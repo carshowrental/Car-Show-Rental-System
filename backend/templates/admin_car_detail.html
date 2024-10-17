@@ -1,0 +1,155 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block title %}{{ car.brand }} {{ car.model }} - DriveEasy Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+    .thumbnail-gallery {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        overflow-x: auto;
+    }
+    .thumbnail-gallery img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        margin: 0 5px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease;
+    }
+    .thumbnail-gallery img.active {
+        border-color: var(--primary-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 style="color: var(--primary-color);">{{ car.brand }} {{ car.model }}</h1>
+    <a href="{% url 'admin_car_list' %}" class="btn btn-secondary"><i class="bi bi-arrow-left me-2"></i>Back to Cars</a>
+</div>
+
+<div class="row">
+    <div class="col-lg-5 mb-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <div id="carImageCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in car.carimages_set.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="{{ car.brand }} {{ car.model }}" style="height: 300px; object-fit: cover;">
+                            </div>
+                        {% empty %}
+                            <div class="carousel-item active">
+                                <div class="d-flex justify-content-center align-items-center bg-secondary" style="height: 400px;">
+                                    <span class="text-white">No image available</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if car.carimages_set.count > 1 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carImageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carImageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="thumbnail-gallery">
+                    {% for image in car.carimages_set.all %}
+                        <img src="{{ image.image.url }}" alt="Thumbnail {{ forloop.counter }}" onclick="setActiveImage({{ forloop.counter0 }})" {% if forloop.first %}class="active"{% endif %}>
+                    {% endfor %}
+                </div>
+                <div class="mt-4">
+                    <h5 class="card-title">Car Details</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Year:</strong> {{ car.year }}</li>
+                        <li class="list-group-item"><strong>Type:</strong> {{ car.get_car_type_display }}</li>
+                        <li class="list-group-item"><strong>Price per Day:</strong> ₱{{ car.price_per_day }}</li>
+                    </ul>
+                </div>
+                <div class="mt-4">
+                    <h5 class="card-title">Features</h5>
+                    <p>{{ car.features }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Reservation History</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>User</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reservation in car.reservation_set.all %}
+                            <tr>
+                                <td>{{ reservation.user.username }}</td>
+                                <td>{{ reservation.start_date|date:"M d, Y" }}</td>
+                                <td>{{ reservation.end_date|date:"M d, Y" }}</td>
+                                <td>
+                                    <span class="badge bg-{% if reservation.status == 'pending' %}warning
+                                     {% elif reservation.status == 'active' %}primary
+                                     {% elif reservation.status == 'completed' %}info
+                                     {% elif reservation.status == 'cancelled' %}danger
+                                     {% elif reservation.status == 'paid' %}success
+                                     {% endif %}">
+                                        {{ reservation.get_status_display }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">No reservations yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    var carImageCarousel = new bootstrap.Carousel(document.getElementById('carImageCarousel'), {
+        interval: false // Disable auto-sliding
+    });
+
+    function setActiveImage(index) {
+        carImageCarousel.to(index);
+        updateThumbnailActive(index);
+    }
+
+    function updateThumbnailActive(index) {
+        var thumbnails = document.querySelectorAll('.thumbnail-gallery img');
+        thumbnails.forEach((thumb, i) => {
+            if (i === index) {
+                thumb.classList.add('active');
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
+
+    document.getElementById('carImageCarousel').addEventListener('slid.bs.carousel', function (event) {
+        updateThumbnailActive(event.to);
+    });
+</script>
+{% endblock %}

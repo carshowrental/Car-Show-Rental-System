@@ -1,0 +1,101 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block title %}Edit Car - DriveEasy Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 style="color: var(--primary-color);">Edit Car</h1>
+    <a href="{% url 'admin_car_list' %}" class="btn btn-secondary"><i class="bi bi-arrow-left me-2"></i>Back to Cars</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="brand" class="form-label">Brand</label>
+                    <input type="text" class="form-control" id="brand" name="brand" value="{{ car.brand }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="model" class="form-label">Model</label>
+                    <input type="text" class="form-control" id="model" name="model" value="{{ car.model }}" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="year" class="form-label">Year</label>
+                    <input type="number" class="form-control" id="year" name="year" value="{{ car.year }}" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="car_type" class="form-label">Car Type</label>
+                    <select class="form-select" id="car_type" name="car_type" required>
+                        {% for value, display in car_types %}
+                            <option value="{{ value }}" {% if car.car_type == value %}selected{% endif %}>{{ display }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="price_per_day" class="form-label">Price per Day</label>
+                    <input type="number" step="0.01" class="form-control" id="price_per_day" name="price_per_day" value="{{ car.price_per_day }}" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="features" class="form-label">Features</label>
+                <textarea class="form-control" id="features" name="features" rows="3">{{ car.features }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Current Images</label>
+                <div class="row">
+                    {% for image in images %}
+                        <div class="col-md-3 mb-3">
+                            <img src="{{ image.image.url }}" alt="Car Image" class="img-thumbnail" style="height: 150px; object-fit: cover;">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" name="delete_images" value="{{ image.id }}" id="delete_image_{{ image.id }}">
+                                <label class="form-check-label" for="delete_image_{{ image.id }}">
+                                    Delete
+                                </label>
+                            </div>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="radio" name="main_image" value="{{ image.id }}" id="main_image_{{ image.id }}" {% if image.is_main %}checked{% endif %}>
+                                <label class="form-check-label" for="main_image_{{ image.id }}">
+                                    Main Image
+                                </label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="new_images" class="form-label">Add New Images</label>
+                <input type="file" class="form-control" id="new_images" name="new_images" multiple accept="image/*">
+            </div>
+            <div id="image-preview" class="mb-3"></div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save me-2"></i>Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('new_images').addEventListener('change', function(event) {
+    var preview = document.getElementById('image-preview');
+    preview.innerHTML = '';
+    for (var i = 0; i < event.target.files.length; i++) {
+        var file = event.target.files[i];
+        var reader = new FileReader();
+        reader.onload = (function(file) {
+            return function(e) {
+                var div = document.createElement('div');
+                div.classList.add('mb-2');
+                div.innerHTML = '<img src="' + e.target.result + '" style="height: 100px; object-fit: cover; margin-right: 10px;">';
+                preview.appendChild(div);
+            };
+        })(file);
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+{% endblock %}

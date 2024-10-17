@@ -1,0 +1,72 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block title %}Add Reservation - DriveEasy Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 style="color: var(--primary-color);">Add New Reservation</h1>
+    <a href="{% url 'admin_reservations' %}" class="btn btn-secondary">Back to Reservations</a>
+</div>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="user" class="form-label">User</label>
+                <select class="form-select" id="user" name="user" required>
+                    <option value="">Select a user</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="car" class="form-label">Car</label>
+                <select class="form-select" id="car" name="car" required>
+                    <option value="">Select a car</option>
+                    {% for car in cars %}
+                        <option value="{{ car.id }}">{{ car.brand }} {{ car.model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    {% for status_value, status_display in statuses %}
+                        <option value="{{ status_value }}">{{ status_display }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>Create Reservation
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+
+        startDateInput.addEventListener('change', function() {
+            endDateInput.min = this.value;
+        });
+
+        endDateInput.addEventListener('change', function() {
+            startDateInput.max = this.value;
+        });
+    });
+</script>
+{% endblock %}

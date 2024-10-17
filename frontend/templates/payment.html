@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment for Reservation{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4"><i class="fas fa-credit-card me-2 text-primary"></i>Payment for Reservation</h1>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title h4 mb-3"><i class="fas fa-info-circle me-2 text-primary"></i>Reservation Details</h2>
+                    <p><strong>Car:</strong> {{ reservation.car.brand }} {{ reservation.car.model }}</p>
+                    <p><strong>Start Date:</strong> {{ reservation.start_date }}</p>
+                    <p><strong>End Date:</strong> {{ reservation.end_date }}</p>
+                    <p><strong>Total Price:</strong> <span class="total-price">₱{{ reservation.total_price }}</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title h4 mb-3"><i class="fas fa-mobile-alt me-2 text-primary"></i>GCash Payment</h2>
+                    <form id="gcash-payment-form" method="post" action="{% url 'payment' reservation.id %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="gcash_number" class="form-label">GCash Number</label>
+                            <input type="tel" class="form-control" id="gcash_number" name="gcash_number" required pattern="[0-9]{11}" placeholder="09XXXXXXXXX">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-money-bill-wave me-2"></i>Pay with GCash</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Simulated GCash Payment Modal -->
+<div class="modal fade" id="gcashModal" tabindex="-1" aria-labelledby="gcashModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="gcashModalLabel">GCash Payment Simulation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Simulating payment for ₱{{ reservation.total_price }} to DriveEasy Car Rental</p>
+                <div class="mb-3">
+                    <label for="sim_gcash_pin" class="form-label">Enter GCash PIN</label>
+                    <input type="password" class="form-control" id="sim_gcash_pin" maxlength="4" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmPayment">Confirm Payment</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('gcash-payment-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var myModal = new bootstrap.Modal(document.getElementById('gcashModal'));
+        myModal.show();
+    });
+
+    document.getElementById('confirmPayment').addEventListener('click', function() {
+        var pin = document.getElementById('sim_gcash_pin').value;
+        if (pin.length === 4) {
+            // Simulate payment processing
+            this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+            this.disabled = true;
+            setTimeout(() => {
+                document.getElementById('gcash-payment-form').submit();
+            }, 2000);
+        } else {
+            alert('Please enter a valid 4-digit PIN.');
+        }
+    });
+</script>
+{% endblock %}
