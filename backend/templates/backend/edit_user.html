@@ -66,17 +66,21 @@
 </div>
 
 <!-- License Image Modal -->
+{% if user.userprofile.license_image and user.userprofile.license_image.url %}
 <div class="modal fade" id="licenseModal" tabindex="-1" aria-labelledby="licenseModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="licenseModalLabel"><i class="fas fa-id-card me-2"></i>License Image - {{ user.get_full_name }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="{{ user.userprofile.license_image.url }}" class="img-fluid" alt="Full size license image">
-      </div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="licenseModalLabel">License Image - {{ user.get_full_name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="{{ user.userprofile.license_image.url }}"
+                     class="img-fluid"
+                     alt="Full size license image">
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+{% endif %}
 {% endblock %}
