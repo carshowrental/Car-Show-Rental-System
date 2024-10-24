@@ -53,7 +53,7 @@ def user_register(request):
             messages.error(request, 'Password must be at least 8 characters long.')
         elif User.objects.filter(email=email).exists():
             messages.error(request, 'This email is already registered. Please use a different email.')
-        elif User.objects.filter(phone_number=phone_number).exists():
+        elif UserProfile.objects.filter(phone_number=phone_number).exists():
             messages.error(request, 'This phone number is already registered. Please use a different phone number.')
         else:
             try:
