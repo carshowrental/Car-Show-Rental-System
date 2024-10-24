@@ -47,9 +47,7 @@ def user_register(request):
         password2 = request.POST.get('password2')
 
         # Validate that all fields are filled
-        if not (username and email and phone_number and address and password1 and password2):
-            messages.error(request, 'Please fill in all fields.')
-        elif password1 != password2:
+        if password1 != password2:
             messages.error(request, 'Passwords do not match.')
         elif len(password1) < 8:
             messages.error(request, 'Password must be at least 8 characters long.')

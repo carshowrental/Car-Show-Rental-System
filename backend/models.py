@@ -35,8 +35,7 @@ class Car(models.Model):
 
         # Ensure we're working with datetime objects
         if not isinstance(start_datetime, timezone.datetime):
-            start_datetime = timezone.make_aware(
-                timezone.datetime.combine(start_datetime, timezone.datetime.min.time()))
+            start_datetime = timezone.make_aware(timezone.datetime.combine(start_datetime, timezone.datetime.min.time()))
         if not isinstance(end_datetime, timezone.datetime):
             end_datetime = timezone.make_aware(timezone.datetime.combine(end_datetime, timezone.datetime.min.time()))
 
@@ -69,6 +68,7 @@ class Car(models.Model):
         """
         now = timezone.localtime(timezone.now())
         next_hour = now + timezone.timedelta(hours=1)
+        return self.available_quantity(now, next_hour) > 0
 
     def get_main_image(self):
         return self.carimages_set.filter(is_main=True).first() or self.carimages_set.first()
