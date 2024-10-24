@@ -1,0 +1,252 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+{% block title %}Add New Car - DriveEasy Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+    .image-preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .image-preview-item {
+        position: relative;
+        width: 100px;
+        height: 100px;
+    }
+    .image-preview-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    .image-preview-item .remove-image {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        cursor: pointer;
+    }
+    .main-image-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        text-align: center;
+        padding: 2px;
+        font-size: 0.8em;
+    }
+    #submission-status {
+        display: none;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .submitting {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 style="color: var(--primary-color);"><i class="fas fa-car-alt me-2"></i>Add New Car</h1>
+    <a href="{% url 'admin_cars' %}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Back to Cars</a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data" id="add-car-form" action="{% url 'admin_add_car' %}">
+            {% csrf_token %}
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="brand" class="form-label"><i class="fas fa-trademark me-2"></i>Brand</label>
+                    <input type="text" class="form-control" id="brand" name="brand" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="model" class="form-label"><i class="fas fa-car me-2"></i>Model</label>
+                    <input type="text" class="form-control" id="model" name="model" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="year" class="form-label"><i class="fas fa-calendar-alt me-2"></i>Year</label>
+                    <input type="number" class="form-control" id="year" name="year" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="car_type" class="form-label"><i class="fas fa-tag me-2"></i>Car Type</label>
+                    <select class="form-select" id="car_type" name="car_type" required>
+                        {% for value, display in car_types %}
+                            <option value="{{ value }}">{{ display }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="quantity" class="form-label"><i class="fas fa-calculator me-2"></i>Quantity</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="hourly_rate" class="form-label"><i class="fas fa-clock me-2"></i>Hourly Rate (₱)</label>
+                    <input type="number" step="0.01" class="form-control" id="hourly_rate" name="hourly_rate" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="daily_rate" class="form-label"><i class="fas fa-calendar-day me-2"></i>Daily Rate (₱)</label>
+                    <input type="number" step="0.01" class="form-control" id="daily_rate" name="daily_rate" required>
+                </div>
+                <div class="col-12">
+                    <label for="features" class="form-label"><i class="fas fa-list-ul me-2"></i>Features</label>
+                    <textarea class="form-control" id="features" name="features" rows="3"></textarea>
+                </div>
+                <div class="col-12">
+                    <label class="form-label"><i class="fas fa-images me-2"></i>Car Images</label>
+                    <input type="file" class="form-control" id="car-images" multiple accept="image/*">
+                    <div class="form-text"><i class="fas fa-info-circle me-2"></i>Select multiple images to upload. Click on an image to set it as the main image.</div>
+                    <div id="image-preview-container" class="image-preview-container"></div>
+                    <input type="hidden" id="main-image-index" name="main_image" value="0">
+                </div>
+            </div>
+            <div class="mt-3">
+                <div id="submission-status"></div>
+                <button type="submit" class="btn btn-primary w-100"><i class="fas fa-plus-circle me-2"></i>Add Car</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let imageFiles = [];
+    let mainImageIndex = 0;
+
+    document.getElementById('car-images').addEventListener('change', function(event) {
+        const files = event.target.files;
+        for (let i = 0; i < files.length; i++) {
+            imageFiles.push(files[i]);
+        }
+        updateImagePreviews();
+    });
+
+    function updateImagePreviews() {
+        const container = document.getElementById('image-preview-container');
+        container.innerHTML = '';
+        imageFiles.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const div = document.createElement('div');
+                div.className = 'image-preview-item';
+                div.innerHTML = `
+                    <img src="${e.target.result}" alt="Car Image ${index + 1}">
+                    <span class="remove-image" onclick="removeImage(${index})">×</span>
+                    ${index === mainImageIndex ? '<span class="main-image-label">Main</span>' : ''}
+                `;
+                div.querySelector('img').addEventListener('click', () => setMainImage(index));
+                container.appendChild(div);
+            }
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function removeImage(index) {
+        imageFiles.splice(index, 1);
+        if (mainImageIndex === index) {
+            mainImageIndex = 0;
+        } else if (mainImageIndex > index) {
+            mainImageIndex--;
+        }
+        updateImagePreviews();
+        updateMainImageIndex();
+    }
+
+    function setMainImage(index) {
+        mainImageIndex = index;
+        updateImagePreviews();
+        updateMainImageIndex();
+    }
+
+    function updateMainImageIndex() {
+        document.getElementById('main-image-index').value = mainImageIndex;
+    }
+
+    function showAlert(message, type) {
+        console.log('Showing alert:', message, type);
+        const statusDiv = document.getElementById('submission-status');
+        statusDiv.innerHTML = `
+            <div class="alert alert-${type} alert-dismissible fade show text-center" role="alert">
+                ${message}
+            </div>
+        `;
+        statusDiv.style.display = 'block';
+        console.log('Alert HTML:', statusDiv.innerHTML);
+    }
+
+    document.getElementById('add-car-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        console.log('Form submission started');
+
+        const formData = new FormData(this);
+
+        showAlert('Submitting...', 'info');
+
+        // Remove any existing car_images[] fields
+        for (let [key, value] of formData.entries()) {
+            if (key === 'car_images[]') {
+                formData.delete(key);
+            }
+        }
+
+        // Append the actual File objects to formData
+        imageFiles.forEach((file, index) => {
+            formData.append('car_images[]', file);
+        });
+
+        // Append the main image index
+        formData.append('main_image', mainImageIndex);
+
+        fetch(window.location.href, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+            }
+        })
+        .then(response => {
+            console.log('Response received:', response);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data received:', data);
+            if (data.success) {
+                showAlert('Car added successfully. Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 2000);
+            } else {
+                throw new Error(data.error || 'An error occurred');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showAlert(`Error: ${error.message}`, 'danger');
+        });
+    });
+
+</script>
+{% endblock %}

@@ -7,7 +7,7 @@ class CarImageInline(admin.TabularInline):
 
 class CarAdmin(admin.ModelAdmin):
     inlines = [CarImageInline]
-    list_display = ('brand', 'model', 'year', 'price_per_day')
+    list_display = ('brand', 'model', 'year', 'daily_rate')
     list_filter = ('brand', 'car_type', 'year')
     search_fields = ('brand', 'model')
 

@@ -1,0 +1,110 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+{% block title %}Cars - DriveEasy Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 style="color: var(--primary-color);"><i class="fas fa-car me-2"></i>Cars</h1>
+    <a href="{% url 'admin_add_car' %}" class="btn btn-primary"><i class="fas fa-plus me-2"></i>New Car</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th><i class="fas fa-image me-2"></i>Image</th>
+                    <th><i class="fas fa-trademark me-2"></i>Brand</th>
+                    <th><i class="fas fa-car me-2"></i>Model</th>
+                    <th><i class="fas fa-calendar-alt me-2"></i>Year</th>
+                    <th><i class="fas fa-tag me-2"></i>Type</th>
+                    <th><i class="fas fa-calculator me-2"></i>Quantity</th>
+                    <th><i class="fas fa-clock me-2"></i>Hourly Rate</th>
+                    <th><i class="fas fa-calendar-day me-2"></i>Daily Rate</th>
+                    <th><i class="fas fa-calendar-week me-2"></i>Weekly Rate</th>
+                    <th><i class="fas fa-cog me-2"></i>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for car in cars %}
+                <tr>
+                    <td>
+                        {% with main_image=car.get_main_image %}
+                        {% if main_image %}
+                        <img src="{{ main_image.image.url }}" class="img-thumbnail"
+                             alt="{{ car.brand }} {{ car.model }}"
+                             style="width: 100px; height: 60px; object-fit: cover; cursor: pointer">
+                        {% else %}
+                        <span>No image</span>
+                        {% endif %}
+                        {% endwith %}
+                    </td>
+                    <td>{{ car.brand }}</td>
+                    <td>{{ car.model }}</td>
+                    <td>{{ car.year }}</td>
+                    <td>{{ car.get_car_type_display }}</td>
+                    <td>{{ car.quantity }}</td>
+                    <td>₱{{ car.hourly_rate }}</td>
+                    <td>₱{{ car.daily_rate }}</td>
+                    <td>₱{{ car.weekly_rate }}</td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <a href="{% url 'admin_car_detail' car.id %}" class="btn btn-info btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{% url 'admin_edit_car' car.id %}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal-{{ car.id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Delete Modal for each car -->
+                <div class="modal fade" id="deleteModal-{{ car.id }}" tabindex="-1"
+                     aria-labelledby="deleteModalLabel-{{ car.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel-{{ car.id }}">Confirm Deletion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete car <strong>{{ car.brand }} {{ car.model }}</strong>?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <form method="POST" action="{% url 'admin_delete_car' car.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            {% if cars.has_previous %}
+                <a href="?page={{ cars.previous_page_number }}" class="btn btn-outline-primary btn-sm mx-1">&laquo; Previous</a>
+            {% endif %}
+
+            <span class="mx-3 align-self-center">
+                Page {{ cars.number }} of {{ cars.paginator.num_pages }}
+            </span>
+
+            {% if cars.has_next %}
+                <a href="?page={{ cars.next_page_number }}" class="btn btn-outline-primary btn-sm mx-1">Next &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Reservation History{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4"><i class="fas fa-history me-2 text-secondary"></i>Reservation History</h1>
+
+    <ul class="nav nav-tabs mb-4" id="reservationTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab" aria-controls="upcoming" aria-selected="true">Upcoming</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="current-tab" data-bs-toggle="tab" data-bs-target="#current" type="button" role="tab" aria-controls="current" aria-selected="false">Current</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab" aria-controls="past" aria-selected="false">Past</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="reservationTabsContent">
+        <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+            <h2 class="h4 mb-3"><i class="fas fa-clock"></i> Upcoming Reservations</h2>
+            {% include 'frontend/reservation_list.html' with reservations=upcoming_reservations %}
+        </div>
+        <div class="tab-pane fade" id="current" role="tabpanel" aria-labelledby="current-tab">
+            <h2 class="h4 mb-3"><i class="fas fa-check-circle"></i> Current Reservations</h2>
+            {% include 'frontend/reservation_list.html' with reservations=current_reservations %}
+        </div>
+        <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+            <h2 class="h4 mb-3"><i class="fas fa-history"></i> Past Reservations</h2>
+            {% include 'frontend/reservation_list.html' with reservations=past_reservations %}
+        </div>
+    </div>
+</div>
+{% endblock %}

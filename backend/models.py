@@ -1,6 +1,9 @@
-from django.db import models
+import uuid
+
 from django.contrib.auth.models import User
+from django.db import models
 from django.utils import timezone
+
 
 class Car(models.Model):
     CAR_TYPES = [
@@ -13,30 +16,67 @@ class Car(models.Model):
     brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     year = models.IntegerField()
+    quantity = models.IntegerField()
     car_type = models.CharField(max_length=20, choices=CAR_TYPES)
-    price_per_day = models.DecimalField(max_digits=8, decimal_places=2)
+    hourly_rate = models.DecimalField(max_digits=8, decimal_places=2)
+    daily_rate = models.DecimalField(max_digits=8, decimal_places=2)
     features = models.TextField()
 
     def __str__(self):
         return f"{self.brand} {self.model} ({self.year})"
 
-    def is_available(self, start_date, end_date):
+    def get_reserved_quantity(self, start_datetime, end_datetime):
+        """
+        Calculate how many units of this car are reserved for a given period.
+        Works with both datetime and date objects, handling hourly, daily, and weekly rentals.
+        The end time is exclusive, meaning a car can be booked starting exactly when another rental ends.
+        """
         from .models import Reservation  # Import here to avoid circular import
+
+        # Ensure we're working with datetime objects
+        if not isinstance(start_datetime, timezone.datetime):
+            start_datetime = timezone.make_aware(
+                timezone.datetime.combine(start_datetime, timezone.datetime.min.time()))
+        if not isinstance(end_datetime, timezone.datetime):
+            end_datetime = timezone.make_aware(timezone.datetime.combine(end_datetime, timezone.datetime.min.time()))
+
         overlapping_reservations = Reservation.objects.filter(
             car=self,
-            start_date__lte=end_date,
-            end_date__gte=start_date,
+            start_date__lt=end_datetime,  # Reservation starts before the new end time
+            end_date__gt=start_datetime,  # Reservation ends after the new start time
             status__in=['pending', 'paid', 'active']
         )
-        return not overlapping_reservations.exists()
+        return overlapping_reservations.count()
+
+    def is_available(self, start_datetime, end_datetime):
+        """
+        Check if there are any available units of this car for the given period.
+        """
+        reserved_quantity = self.get_reserved_quantity(start_datetime, end_datetime)
+        return reserved_quantity < self.quantity
+
+    def available_quantity(self, start_datetime, end_datetime):
+        """
+        Return the number of available units for the given period.
+        """
+        reserved_quantity = self.get_reserved_quantity(start_datetime, end_datetime)
+        return max(0, self.quantity - reserved_quantity)
 
     @property
     def is_currently_available(self):
-        today = timezone.now().date()
-        return self.is_available(today, today)
+        """
+        Check if any units are available now.
+        """
+        now = timezone.localtime(timezone.now())
+        next_hour = now + timezone.timedelta(hours=1)
 
     def get_main_image(self):
         return self.carimages_set.filter(is_main=True).first() or self.carimages_set.first()
+
+    @property
+    def weekly_rate(self):
+        return self.daily_rate * 6
+
 
 class CarImage(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='carimages_set')
@@ -50,7 +90,14 @@ class CarImage(models.Model):
     class Meta:
         ordering = ['-is_main', 'id']
 
+
 class Reservation(models.Model):
+    RATE_TYPES = [
+        ('hourly', 'Hourly'),
+        ('daily', 'Daily'),
+        ('weekly', 'Weekly'),
+    ]
+
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('paid', 'Paid'),
@@ -61,8 +108,9 @@ class Reservation(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    rate_type = models.CharField(max_length=10, choices=RATE_TYPES)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     payment_source_id = models.CharField(max_length=255, blank=True, null=True)
     payment_id = models.CharField(max_length=255, blank=True, null=True)
@@ -85,3 +133,16 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s profile"
+
+
+class PasswordResetToken(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+
+    def __str__(self):
+        return f"Password reset token for {self.user.username}"
+
+    def is_valid(self):
+        return timezone.localtime(timezone.now()) < self.expires_at

@@ -1,0 +1,97 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Payment for Reservation{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4"><i class="fas fa-wallet me-2 text-secondary"></i>Payment for Reservation</h1>
+    <div class="card shadow-md p-4" style="background-color: #d3d3d3;">
+        <div class="row justify-content-center g-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-3"><i class="fas fa-info-circle text-secondary me-2"></i>Reservation Details</h2>
+                        <p><strong><i class="fas fa-car me-1"></i> Car:</strong> {{ reservation.car.brand }} {{ reservation.car.model }}</p>
+                        <p><strong><i class="fas fa-calendar-alt me-1"></i> Start Date:</strong> {{ reservation.start_date }}</p>
+                        <p><strong><i class="fas fa-calendar-check me-1"></i> End Date:</strong> {{ reservation.end_date }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <h2 class="card-title h4 mb-3"><i class="fas fa-mobile-alt text-secondary me-2"></i>GCash Payment</h2>
+                            <p>Scan the QR code below to pay with GCash</p>
+                            <img src="{% static 'images/gcash_qr.jpg' %}" alt="GCash QR Code" class="img-fluid mb-3" style="max-width: 200px;">
+                            <p><strong><i class="fas fa-tag me-1"></i>Total Price:</strong> ₱{{ reservation.total_price }}</p>
+                        </div>
+
+                        <form method="post" enctype="multipart/form-data" id="receipt-upload-form">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="receipt" class="form-label"><i class="fas fa-file-upload me-1"></i>Upload your GCash payment receipt</label>
+                                <input type="file" class="form-control" id="receipt" name="receipt" accept="image/*" required>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-upload me-1"></i>Upload Receipt</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="processingModal" tabindex="-1" aria-labelledby="processingModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Processing your receipt...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        $('#receipt-upload-form').on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $('#processingModal').modal('show');
+
+            $.ajax({
+                url: '{% url "process_payment" reservation.id %}',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                success: function(data) {
+                    $('#processingModal').modal('hide');
+                    if (data.success) {
+                        alert('Payment verified successfully! Reference number: ' + data.reference_number);
+                        window.location.href = '{% url "payment_confirmation" reservation.id %}';
+                    } else {
+                        alert('Error processing receipt: ' + data.error);
+                    }
+                },
+                error: function() {
+                    $('#processingModal').modal('hide');
+                    alert('An error occurred while processing the receipt.');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

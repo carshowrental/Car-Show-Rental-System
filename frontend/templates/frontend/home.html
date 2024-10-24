@@ -1,0 +1,69 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Welcome to Car Show Rentals{% endblock %}
+
+{% block content %}
+<section class="hero-section text-center py-5 text-white bg-danger">
+    <h1 class="display-4 mb-4"><i class="fas fa-car me-3"></i>Car Show Rentals</h1>
+    <p class="lead mb-4">Experience premium car rental, trucking, and allied services.</p>
+    <a href="{% url 'cars' %}" class="btn btn-light btn-lg"><i class="fas fa-search me-2"></i>Explore Our Fleet</a>
+</section>
+
+<section class="featured-cars py-5" style="background-color: #f8f9fa;">
+    <h2 class="text-center mb-4" style="color: #333;"><i class="fas fa-star me-2 text-danger"></i>Featured Vehicles</h2>
+    <div class="row">
+        {% for car in featured_cars %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ car.get_main_image.image.url }}" class="card-img-top" height="250" alt="{{ car.brand }} {{ car.model }}">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-car me-2 text-danger"></i>{{ car.brand }} {{ car.model }}</h5>
+                        <p class="card-text"><i class="fas fa-tag me-2 text-danger"></i>₱{{ car.daily_rate }} / day</p>
+                        <a href="{% url 'car_detail' car.id %}" class="btn btn-outline-danger"><i class="fas fa-info-circle me-2"></i>View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="bg-dark p-5">
+    <h2 class="text-danger text-center mb-4"><i class="fas fa-check-circle me-2"></i>Why Choose Car Show?</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-light text-dark">
+                <div class="card-body text-center">
+                    <i class="fas fa-car-alt feature-icon mb-3 text-danger"></i>
+                    <h3 class="h5 card-title">Wide Selection</h3>
+                    <p class="card-text">Choose from our diverse fleet of vehicles to suit your needs.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-light text-dark">
+                <div class="card-body text-center">
+                    <i class="fas fa-truck feature-icon mb-3 text-danger"></i>
+                    <h3 class="h5 card-title">Trucking Services</h3>
+                    <p class="card-text">Reliable transportation solutions for your business.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 bg-light text-dark">
+                <div class="card-body text-center">
+                    <i class="fas fa-cogs feature-icon mb-3 text-danger"></i>
+                    <h3 class="h5 card-title">Allied Services</h3>
+                    <p class="card-text">Comprehensive support for all your vehicle needs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="text-center py-5 bg-danger text-light">
+    <h2 class="mb-4"><i class="fas fa-calendar-alt me-2"></i>Ready to Hit the Road?</h2>
+    <p class="lead mb-4">Book your dream vehicle today and start your journey!</p>
+    <a href="{% url 'cars' %}" class="btn btn-light btn-lg"><i class="fas fa-car me-2"></i>Rent Now</a>
+</section>
+{% endblock %}

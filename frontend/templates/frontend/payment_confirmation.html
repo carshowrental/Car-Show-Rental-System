@@ -1,0 +1,28 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}Reservation Confirmed{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h1 class="card-title mb-4">Reservation Confirmed</h1>
+                    <p class="lead">Thank you for your payment. Your reservation has been confirmed.</p>
+                    <hr>
+                    <h2 class="h4 mb-3">Reservation Details</h2>
+                    <p><strong>Car:</strong> {{ reservation.car.brand }} {{ reservation.car.model }}</p>
+                    <p><strong>Start Date:</strong> {{ reservation.start_date }}</p>
+                    <p><strong>End Date:</strong> {{ reservation.end_date }}</p>
+                    <p><strong>Total Price:</strong> ₱{{ reservation.total_price }}</p>
+                    <p><strong>Reference Number:</strong> {{ reservation.payment_id }}</p>
+                    <hr>
+                    <a href="{% url 'user_dashboard' %}" class="btn btn-primary">Go to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

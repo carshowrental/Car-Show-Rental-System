@@ -1,0 +1,546 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}{{ car.brand }} {{ car.model }} - Car Show Rentals{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <!-- Left Column - Car Details -->
+            <div class="col-lg-7">
+                <!-- Image Carousel -->
+                <div id="carImageCarousel" class="carousel slide mb-4 shadow">
+                    <div class="carousel-inner rounded">
+                        {% for image in car.carimages_set.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image.image.url }}"
+                                 class="d-block w-100"
+                                 alt="{{ car.brand }} {{ car.model }}"
+                                 style="height: 400px; object-fit: cover;">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if car.carimages_set.count > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carImageCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carImageCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    {% endif %}
+                </div>
+
+                <!-- Car Information -->
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="mb-0 text-danger">
+                            <i class="fas fa-car me-2"></i>
+                            {{ car.brand }} {{ car.model }}</h2>
+                        <div>
+                            <span class="badge bg-danger me-2">
+                                <i class="fas fa-tag me-1"></i>
+                                {{ car.get_car_type_display }}
+                            </span>
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-calendar-alt me-1"></i>
+                                {{ car.year }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- New: Availability Status -->
+                    <div class="card bg-light ps-3 rounded mb-4">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-center">
+                                <i class="fas fa-layer-group me-2 fa-2x text-muted"></i>
+                                <div>
+                                    <h6 class="mb-0 text-muted">Total Units: <span class="h4 text-danger">{{ car.quantity }} Available</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Car Rates Summary -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title text-muted mb-2">
+                                        <i class="fas fa-clock me-2"></i>Hourly Rate
+                                    </h6>
+                                    <h4 class="card-text text-danger mb-0">₱{{ car.hourly_rate }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title text-muted mb-2">
+                                        <i class="fas fa-sun me-2"></i>Daily Rate
+                                    </h6>
+                                    <h4 class="card-text text-danger mb-0">₱{{ car.daily_rate }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title text-muted mb-2">
+                                        <i class="fas fa-calendar-week me-2"></i>Weekly Rate
+                                    </h6>
+                                    <h4 class="card-text text-danger mb-0">₱{{ car.weekly_rate }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <h5 class="mb-3">
+                        <i class="fas fa-list-check me-2"></i>Features
+                    </h5>
+                    <div class="row mb-3">
+                        {% for feature in features %}
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>{{ feature }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Booking Form -->
+            <div class="col-lg-5">
+                <div class="bg-white rounded shadow p-4 sticky-top" style="top: 20px;">
+                    <h4 class="mb-4 text-center">
+                        <i class="fas fa-calendar-check me-2"></i>Choose Your Rental Plan
+                    </h4>
+
+                    {% if not request.user.is_authenticated %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Please <a href="{% url 'login' %}?next={{ request.path }}" class="alert-link">login</a> to make a reservation.
+                    </div>
+                    {% elif not request.user.userprofile.license_image %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Please <a href="{% url 'profile' %}" class="alert-link">upload your driver's license</a> before making a reservation.
+                    </div>
+                    {% else %}
+                    <!-- Booking Tabs -->
+                    <ul class="nav nav-tabs nav-fill mb-4" id="rentalTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="hourly-tab" data-bs-toggle="tab" data-bs-target="#hourly"
+                                    type="button" role="tab" aria-selected="true">
+                                <i class="fas fa-clock me-2"></i>Hourly
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily"
+                                    type="button" role="tab" aria-selected="false">
+                                <i class="fas fa-sun me-2"></i>Daily
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="weekly-tab" data-bs-toggle="tab" data-bs-target="#weekly"
+                                    type="button" role="tab" aria-selected="false">
+                                <i class="fas fa-calendar-week me-2"></i>Weekly
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Contents -->
+                    <div class="tab-content" id="rentalTabsContent">
+                        <!-- Hourly Tab -->
+                        <div class="tab-pane fade show active" id="hourly" role="tabpanel">
+                            <form method="POST" action="{% url 'create_reservation' car.id %}" class="reservation-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="rate_type" value="hourly">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Start Date & Time</label>
+                                    <input type="datetime-local" class="form-control" name="start_datetime" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Number of Hours</label>
+                                    <select class="form-select" name="duration">
+                                        {% for i in "123456789"|make_list %}
+                                        <option value="{{ i }}">{{ i }} Hour{% if i != '1' %}s{% endif %}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span>Rate per Hour:</span>
+                                            <span class="h5 mb-0 text-danger">₱{{ car.hourly_rate }}</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="h6 mb-0">Total Price:</span>
+                                            <span class="h5 mb-0 text-success price-display">₱0.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Availability Message Placeholder -->
+                                <div class="availability-message"></div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" required id="agreeHourly">
+                                        <label class="form-check-label" for="agreeHourly">
+                                            I agree to the <a href="{% url 'rental_policy' %}" target="_blank">Rental Policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-danger w-100" disabled>Book Now</button>
+                            </form>
+                        </div>
+
+                        <!-- Daily Tab -->
+                        <div class="tab-pane fade" id="daily" role="tabpanel">
+                            <form method="POST" action="{% url 'create_reservation' car.id %}" class="reservation-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="rate_type" value="daily">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" name="start_date" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Number of Days</label>
+                                    <select class="form-select" name="duration">
+                                        {% for i in "123456"|make_list %}
+                                        <option value="{{ i }}">{{ i }} Day{% if i != '1' %}s{% endif %}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span>Rate per Day:</span>
+                                            <span class="h5 mb-0 text-danger">₱{{ car.daily_rate }}</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="h6 mb-0">Total Price:</span>
+                                            <span class="h5 mb-0 text-success price-display">₱0.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Availability Message Placeholder -->
+                                <div class="availability-message"></div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" required id="agreeDaily">
+                                        <label class="form-check-label" for="agreeDaily">
+                                            I agree to the <a href="{% url 'rental_policy' %}" target="_blank">Rental Policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-danger w-100" disabled>Book Now</button>
+                            </form>
+                        </div>
+
+                        <!-- Weekly Tab -->
+                        <div class="tab-pane fade" id="weekly" role="tabpanel">
+                            <form method="POST" action="{% url 'create_reservation' car.id %}" class="reservation-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="rate_type" value="weekly">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" name="start_date" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Number of Weeks</label>
+                                    <select class="form-select" name="duration">
+                                        {% for i in "1234"|make_list %}
+                                        <option value="{{ i }}">{{ i }} Week{% if i != '1' %}s{% endif %}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="card bg-light mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span>Rate per Week:</span>
+                                            <span class="h5 mb-0 text-danger">₱{{ car.weekly_rate }}</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="h6 mb-0">Total Price:</span>
+                                            <span class="h5 mb-0 text-success price-display">₱0.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Availability Message Placeholder -->
+                                <div class="availability-message"></div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" required id="agreeWeekly">
+                                        <label class="form-check-label" for="agreeWeekly">
+                                            I agree to the <a href="{% url 'rental_policy' %}" target="_blank">Rental Policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-danger w-100" disabled>Book Now</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const hourlyRate = {{ car.hourly_rate }};
+    const dailyRate = {{ car.daily_rate }};
+    const weeklyRate = {{ car.weekly_rate }};
+
+    const forms = document.querySelectorAll('.reservation-form');
+
+    forms.forEach(form => {
+        const rateType = form.querySelector('[name="rate_type"]').value;
+        const startInput = form.querySelector('[name="start_date"], [name="start_datetime"]');
+        const durationSelect = form.querySelector('[name="duration"]');
+        const submitButton = form.querySelector('button[type="submit"]');
+        const priceDisplay = form.querySelector('.price-display');
+        const availabilityMessage = form.querySelector('.availability-message');
+        const agreementCheckbox = form.querySelector('.form-check-input');
+
+        function updatePrice() {
+            let baseRate;
+            switch(rateType) {
+                case 'hourly':
+                    baseRate = hourlyRate;
+                    break;
+                case 'daily':
+                    baseRate = dailyRate;
+                    break;
+                case 'weekly':
+                    baseRate = weeklyRate;
+                    break;
+            }
+            const duration = parseInt(durationSelect.value);
+            const total = baseRate * duration;
+            priceDisplay.textContent = `₱${total.toFixed(2)}`;
+        }
+
+        function checkAvailability() {
+            if (!startInput.value || !durationSelect.value) return;
+
+            const startDate = new Date(startInput.value);
+            let endDate = new Date(startInput.value);
+
+            // Calculate end date based on rate type and duration
+            switch(rateType) {
+                case 'hourly':
+                    endDate.setHours(endDate.getHours() + parseInt(durationSelect.value));
+                    break;
+                case 'daily':
+                    endDate.setDate(endDate.getDate() + parseInt(durationSelect.value));
+                    break;
+                case 'weekly':
+                    endDate.setDate(endDate.getDate() + (parseInt(durationSelect.value) * 7));
+                    break;
+            }
+
+            // Show loading state
+            availabilityMessage.innerHTML = `
+                <div class="alert alert-info">
+                    <div class="d-flex align-items-center">
+                        <div class="spinner-border spinner-border-sm me-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        Checking availability...
+                    </div>
+                </div>
+            `;
+            submitButton.disabled = true;
+
+            // Format dates for the backend
+            const formattedStart = startDate.toISOString().split('T')[0];
+            const formattedEnd = endDate.toISOString().split('T')[0];
+
+            // Make AJAX call to check availability
+            fetch('{% url "check_car_availability" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
+                body: new URLSearchParams({
+                    'car_id': '{{ car.id }}',
+                    'start_date': formattedStart,
+                    'end_date': formattedEnd,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.available) {
+                    availabilityMessage.innerHTML = `
+                        <div class="alert alert-success">
+                            <i class="bi bi-check-circle me-2"></i>
+                            Car is available for these dates!
+                        </div>
+                    `;
+                    submitButton.disabled = !agreementCheckbox.checked;
+                } else {
+                    availabilityMessage.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-circle me-2"></i>
+                            ${data.message || 'Car is not available for these dates.'}
+                        </div>
+                    `;
+                    submitButton.disabled = true;
+                }
+            })
+            .catch(error => {
+                availabilityMessage.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Error checking availability. Please try again.
+                    </div>
+                `;
+                submitButton.disabled = true;
+            });
+        }
+
+        function validateDates() {
+            const startDate = new Date(startInput.value);
+            const now = new Date();
+
+            // Reset any previous error messages
+            startInput.classList.remove('is-invalid');
+
+            // Check if start date is in the past
+            if (startDate < now) {
+                startInput.classList.add('is-invalid');
+                availabilityMessage.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-circle me-2"></i>
+                        Start date cannot be in the past
+                    </div>
+                `;
+                submitButton.disabled = true;
+                return false;
+            }
+
+            return true;
+        }
+
+        // Set minimum date/time
+        if (startInput.type === 'datetime-local') {
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            startInput.min = now.toISOString().slice(0, 16);
+        } else {
+            const today = new Date().toISOString().split('T')[0];
+            startInput.min = today;
+        }
+
+        // Event Listeners
+        startInput.addEventListener('change', () => {
+            if (validateDates()) {
+                checkAvailability();
+                updatePrice();
+            }
+        });
+
+        durationSelect.addEventListener('change', () => {
+            if (validateDates()) {
+                checkAvailability();
+                updatePrice();
+            }
+        });
+
+        agreementCheckbox.addEventListener('change', function() {
+            // Only enable submit if agreement is checked and car is available
+            if (this.checked && availabilityMessage.querySelector('.alert-success')) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        });
+
+        // Handle form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!validateDates()) {
+                return;
+            }
+
+            if (!form.checkValidity()) {
+                return;
+            }
+
+            const startDate = new Date(startInput.value);
+            let endDate = new Date(startInput.value);
+
+            // Calculate end date based on rate type and duration
+            switch(rateType) {
+                case 'hourly':
+                    endDate.setHours(endDate.getHours() + parseInt(durationSelect.value));
+                    break;
+                case 'daily':
+                    endDate.setDate(endDate.getDate() + parseInt(durationSelect.value));
+                    break;
+                case 'weekly':
+                    endDate.setDate(endDate.getDate() + (parseInt(durationSelect.value) * 7));
+                    break;
+            }
+
+            // Add hidden inputs for end date and total price
+            const endDateInput = document.createElement('input');
+            endDateInput.type = 'hidden';
+            endDateInput.name = rateType === 'hourly' ? 'end_datetime' : 'end_date';
+            endDateInput.value = endDate.toISOString().split('.')[0];
+            form.appendChild(endDateInput);
+
+            const totalPriceInput = document.createElement('input');
+            totalPriceInput.type = 'hidden';
+            totalPriceInput.name = 'total_price';
+            totalPriceInput.value = parseFloat(priceDisplay.textContent.replace('₱', ''));
+            form.appendChild(totalPriceInput);
+
+            // Submit the form
+            form.submit();
+        });
+
+        // Initialize price display
+        updatePrice();
+    });
+
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+</script>
+{% endblock %}

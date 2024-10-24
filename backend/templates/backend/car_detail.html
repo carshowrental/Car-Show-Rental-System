@@ -1,0 +1,180 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+{% block title %}{{ car.brand }} {{ car.model }} - DriveEasy Admin{% endblock %}
+
+{% block extra_css %}
+<style>
+    .thumbnail-gallery {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        overflow-x: auto;
+    }
+    .thumbnail-gallery img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        margin: 0 5px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease;
+    }
+    .thumbnail-gallery img.active {
+        border-color: var(--primary-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 style="color: var(--primary-color);"><i class="fas fa-car me-2"></i>{{ car.brand }} {{ car.model }}</h1>
+    <a href="{% url 'admin_cars' %}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Back to Cars</a>
+</div>
+
+<div class="row">
+    <div class="col-lg-5 mb-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <div id="carImageCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in car.carimages_set.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="{{ car.brand }} {{ car.model }}" style="height: 300px; object-fit: cover;">
+                            </div>
+                        {% empty %}
+                            <div class="carousel-item active">
+                                <div class="d-flex justify-content-center align-items-center bg-secondary" style="height: 400px;">
+                                    <span class="text-white"><i class="fas fa-image me-2"></i>No image available</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if car.carimages_set.count > 1 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carImageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carImageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="thumbnail-gallery">
+                    {% for image in car.carimages_set.all %}
+                        <img src="{{ image.image.url }}" class="img-thumbnail" alt="Thumbnail {{ forloop.counter }}" onclick="setActiveImage({{ forloop.counter0 }})" {% if forloop.first %}class="active"{% endif %}>
+                    {% endfor %}
+                </div>
+                <div class="mt-4">
+                    <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>Car Details</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fas fa-calendar-alt me-2"></i><strong>Year:</strong> {{ car.year }}</li>
+                        <li class="list-group-item"><i class="fas fa-tag me-2"></i><strong>Type:</strong> {{ car.get_car_type_display }}</li>
+                        <li class="list-group-item"><i class="fas fa-clock me-2"></i><strong>Hourly Rate:</strong> ₱{{ car.hourly_rate }}</li>
+                        <li class="list-group-item"><i class="fas fa-calendar-day me-2"></i><strong>Daily Rate:</strong> ₱{{ car.daily_rate }}</li>
+                        <li class="list-group-item"><i class="fas fa-calendar-week me-2"></i><strong>Weekly Rate:</strong> ₱{{ car.weekly_rate }}</li>
+                        <li class="list-group-item"><i class="fas fa-calculator me-2"></i><strong>Quantity:</strong> {{ car.quantity }}</li>
+                    </ul>
+                </div>
+                <div class="mt-4">
+                    <h5 class="card-title"><i class="fas fa-list-ul me-2"></i>Features</h5>
+                    <p>{{ car.features|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="card-title mb-4"><i class="fas fa-history me-2"></i>Reservation History</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th><i class="fas fa-user me-2"></i>User</th>
+                                <th><i class="fas fa-clock me-2"></i>Rate Type</th>
+                                <th><i class="fas fa-calendar-plus me-2"></i>Start Date & Time</th>
+                                <th><i class="fas fa-calendar-minus me-2"></i>End Date & Time</th>
+                                <th><i class="fas fa-info-circle me-2"></i>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reservation in car.reservation_set.all %}
+                            <tr>
+                                <td>{{ reservation.user.username }}</td>
+                                <td>{{ reservation.get_rate_type_display }}</td>
+                                <td>{{ reservation.start_date|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.start_date|date:"| g:i A"}}{% endif %}</td>
+                                <td>{{ reservation.end_date|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.end_date|date:"| g:i A"}}{% endif %}</td>
+                                <td>
+                                    <span class="badge bg-{% if reservation.status == 'pending' %}warning{% elif reservation.status == 'active' %}primary{% elif reservation.status == 'completed' %}info{% elif reservation.status == 'cancelled' %}danger{% elif reservation.status == 'paid' %}success{% endif %}">
+                                        {% if reservation.status == 'pending' %}
+                                        <i class="fas fa-clock me-1"></i>
+                                        {% elif reservation.status == 'active' %}
+                                        <i class="fas fa-play me-1"></i>
+                                        {% elif reservation.status == 'completed' %}
+                                        <i class="fas fa-check me-1"></i>
+                                        {% elif reservation.status == 'cancelled' %}
+                                        <i class="fas fa-times me-1"></i>
+                                        {% elif reservation.status == 'paid' %}
+                                        <i class="fas fa-peso-sign me-1"></i>
+                                        {% endif %}
+                                        {{ reservation.get_status_display }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center"><i class="fas fa-inbox me-2"></i>No reservations yet.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    {% if reservations.has_previous %}
+                        <a href="?page={{ reservations.previous_page_number }}" class="btn btn-outline-primary btn-sm mx-1">&laquo; Previous</a>
+                    {% endif %}
+
+                    <span class="mx-3 align-self-center">
+                        Page {{ reservations.number }} of {{ reservations.paginator.num_pages }}
+                    </span>
+
+                    {% if reservations.has_next %}
+                        <a href="?page={{ reservations.next_page_number }}" class="btn btn-outline-primary btn-sm mx-1">Next &raquo;</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    var carImageCarousel = new bootstrap.Carousel(document.getElementById('carImageCarousel'), {
+        interval: false // Disable auto-sliding
+    });
+
+    function setActiveImage(index) {
+        carImageCarousel.to(index);
+        updateThumbnailActive(index);
+    }
+
+    function updateThumbnailActive(index) {
+        var thumbnails = document.querySelectorAll('.thumbnail-gallery img');
+        thumbnails.forEach((thumb, i) => {
+            if (i === index) {
+                thumb.classList.add('active');
+            } else {
+                thumb.classList.remove('active');
+            }
+        });
+    }
+
+    document.getElementById('carImageCarousel').addEventListener('slid.bs.carousel', function (event) {
+        updateThumbnailActive(event.to);
+    });
+</script>
+{% endblock %}

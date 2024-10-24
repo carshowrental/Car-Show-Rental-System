@@ -1,0 +1,125 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - Car Show Rental Admin{% endblock %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3 mb-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Cars</h5>
+                <h2 class="card-text">{{ total_cars }}</h2>
+                <a href="{% url 'admin_cars' %}" class="btn btn-light btn-sm">View Cars</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-secondary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <h2 class="card-text">{{ total_users }}</h2>
+                <a href="{% url 'admin_user_accounts' %}" class="btn btn-light btn-sm">View Users</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Reservations</h5>
+                <h2 class="card-text">{{ total_reservations }}</h2>
+                <a href="{% url 'admin_reservations' %}" class="btn btn-light btn-sm">View Reservations</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Revenue</h5>
+                <h2 class="card-text">₱{{ revenue }}</h2>
+                <a href="{% url 'admin_payments' %}" class="btn btn-light btn-sm">View Payments</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" style="color: var(--primary-color);">Reservations Overview</h5>
+                <!-- Add a chart or graph here -->
+                <p>Placeholder for reservations chart</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" style="color: var(--secondary-color);">Revenue Sources</h5>
+                <!-- Add a chart or graph here -->
+                <p>Placeholder for revenue sources chart</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var reservationsCtx = document.getElementById('reservationsChart').getContext('2d');
+        new Chart(reservationsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Reservations',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderColor: '#6C63FF',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Monthly Reservations'
+                    }
+                }
+            }
+        });
+
+        var revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Car A', 'Car B', 'Car C', 'Car D'],
+                datasets: [{
+                    data: [300, 50, 100, 80],
+                    backgroundColor: ['#6C63FF', '#FF6584', '#4CAF50', '#FFC107']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Revenue by Car Type'
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %}My Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4"><i class="fas fa-tachometer-alt me-2 text-secondary"></i>My Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm" style="background-color: #d3d3d3;">
+                <div class="card-body">
+                    <h2 class="card-title h4"><i class="fas fa-user-circle me-2 mb-3 text-secondary"></i>Quick Actions</h2>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'profile' %}" class="btn btn-warning"><i class="fas fa-user-edit me-2"></i>Edit Profile</a>
+                        <a href="{% url 'cars' %}" class="btn btn-success"><i class="fas fa-search me-2"></i>Browse Cars</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card shadow-sm" style="background-color: #d3d3d3;">
+                <div class="card-body">
+                    <h2 class="card-title h4 mb-4"><i class="fas fa-calendar-check me-2 text-secondary"></i>My Reservations</h2>
+                    {% if reservations %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Car</th>
+                                        <th>Dates</th>
+                                        <th>Total Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for reservation in reservations %}
+                                        <tr>
+                                            <td>{{ reservation.car.brand }} {{ reservation.car.model }}</td>
+                                            <td>{{ reservation.start_date }} to {{ reservation.end_date }}</td>
+                                            <td>₱{{ reservation.total_price }}</td>
+                                            <td>
+                                                {% if reservation.status == 'pending' %}
+                                                    <span class="badge bg-warning text-dark">Pending</span>
+                                                {% elif reservation.status == 'active' %}
+                                                    <span class="badge bg-success">Active</span>
+                                                {% elif reservation.status == 'completed' %}
+                                                    <span class="badge bg-info">Completed</span>
+                                                {% elif reservation.status == 'cancelled' %}
+                                                    <span class="badge bg-danger">Cancelled</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary">{{ reservation.get_status_display }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if reservation.status == 'pending' %}
+                                                    <a href="{% url 'payment' reservation.id %}" class="btn btn-sm btn-primary"><i class="fas fa-credit-card me-1"></i>Pay Now</a>
+                                                {% elif reservation.status == 'active' %}
+                                                    <a href="{% url 'cancel_reservation' reservation.id %}" class="btn btn-sm btn-danger"><i class="fas fa-times me-1"></i>Cancel</a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-center alert alert-info"><i class="fas fa-info-circle me-2"></i>You have no reservations yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

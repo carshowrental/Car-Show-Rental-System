@@ -1,0 +1,139 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+{% block title %}User Accounts - Car Show Rental Admin{% endblock %}
+
+{% block page_title %}User Accounts{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 style="color: var(--primary-color);"><i class="fas fa-users me-2"></i>User Accounts</h2>
+    <a href="{% url 'admin_add_user' %}" class="btn btn-primary"><i class="fas fa-user-plus me-2"></i>New User</a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><i class="fas fa-user me-2"></i>Username</th>
+                    <th><i class="fas fa-envelope me-2"></i>Email</th>
+                    <th><i class="fas fa-id-card me-2"></i>Name</th>
+                    <th><i class="fas fa-phone me-2"></i>Phone Number</th>
+                    <th><i class="fas fa-address-card me-2"></i>License Number</th>
+                    <th><i class="fas fa-calendar-times me-2"></i>License Expiration</th>
+                    <th><i class="fas fa-id-badge me-2"></i>License Image</th>
+                    <th><i class="fas fa-cog me-2"></i>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.get_full_name }}</td>
+                    <td>{{ user.userprofile.phone_number|default:"N/A" }}</td>
+                    <td>{{ user.userprofile.license_number|default:"N/A" }}</td>
+                    <td>{{ user.userprofile.license_expiration|date:"M d, Y"|default:"N/A" }}</td>
+                    <td>
+                        {% if user.userprofile.license_image %}
+                        <img src="{{ user.userprofile.license_image.url }}" alt="License"
+                             class="img-thumbnail license-image" style="height: 60px; cursor: pointer;"
+                             data-bs-toggle="modal" data-bs-target="#licenseModal"
+                             data-img-src="{{ user.userprofile.license_image.url }}"
+                             data-user-name="{{ user.get_full_name }}">
+                        {% else %}
+                        N/A
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <a href="{% url 'admin_edit_user' user.id %}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal-{{ user.id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Delete Modal for each user -->
+                <div class="modal fade" id="deleteModal-{{ user.id }}" tabindex="-1"
+                     aria-labelledby="deleteModalLabel-{{ user.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel-{{ user.id }}">Confirm Deletion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete user <strong>{{ user.get_full_name }}</strong>?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <form method="POST" action="{% url 'admin_delete_user' user.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            {% if users.has_previous %}
+                <a href="?page={{ users.previous_page_number }}" class="btn btn-outline-primary btn-sm mx-1">&laquo; Previous</a>
+            {% endif %}
+
+            <span class="mx-3 align-self-center">
+                Page {{ users.number }} of {{ users.paginator.num_pages }}
+            </span>
+
+            {% if users.has_next %}
+                <a href="?page={{ users.next_page_number }}" class="btn btn-outline-primary btn-sm mx-1">Next &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- License Image Modal -->
+<div class="modal fade" id="licenseModal" tabindex="-1" aria-labelledby="licenseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="licenseModalLabel">License Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-center">
+                <img src="" class="img-fluid" id="modalLicenseImage" alt="Full size license image">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // License image modal functionality
+    const licenseModal = document.getElementById('licenseModal')
+    licenseModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget
+        const imgSrc = button.getAttribute('data-img-src')
+        const userName = button.getAttribute('data-user-name')
+        const modalTitle = licenseModal.querySelector('.modal-title')
+        const modalBodyImg = licenseModal.querySelector('.modal-body img')
+
+        modalTitle.textContent = `License Image - ${userName}`
+        modalBodyImg.src = imgSrc
+    })
+
+</script>
+{% endblock %}

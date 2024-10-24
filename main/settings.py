@@ -58,7 +58,10 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend', 'templates'),  # Frontend templates
+            os.path.join(BASE_DIR, 'backend', 'templates'),  # Backend templates
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -142,18 +145,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'jaylondentalclinic@gmail.com'
-EMAIL_HOST_PASSWORD = 'oled eiek otbv mrie'
+EMAIL_HOST_USER = 'carshowsystem@gmail.com'
+EMAIL_HOST_PASSWORD = 'jutb fnnw vutk odpu'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-LOGIN_URL = '/login/'  # URL where the login page is located
-LOGIN_REDIRECT_URL = '/dashboard/'  # URL to redirect to after successful login
-LOGOUT_REDIRECT_URL = '/'  # URL to redirect to after logout
-
 
 PAYMONGO_API_URL = 'https://api.paymongo.com/v1'
 PAYMONGO_SECRET_KEY = 'sk_test_YmgWDKyver1ED5zFrXZspNnT'

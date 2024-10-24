@@ -1,0 +1,133 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+{% block title %}Edit Reservation - DriveEasy Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 style="color: var(--primary-color);"><i class="fas fa-edit me-2"></i>Edit Reservation</h1>
+    <a class="btn btn-secondary" href="{% url 'admin_reservations' %}"><i class="fas fa-arrow-left me-2"></i>Back to
+        Reservations</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" for="user"><i class="fas fa-user me-2"></i>User</label>
+                <select class="form-select" id="user" name="user" required>
+                    {% for user in users %}
+                        <option value="{{ user.id }}" {% if user.id == reservation.user.id %}selected{% endif %}>
+                            {{ user.username }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="car"><i class="fas fa-car me-2"></i>Car</label>
+                <select class="form-select" id="car" name="car" required>
+                    {% for car in cars %}
+                        <option value="{{ car.id }}" {% if car.id == reservation.car.id %}selected{% endif %}>
+                            {{ car.brand }} {{ car.model }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="rate_type"><i class="fas fa-clock me-2"></i>Rate Type</label>
+                <select class="form-select" id="rate_type" name="rate_type" required>
+                    {% for rate_value, rate_display in rate_types %}
+                        <option value="{{ rate_value }}" {% if rate_value == reservation.rate_type %}selected{% endif %}>
+                            {{ rate_display }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="start_date"><i class="fas fa-calendar-plus me-2"></i>Start Date</label>
+                <input class="form-control" id="start_date" name="start_date" required
+                       type="date" value="{{ reservation.start_date|date:'Y-m-d' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="end_date"><i class="fas fa-calendar-minus me-2"></i>End Date</label>
+                <input class="form-control" id="end_date" name="end_date" required
+                       type="date" value="{{ reservation.end_date|date:'Y-m-d' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="status"><i class="fas fa-info-circle me-2"></i>Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    {% for status_value, status_display in statuses %}
+                        <option value="{{ status_value }}" {% if status_value == reservation.status %}selected{% endif %}>
+                            {{ status_display }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="btn btn-primary w-100" type="submit">
+                <i class="fas fa-save me-2"></i>Save Changes
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rateTypeSelect = document.getElementById('rate_type');
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+
+        function updateDateInputTypes() {
+            const selectedRateType = rateTypeSelect.value;
+            if (selectedRateType === 'hourly') {
+                startDateInput.type = 'datetime-local';
+                endDateInput.type = 'datetime-local';
+                startDateInput.step = '3600'; // 1 hour steps
+                endDateInput.step = '3600';   // 1 hour steps
+
+                // Convert the date values to datetime-local format if they exist
+                if (startDateInput.value) {
+                    const startDate = new Date(startDateInput.value);
+                    startDateInput.value = startDate.toISOString().slice(0, 16);
+                }
+                if (endDateInput.value) {
+                    const endDate = new Date(endDateInput.value);
+                    endDateInput.value = endDate.toISOString().slice(0, 16);
+                }
+            } else {
+                startDateInput.type = 'date';
+                endDateInput.type = 'date';
+                startDateInput.removeAttribute('step');
+                endDateInput.removeAttribute('step');
+
+                // Convert the datetime values to date format if they exist
+                if (startDateInput.value) {
+                    const startDate = new Date(startDateInput.value);
+                    startDateInput.value = startDate.toISOString().slice(0, 10);
+                }
+                if (endDateInput.value) {
+                    const endDate = new Date(endDateInput.value);
+                    endDateInput.value = endDate.toISOString().slice(0, 10);
+                }
+            }
+        }
+
+        // Update date input types when rate type changes
+        rateTypeSelect.addEventListener('change', updateDateInputTypes);
+
+        // Set initial state
+        updateDateInputTypes();
+
+        // Set min/max dates
+        startDateInput.addEventListener('change', function() {
+            endDateInput.min = this.value;
+        });
+
+        endDateInput.addEventListener('change', function() {
+            startDateInput.max = this.value;
+        });
+    });
+</script>
+{% endblock %}

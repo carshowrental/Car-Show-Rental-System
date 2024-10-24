@@ -1,0 +1,104 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+
+{% block title %}Add Reservation - DriveEasy Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 style="color: var(--primary-color);"><i class="fas fa-calendar-plus me-2"></i>Add New Reservation</h1>
+    <a href="{% url 'admin_reservations' %}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Back to Reservations</a>
+</div>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="user" class="form-label"><i class="fas fa-user me-2"></i>User</label>
+                <select class="form-select" id="user" name="user" required>
+                    <option value="" selected disabled>Select a user</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="car" class="form-label"><i class="fas fa-car me-2"></i>Car</label>
+                <select class="form-select" id="car" name="car" required>
+                    <option value="" selected disabled>Select a car</option>
+                    {% for car in cars %}
+                        <option value="{{ car.id }}">{{ car.brand }} {{ car.model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="rate_type" class="form-label"><i class="fas fa-clock me-2"></i>Rate Type</label>
+                <select class="form-select" id="rate_type" name="rate_type" required>
+                    <option value="" selected disabled>Choose a rate type</option>
+                    {% for rate_value, rate_display in rate_types %}
+                        <option value="{{ rate_value }}">{{ rate_display }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="start_date" class="form-label"><i class="fas fa-calendar-plus me-2"></i>Start Date & Time</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label"><i class="fas fa-calendar-minus me-2"></i>End Date & Time</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label"><i class="fas fa-info-circle me-2"></i>Status</label>
+                <select class="form-select" id="status" name="status" required>
+                    {% for status_value, status_display in statuses %}
+                        <option value="{{ status_value }}">{{ status_display }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-plus-circle me-2"></i>Create Reservation
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rateTypeSelect = document.getElementById('rate_type');
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+
+        function updateDateInputTypes() {
+            const selectedRateType = rateTypeSelect.value;
+            if (selectedRateType === 'hourly') {
+                startDateInput.type = 'datetime-local';
+                endDateInput.type = 'datetime-local';
+                startDateInput.step = '3600'; // 1 hour steps
+                endDateInput.step = '3600';   // 1 hour steps
+            } else {
+                startDateInput.type = 'date';
+                endDateInput.type = 'date';
+                startDateInput.removeAttribute('step');
+                endDateInput.removeAttribute('step');
+            }
+        }
+
+        // Update date input types when rate type changes
+        rateTypeSelect.addEventListener('change', updateDateInputTypes);
+
+        // Set initial state
+        updateDateInputTypes();
+
+        // Set min/max dates
+        startDateInput.addEventListener('change', function() {
+            endDateInput.min = this.value;
+        });
+
+        endDateInput.addEventListener('change', function() {
+            startDateInput.max = this.value;
+        });
+    });
+</script>
+{% endblock %}
