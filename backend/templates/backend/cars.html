@@ -20,7 +20,7 @@
                     <th><i class="fas fa-car me-2"></i>Model</th>
                     <th><i class="fas fa-calendar-alt me-2"></i>Year</th>
                     <th><i class="fas fa-tag me-2"></i>Type</th>
-                    <th><i class="fas fa-calculator me-2"></i>Quantity</th>
+                    <th><i class="fas fas fa-clipboard-check me-2"></i>Available Units</th>
                     <th><i class="fas fa-clock me-2"></i>Hourly Rate</th>
                     <th><i class="fas fa-calendar-day me-2"></i>Daily Rate</th>
                     <th><i class="fas fa-calendar-week me-2"></i>Weekly Rate</th>
@@ -45,7 +45,7 @@
                     <td>{{ car.model }}</td>
                     <td>{{ car.year }}</td>
                     <td>{{ car.get_car_type_display }}</td>
-                    <td>{{ car.quantity }}</td>
+                    <td>{{ car.available_units }}/{{ car.total_units }}</td>
                     <td>₱{{ car.hourly_rate }}</td>
                     <td>₱{{ car.daily_rate }}</td>
                     <td>₱{{ car.weekly_rate }}</td>

@@ -1,6 +1,8 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
+from functools import wraps
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import user_passes_test, login_required
@@ -8,21 +10,38 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db import transaction
 from django.db.models import Sum
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils import timezone
+from django.utils.html import strip_tags
 from django.views.decorators.http import require_POST, require_http_methods
 
-from backend.models import Car, Reservation, CarImage, UserProfile
+from backend.models import Car, Reservation, CarImage, UserProfile, PasswordResetToken
 
 
-def is_admin(user):
-    return user.is_authenticated and user.is_staff
+def admin_required(view_func):
+    """
+    Decorator for views that checks that the user is an admin,
+    redirecting to the admin login page if necessary.
+    """
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        is_admin = request.user.is_authenticated and request.user.is_staff
 
-@user_passes_test(is_admin)
+        if not is_admin:
+            messages.error(request, 'Please login with admin credentials to access this page.')
+            return redirect('admin_login')
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
+
+@admin_required
 def view_dashboard(request):
     total_cars = Car.objects.count()
     total_users = User.objects.filter(is_superuser=False).count()
@@ -37,6 +56,7 @@ def view_dashboard(request):
     }
     return render(request, 'backend/dashboard.html', context)
 
+
 @require_http_methods(["GET", "POST"])
 def admin_login(request):
     if request.method == 'POST':
@@ -50,13 +70,89 @@ def admin_login(request):
             messages.error(request, 'Invalid username or password, or insufficient permissions.')
     return render(request, 'backend/login.html')
 
+
 def admin_logout(request):
     logout(request)
     return redirect('admin_login')
 
 
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email, is_staff=True)
+            token = PasswordResetToken.objects.create(
+                user=user,
+                expires_at=timezone.localtime(timezone.now()) + timedelta(hours=24)
+            )
 
-@user_passes_test(is_admin)
+            reset_url = request.build_absolute_uri(
+                reverse('admin_reset_password', args=[str(token.token)])
+            )
+
+            subject = 'Admin Password Reset for Car Show Rental'
+            html_message = render_to_string('backend/reset_password_email.html', {
+                'user': user,
+                'reset_url': reset_url,
+            })
+            plain_message = strip_tags(html_message)
+
+            send_mail(
+                subject,
+                plain_message,
+                settings.EMAIL_HOST_USER,
+                [user.email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+
+            messages.success(request, 'Password reset instructions have been sent to your email.')
+            return redirect('admin_login')
+        except User.DoesNotExist:
+            messages.error(request, 'No admin user with that email address exists.')
+
+    return render(request, 'backend/forgot_password.html')
+
+
+def reset_password(request, token):
+    try:
+        reset_token = PasswordResetToken.objects.get(token=token)
+
+        # Verify this is an admin user
+        if not reset_token.user.is_staff:
+            messages.error(request, 'Invalid password reset link.')
+            return redirect('admin_login')
+
+        # Check if token is expired
+        if not reset_token.is_valid():
+            messages.error(request, 'This password reset link has expired.')
+            return redirect('admin_login')
+
+        if request.method == 'POST':
+            password1 = request.POST.get('password1')
+            password2 = request.POST.get('password2')
+
+            if password1 != password2:
+                messages.error(request, 'Passwords do not match.')
+            elif len(password1) < 8:
+                messages.error(request, 'Password must be at least 8 characters long.')
+            else:
+                user = reset_token.user
+                user.password = make_password(password1)
+                user.save()
+                reset_token.delete()
+                messages.success(request,
+                                 'Your password has been reset successfully. You can now log in with your new password.')
+                return redirect('admin_login')
+
+        return render(request, 'backend/reset_password.html', {'token': token})
+
+    except PasswordResetToken.DoesNotExist:
+        messages.error(request, 'Invalid password reset link.')
+        return redirect('admin_login')
+
+
+@admin_required
 def view_cars(request):
     car_list = Car.objects.all()
     paginator = Paginator(car_list, 10)  # Show 10 cars per page
@@ -65,17 +161,27 @@ def view_cars(request):
     return render(request, 'backend/cars.html', {'cars': cars})
 
 
-@user_passes_test(is_admin)
+@admin_required
 def car_detail(request, car_id):
     car = get_object_or_404(Car, id=car_id)
     reservation_list = car.reservation_set.all().order_by('-start_date')
     paginator = Paginator(reservation_list, 5)  # Show 5 reservations per page
     page = request.GET.get('page')
     reservations = paginator.get_page(page)
-    return render(request, 'backend/car_detail.html', {'car': car, 'reservations': reservations})
+
+    # Split the features string into a list, respecting newlines
+    features = [feature.strip() for feature in car.features.split('\n') if feature.strip()]
+
+    context = {
+        'car': car,
+        'reservations': reservations,
+        'features': features
+    }
+
+    return render(request, 'backend/car_detail.html', context)
 
 
-@user_passes_test(is_admin)
+@admin_required
 @require_http_methods(["GET", "POST"])
 def add_car(request):
     if request.method == 'POST':
@@ -85,13 +191,13 @@ def add_car(request):
             model = request.POST.get('model')
             year = request.POST.get('year')
             car_type = request.POST.get('car_type')
-            quantity = request.POST.get('quantity')
+            total_units = request.POST.get('total_units')
             hourly_rate = request.POST.get('hourly_rate')
             daily_rate = request.POST.get('daily_rate')
             features = request.POST.get('features')
 
             # Validate required fields
-            if not all([brand, model, year, car_type, quantity, hourly_rate, daily_rate]):
+            if not all([brand, model, year, car_type, total_units, hourly_rate, daily_rate]):
                 messages.warning(request, 'Missing required fields')
 
             car = Car.objects.create(
@@ -99,7 +205,7 @@ def add_car(request):
                 model=model,
                 year=int(year),
                 car_type=car_type,
-                quantity=int(quantity),
+                total_units=int(total_units),
                 hourly_rate=float(hourly_rate),
                 daily_rate=float(daily_rate),
                 features=features
@@ -129,7 +235,8 @@ def add_car(request):
     # If GET request, render the form
     return render(request, 'backend/add_car.html', {'car_types': Car.CAR_TYPES})
 
-@user_passes_test(is_admin)
+
+@admin_required
 @require_http_methods(["GET", "POST"])
 def edit_car(request, car_id):
     car = get_object_or_404(Car, id=car_id)
@@ -141,7 +248,8 @@ def edit_car(request, car_id):
             car.model = request.POST.get('model')
             car.year = int(request.POST.get('year'))
             car.car_type = request.POST.get('car_type')
-            car.quantity = int(request.POST.get('quantity'))
+            car.total_units = int(request.POST.get('total_units'))
+            car.unavailable_units = int(request.POST.get('unavailable_units'))
             car.hourly_rate = float(request.POST.get('hourly_rate'))
             car.daily_rate = float(request.POST.get('daily_rate'))
             car.features = request.POST.get('features')
@@ -190,7 +298,7 @@ def delete_car(request, car_id):
 
 
 @login_required
-@user_passes_test(is_admin)
+@admin_required
 def view_user_accounts(request):
     user_list = User.objects.filter(is_superuser=False)
     paginator = Paginator(user_list, 10)  # Show 10 users per page
@@ -200,13 +308,14 @@ def view_user_accounts(request):
 
 
 @login_required
-@user_passes_test(is_admin)
+@admin_required
 def add_user(request):
     if request.method == 'POST':
         try:
             username = request.POST['username']
             email = request.POST['email']
             password = request.POST['password']
+            phone_number = request.POST.get('phone_number', '')
 
             # Check if username already exists
             if User.objects.filter(username=username).exists():
@@ -215,6 +324,10 @@ def add_user(request):
             # Check if email already exists
             if User.objects.filter(email=email).exists():
                 messages.error(request, 'This email is already in use.')
+
+            # Check if phone number already exists
+            if phone_number and UserProfile.objects.filter(phone_number=phone_number).exists():
+                messages.error(request, 'This phone number is already registered.')
 
             # Validate password length
             if len(password) < 8:
@@ -236,7 +349,7 @@ def add_user(request):
 
                 profile = UserProfile(
                     user=user,
-                    phone_number=request.POST.get('phone_number', ''),
+                    phone_number=phone_number,
                     address=request.POST.get('address', ''),
                     license_number=request.POST.get('license_number', ''),
                     license_expiration=request.POST.get('license_expiration'),
@@ -254,13 +367,14 @@ def add_user(request):
 
 
 @login_required
-@user_passes_test(is_admin)
+@admin_required
 def edit_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
         try:
             username = request.POST['username']
             email = request.POST['email']
+            phone_number = request.POST.get('phone_number', '')
 
             # Check if username already exists (excluding the current user)
             if User.objects.filter(username=username).exclude(id=user_id).exists():
@@ -269,6 +383,10 @@ def edit_user(request, user_id):
             # Check if email already exists (excluding the current user)
             if User.objects.filter(email=email).exclude(id=user_id).exists():
                 messages.error(request, 'This email is already in use.')
+
+            # Check if phone number already exists (excluding the current user)
+            if phone_number and UserProfile.objects.filter(phone_number=phone_number).exclude(user_id=user_id).exists():
+                messages.error(request, 'This phone number is already registered.')
 
             with transaction.atomic():
                 user.username = username
@@ -288,7 +406,7 @@ def edit_user(request, user_id):
                 user.save()
 
                 profile, created = UserProfile.objects.get_or_create(user=user)
-                profile.phone_number = request.POST.get('phone_number', '')
+                profile.phone_number = phone_number
                 profile.address = request.POST.get('address', '')
                 profile.license_number = request.POST.get('license_number', '')
                 license_expiration = request.POST.get('license_expiration')
@@ -308,7 +426,7 @@ def edit_user(request, user_id):
 
 
 @login_required
-@user_passes_test(is_admin)
+@admin_required
 @require_POST
 def delete_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
@@ -317,7 +435,7 @@ def delete_user(request, user_id):
     return redirect('admin_user_accounts')
 
 
-@user_passes_test(is_admin)
+@admin_required
 def view_reservations(request):
     reservation_list = Reservation.objects.all().order_by('-created_at')
     paginator = Paginator(reservation_list, 10)  # Show 10 reservations per page
@@ -326,7 +444,7 @@ def view_reservations(request):
     return render(request, 'backend/reservations.html', {'reservations': reservations})
 
 
-@user_passes_test(is_admin)
+@admin_required
 def add_reservation(request):
     users = User.objects.filter(is_superuser=False)
     cars = Car.objects.all()
@@ -337,12 +455,15 @@ def add_reservation(request):
         rate_type = request.POST.get('rate_type')
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
+        receipt_image = request.FILES.get('receipt_image')
+        reference_number = request.POST.get('reference_number')
+        amount = request.POST.get('amount')
         status = request.POST.get('status')
 
         try:
-            # Get car and check quantity
+            # Get car and check total units
             car = Car.objects.get(id=car_id)
-            if car.quantity <= 0:
+            if car.total_units <= 0:
                 messages.error(request, 'No units available for this car model.')
                 return redirect('admin_reservations')
 
@@ -353,7 +474,7 @@ def add_reservation(request):
             # Check availability
             if car.is_available(start_date, end_date):
                 # Calculate duration
-                duration = (end_date - start_date).days + 1
+                duration = (end_date - start_date).days
 
                 # Calculate total price based on rate type
                 if rate_type == 'hourly':
@@ -366,10 +487,6 @@ def add_reservation(request):
                 else:
                     total_price = 0
 
-                # Decrease car quantity
-                car.quantity -= 1
-                car.save()
-
                 # Create reservation
                 reservation = Reservation.objects.create(
                     user_id=user_id,
@@ -377,6 +494,9 @@ def add_reservation(request):
                     rate_type=rate_type,
                     start_date=start_date,
                     end_date=end_date,
+                    receipt_image=receipt_image,
+                    reference_number=reference_number,
+                    amount=amount,
                     status=status,
                     total_price=total_price
                 )
@@ -406,7 +526,7 @@ def add_reservation(request):
     return render(request, 'backend/add_reservation.html', context)
 
 
-@user_passes_test(is_admin)
+@admin_required
 def edit_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id)
     users = User.objects.filter(is_superuser=False)
@@ -418,6 +538,9 @@ def edit_reservation(request, reservation_id):
         rate_type = request.POST.get('rate_type')
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
+        new_receipt_image = request.FILES.get('receipt_image')
+        reference_number = request.POST.get('reference_number')
+        amount = request.POST.get('amount')
         status = request.POST.get('status')
 
         try:
@@ -429,7 +552,7 @@ def edit_reservation(request, reservation_id):
             car = Car.objects.get(id=car_id)
 
             # Calculate duration
-            duration = (end_date - start_date).days + 1
+            duration = (end_date - start_date).days
 
             # Calculate total price based on rate type
             if rate_type == 'hourly':
@@ -442,12 +565,21 @@ def edit_reservation(request, reservation_id):
             else:
                 total_price = 0
 
+            # Handle receipt image update
+            if new_receipt_image:
+                # Delete old receipt image if it exists
+                if reservation.receipt_image:
+                    reservation.receipt_image.delete(save=False)
+                reservation.receipt_image = new_receipt_image
+
             # Update reservation
             reservation.user_id = user_id
             reservation.car_id = car_id
             reservation.rate_type = rate_type
             reservation.start_date = start_date
             reservation.end_date = end_date
+            reservation.reference_number = reference_number
+            reservation.amount = amount
             reservation.status = status
             reservation.total_price = total_price
             reservation.save()
@@ -475,7 +607,7 @@ def edit_reservation(request, reservation_id):
     return render(request, 'backend/edit_reservation.html', context)
 
 
-@user_passes_test(is_admin)
+@admin_required
 @require_POST
 def cancel_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id)
@@ -487,7 +619,17 @@ def cancel_reservation(request, reservation_id):
         return redirect('admin_reservations')
 
 
-@user_passes_test(is_admin)
+@admin_required
+@require_POST
+def delete_reservation(request, reservation_id):
+    reservation = get_object_or_404(Reservation, id=reservation_id)
+    reservation.delete()
+
+    messages.success(request, f'The reservation for { reservation.car.brand } { reservation.car.model } has been successfully deleted.')
+    return redirect('admin_reservations')
+
+
+@admin_required
 def view_payments(request):
     payment_list = Reservation.objects.filter(status='paid').order_by('-updated_at')
     paginator = Paginator(payment_list, 10)  # Show 10 payments per page
@@ -496,7 +638,7 @@ def view_payments(request):
     return render(request, 'backend/payments.html', {'payments': payments})
 
 
-@user_passes_test(is_admin)
+@admin_required
 def view_profile(request):
     if request.method == 'POST':
         # Handle profile update

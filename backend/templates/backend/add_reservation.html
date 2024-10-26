@@ -10,7 +10,7 @@
 </div>
 <div class="card shadow mb-4">
     <div class="card-body">
-        <form method="post">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="user" class="form-label"><i class="fas fa-user me-2"></i>User</label>
@@ -46,6 +46,18 @@
             <div class="mb-3">
                 <label for="end_date" class="form-label"><i class="fas fa-calendar-minus me-2"></i>End Date & Time</label>
                 <input type="date" class="form-control" id="end_date" name="end_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="receipt_image" class="form-label"><i class="fas fa-receipt me-2"></i>Receipt Image</label>
+                <input type="file" class="form-control" id="receipt_image" name="receipt_image" accept="image/*" required>
+            </div>
+            <div class="mb-3">
+                <label for="reference_number" class="form-label"><i class="fas fa-barcode me-2"></i>Reference Number</label>
+                <input type="text" class="form-control" id="reference_number" name="reference_number" required>
+            </div>
+            <div class="mb-3">
+                <label for="amount" class="form-label"><i class="fas fa-money-bill-wave me-2"></i>Amount</label>
+                <input type="number" class="form-control" id="amount" name="amount" required>
             </div>
             <div class="mb-3">
                 <label for="status" class="form-label"><i class="fas fa-info-circle me-2"></i>Status</label>

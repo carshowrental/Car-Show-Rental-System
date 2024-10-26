@@ -39,7 +39,7 @@
                     <td>
                         {% if user.userprofile.license_image %}
                         <img src="{{ user.userprofile.license_image.url }}" alt="License"
-                             class="img-thumbnail license-image" style="height: 60px; cursor: pointer;"
+                             class="img-thumbnail" style="height: 60px; cursor: pointer;"
                              data-bs-toggle="modal" data-bs-target="#licenseModal"
                              data-img-src="{{ user.userprofile.license_image.url }}"
                              data-user-name="{{ user.get_full_name }}">

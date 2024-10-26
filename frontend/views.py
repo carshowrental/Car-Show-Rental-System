@@ -41,7 +41,7 @@ def user_register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
-        phone_number = request.POST.get('phone')
+        phone_number = request.POST.get('phone_number')
         address = request.POST.get('address')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
@@ -51,24 +51,25 @@ def user_register(request):
             messages.error(request, 'Passwords do not match.')
         elif len(password1) < 8:
             messages.error(request, 'Password must be at least 8 characters long.')
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, 'This username is already taken. Please use a different username.')
         elif User.objects.filter(email=email).exists():
             messages.error(request, 'This email is already registered. Please use a different email.')
+        elif UserProfile.objects.filter(phone_number=phone_number).exists():
+            messages.error(request, 'This phone number is already registered. Please use a different phone number.')
         else:
-            try:
-                # Create the user
-                user = User.objects.create_user(username=username, email=email, password=password1)
+            # Create the user
+            user = User.objects.create_user(username=username, email=email, password=password1)
 
-                # Create the user profile with phone number and address
-                UserProfile.objects.create(
-                    user=user,
-                    phone_number=phone_number,
-                    address=address
-                )
+            # Create the user profile with phone number and address
+            UserProfile.objects.create(
+                user=user,
+                phone_number=phone_number,
+                address=address
+            )
 
-                messages.success(request, f'Account created for {username}. You can now log in.')
-                return redirect('login')
-            except IntegrityError:
-                messages.error(request, 'That username is already taken. Please choose a different one.')
+            messages.success(request, f'Account created for {username}. You can now log in.')
+            return redirect('login')
 
     return render(request, 'frontend/register.html')
 
@@ -288,40 +289,6 @@ def user_profile(request):
     })
 
 
-@login_required
-def user_dashboard(request):
-    now = timezone.localtime(timezone.now())
-    reservations = Reservation.objects.filter(user=request.user).order_by('-start_date')
-
-    # Classify reservations
-    for reservation in reservations:
-        # Convert datetime to date for comparison if rate_type is not hourly
-        if reservation.rate_type == 'hourly':
-            start = reservation.start_date
-            end = reservation.end_date
-            current = now
-        else:
-            start = reservation.start_date.date()
-            end = reservation.end_date.date()
-            current = now.date()
-
-        if reservation.status == 'paid' and start <= current <= end:
-            reservation.status = 'active'
-        elif reservation.status == 'paid' and end < current:
-            reservation.status = 'completed'
-        reservation.save()
-
-    # Check for newly cancelled reservations
-    newly_cancelled = reservations.filter(status='cancelled', cancellation_notified=False)
-    for reservation in newly_cancelled:
-        messages.warning(request,
-                        f'Your reservation for {reservation.car.brand} {reservation.car.model} from {reservation.start_date} to {reservation.end_date} has been cancelled due to overlapping with a confirmed booking.')
-        reservation.cancellation_notified = True
-        reservation.save()
-
-    return render(request, 'frontend/user_dashboard.html', {'reservations': reservations})
-
-
 def view_cars(request):
     cars = Car.objects.all()
 
@@ -439,13 +406,13 @@ def check_car_availability(request):
                 'message': 'Cannot book in the past'
             })
 
-        # Check availability and get quantity
-        available_quantity = car.available_quantity(start_datetime, end_datetime)
+        # Check availability and get total units
+        get_available_total_units = car.get_available_total_units(start_datetime, end_datetime)
 
         return JsonResponse({
-            'available': available_quantity > 0,
-            'available_quantity': available_quantity,
-            'message': f'{available_quantity} units available' if available_quantity > 0 else 'No units available for these dates/times'
+            'available': get_available_total_units > 0,
+            'get_available_total_units': get_available_total_units,
+            'message': f'{get_available_total_units} units available' if get_available_total_units > 0 else 'No units available for these dates/times'
         })
 
     except Exception as e:
@@ -453,6 +420,33 @@ def check_car_availability(request):
             'available': False,
             'message': str(e)
         }, status=400)
+
+
+
+@login_required
+def view_reservations(request):
+    now = timezone.localtime(timezone.now())
+    reservations = Reservation.objects.filter(user=request.user).order_by('-start_date')
+
+    # Classify reservations
+    for reservation in reservations:
+        # Convert datetime to date for comparison if rate_type is not hourly
+        if reservation.rate_type == 'hourly':
+            start = reservation.start_date
+            end = reservation.end_date
+            current = now
+        else:
+            start = reservation.start_date.date()
+            end = reservation.end_date.date()
+            current = now.date()
+
+        if reservation.status == 'paid' and start <= current <= end:
+            reservation.status = 'active'
+        elif reservation.status == 'paid' and end < current:
+            reservation.status = 'completed'
+        reservation.save()
+
+    return render(request, 'frontend/reservations.html', {'reservations': reservations})
 
 
 @login_required
@@ -492,10 +486,10 @@ def create_reservation(request, car_id):
                 start_datetime = timezone.make_aware(datetime.combine(start_date, datetime.min.time()))
                 end_datetime = timezone.make_aware(datetime.combine(end_date, datetime.min.time()))
 
-            # Get the available quantity for the period
-            available_quantity = car.available_quantity(start_datetime, end_datetime)
+            # Get the available total units for the period
+            get_available_total_units = car.get_available_total_units(start_datetime, end_datetime)
 
-            if available_quantity > 0:
+            if get_available_total_units > 0:
                 reservation = Reservation.objects.create(
                     user=request.user,
                     car=car,
@@ -521,33 +515,23 @@ def create_reservation(request, car_id):
 
 
 @login_required
-def view_reservations(request):
-    now = timezone.localtime(timezone.now())
-    upcoming_reservations = Reservation.objects.filter(user=request.user, start_date__gt=now).order_by('start_date')
-    current_reservations = Reservation.objects.filter(user=request.user, start_date__lte=now,
-                                                      end_date__gte=now).order_by('start_date')
-    past_reservations = Reservation.objects.filter(user=request.user, end_date__lt=now).order_by('-end_date')
-
-    context = {
-        'upcoming_reservations': upcoming_reservations,
-        'current_reservations': current_reservations,
-        'past_reservations': past_reservations,
-    }
-    return render(request, 'frontend/reservations.html', context)
-
-
-@login_required
 def cancel_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
 
-    if reservation.status == 'active':
-        reservation.status = 'cancelled'
-        reservation.save()
-        messages.success(request, 'Reservation cancelled successfully.')
-    else:
-        messages.error(request, 'This reservation cannot be cancelled.')
+    reservation.status = 'cancelled'
+    reservation.save()
+    messages.success(request, 'Reservation cancelled successfully.')
 
-    return redirect('user_dashboard')
+    return redirect('reservations')
+
+
+@login_required
+def delete_reservation(request, reservation_id):
+    reservation = get_object_or_404(Reservation, id=reservation_id)
+    reservation.delete()
+
+    messages.success(request, f'The reservation for { reservation.car.brand } { reservation.car.model } has been successfully deleted.')
+    return redirect('reservations')
 
 
 @login_required

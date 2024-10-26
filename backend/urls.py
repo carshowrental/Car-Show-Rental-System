@@ -9,6 +9,10 @@ urlpatterns = [
     path('login/', views.admin_login, name='admin_login'),
     path('logout/', views.admin_logout, name='admin_logout'),
 
+    # Password Management
+    path('forgot-password/', views.forgot_password, name='admin_forgot_password'),
+    path('reset-password/<uuid:token>/', views.reset_password, name='admin_reset_password'),
+
     # Car Management
     path('cars/', views.view_cars, name='admin_cars'),
     path('cars/<int:car_id>/', views.car_detail, name='admin_car_detail'),
@@ -27,6 +31,7 @@ urlpatterns = [
     path('reservations/add/', views.add_reservation, name='admin_add_reservation'),
     path('reservations/<int:reservation_id>/edit/', views.edit_reservation, name='admin_edit_reservation'),
     path('reservations/<int:reservation_id>/cancel/', views.cancel_reservation, name='admin_cancel_reservation'),
+    path('reservations/<int:reservation_id>/delete/', views.delete_reservation, name='admin_delete_reservation'),
 
     # Payment Management
     path('payments/', views.view_payments, name='admin_payments'),

@@ -50,7 +50,11 @@
                                 <span class="badge bg-danger"><i class="fas fa-tag me-1"></i>{{ car.get_car_type_display }}</span>
                                 <span class="float-end text-success"><i class="fas fa-peso-sign me-1"></i>{{ car.daily_rate }}/day</span>
                             </p>
+                            {% if car.available_units == 0 %}
+                            <button type="button" class="btn btn-outline-secondary w-100 mt-3"><i class="fas fa-ban me-2"></i>Out of Stock</button>
+                            {% else %}
                             <a href="{% url 'car_detail' car.id %}" class="btn btn-outline-danger w-100 mt-3"><i class="fas fa-info-circle me-2"></i>View Details</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

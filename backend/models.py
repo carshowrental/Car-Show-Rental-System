@@ -9,14 +9,16 @@ class Car(models.Model):
     CAR_TYPES = [
         ('sedan', 'Sedan'),
         ('suv', 'SUV'),
-        ('sports', 'Sports Car'),
+        ('pick up', 'Pick Up'),
         ('van', 'Van'),
+        ('mini van', 'Mini Van'),
     ]
 
     brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     year = models.IntegerField()
-    quantity = models.IntegerField()
+    total_units = models.IntegerField()
+    unavailable_units = models.IntegerField(default=0)
     car_type = models.CharField(max_length=20, choices=CAR_TYPES)
     hourly_rate = models.DecimalField(max_digits=8, decimal_places=2)
     daily_rate = models.DecimalField(max_digits=8, decimal_places=2)
@@ -25,50 +27,75 @@ class Car(models.Model):
     def __str__(self):
         return f"{self.brand} {self.model} ({self.year})"
 
-    def get_reserved_quantity(self, start_datetime, end_datetime):
+    def get_reserved_total_units(self, start_datetime, end_datetime):
         """
         Calculate how many units of this car are reserved for a given period.
-        Works with both datetime and date objects, handling hourly, daily, and weekly rentals.
-        The end time is exclusive, meaning a car can be booked starting exactly when another rental ends.
+        Handles hourly bookings with precise time comparison.
         """
-        from .models import Reservation  # Import here to avoid circular import
+        from .models import Reservation
 
-        # Ensure we're working with datetime objects
-        if not isinstance(start_datetime, timezone.datetime):
-            start_datetime = timezone.make_aware(timezone.datetime.combine(start_datetime, timezone.datetime.min.time()))
-        if not isinstance(end_datetime, timezone.datetime):
-            end_datetime = timezone.make_aware(timezone.datetime.combine(end_datetime, timezone.datetime.min.time()))
+        # Ensure datetimes are timezone-aware
+        if timezone.is_naive(start_datetime):
+            start_datetime = timezone.make_aware(start_datetime)
+        if timezone.is_naive(end_datetime):
+            end_datetime = timezone.make_aware(end_datetime)
 
-        overlapping_reservations = Reservation.objects.filter(
+        # Get existing reservations
+        existing_reservations = Reservation.objects.filter(
             car=self,
-            start_date__lt=end_datetime,  # Reservation starts before the new end time
-            end_date__gt=start_datetime,  # Reservation ends after the new start time
-            status__in=['pending', 'paid', 'active']
+            status__in=['pending', 'partial', 'paid', 'active']
         )
-        return overlapping_reservations.count()
+
+        # Count only truly overlapping reservations
+        overlapping_count = existing_reservations.filter(
+            start_date__lt=end_datetime,
+            end_date__gt=start_datetime
+        ).exclude(
+            models.Q(start_date=end_datetime) |  # Reservation starts exactly when requested period ends
+            models.Q(end_date=start_datetime)    # Reservation ends exactly when requested period starts
+        ).count()
+
+        return overlapping_count
+
+
+    @property
+    def available_units(self):
+        """Returns the number of units that are available"""
+        return max(0, self.total_units - self.unavailable_units)
 
     def is_available(self, start_datetime, end_datetime):
         """
         Check if there are any available units of this car for the given period.
         """
-        reserved_quantity = self.get_reserved_quantity(start_datetime, end_datetime)
-        return reserved_quantity < self.quantity
+        available = self.available_units
+        if available <= 0:
+            return False
 
-    def available_quantity(self, start_datetime, end_datetime):
+        reserved_total = self.get_reserved_total_units(start_datetime, end_datetime)
+        return (available - reserved_total) > 0
+
+    def get_available_total_units(self, start_datetime, end_datetime):
         """
         Return the number of available units for the given period.
         """
-        reserved_quantity = self.get_reserved_quantity(start_datetime, end_datetime)
-        return max(0, self.quantity - reserved_quantity)
+        available = self.available_units
+        if available <= 0:
+            return 0
+
+        reserved_total = self.get_reserved_total_units(start_datetime, end_datetime)
+        return max(0, available - reserved_total)
 
     @property
     def is_currently_available(self):
         """
         Check if any units are available now.
         """
+        if self.available_units <= 0:
+            return False
+
         now = timezone.localtime(timezone.now())
         next_hour = now + timezone.timedelta(hours=1)
-        return self.available_quantity(now, next_hour) > 0
+        return self.get_available_total_units(now, next_hour) > 0
 
     def get_main_image(self):
         return self.carimages_set.filter(is_main=True).first() or self.carimages_set.first()
@@ -100,6 +127,7 @@ class Reservation(models.Model):
 
     STATUS_CHOICES = [
         ('pending', 'Pending'),
+        ('partial', 'Partial'),
         ('paid', 'Paid'),
         ('active', 'Active'),
         ('completed', 'Completed'),
@@ -108,16 +136,16 @@ class Reservation(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    rate_type = models.CharField(max_length=10, choices=RATE_TYPES)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    rate_type = models.CharField(max_length=10, choices=RATE_TYPES)
+    receipt_image = models.ImageField(upload_to='receipts/', blank=True, null=True)
+    reference_number = models.CharField(max_length=50, blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_source_id = models.CharField(max_length=255, blank=True, null=True)
-    payment_id = models.CharField(max_length=255, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    cancellation_notified = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username}'s reservation for {self.car.brand} {self.car.model}"

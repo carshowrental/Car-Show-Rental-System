@@ -68,11 +68,11 @@
                     <label for="model" class="form-label"><i class="fas fa-car me-2"></i>Model</label>
                     <input type="text" class="form-control" id="model" name="model" value="{{ car.model }}" required>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="year" class="form-label"><i class="fas fa-calendar-alt me-2"></i>Year</label>
                     <input type="number" class="form-control" id="year" name="year" value="{{ car.year }}" required>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="car_type" class="form-label"><i class="fas fa-tag me-2"></i>Car Type</label>
                     <select class="form-select" id="car_type" name="car_type" required>
                         {% for value, display in car_types %}
@@ -80,9 +80,13 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-md-4">
-                    <label for="quantity" class="form-label"><i class="fas fa-calculator me-2"></i>Quantity</label>
-                    <input type="number" class="form-control" id="quantity" name="quantity" value="{{ car.quantity }}" required>
+                <div class="col-md-6">
+                    <label for="total_units" class="form-label"><i class="fas fa-clipboard-check me-2"></i>Total Units</label>
+                    <input type="number" class="form-control" id="total_units" name="total_units" value="{{ car.total_units }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="unavailable_units" class="form-label"><i class="fas fa-ban me-2"></i>Unavailable Units</label>
+                    <input type="number" class="form-control" id="unavailable_units" name="unavailable_units" value="{{ car.unavailable_units }}" required>
                 </div>
                 <div class="col-md-6">
                     <label for="hourly_rate" class="form-label"><i class="fas fa-clock me-2"></i>Hourly Rate (₱)</label>

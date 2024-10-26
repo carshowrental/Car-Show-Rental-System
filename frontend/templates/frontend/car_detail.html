@@ -3,6 +3,27 @@
 
 {% block title %}{{ car.brand }} {{ car.model }} - Car Show Rentals{% endblock %}
 
+{% block extra_css %}
+<style>
+    /* Add custom styles for thumbnails */
+    .thumbnails-wrapper {
+        padding: 10px;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .thumbnail-item img {
+        transition: all 0.2s ease-in-out;
+        border: 2px solid transparent;
+    }
+
+    .thumbnail-item img.active {
+        border-color: #dc3545;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid py-4 bg-light">
     <div class="container">
@@ -10,26 +31,47 @@
             <!-- Left Column - Car Details -->
             <div class="col-lg-7">
                 <!-- Image Carousel -->
-                <div id="carImageCarousel" class="carousel slide mb-4 shadow">
-                    <div class="carousel-inner rounded">
-                        {% for image in car.carimages_set.all %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{ image.image.url }}"
-                                 class="d-block w-100"
-                                 alt="{{ car.brand }} {{ car.model }}"
-                                 style="height: 400px; object-fit: cover;">
+                <div class="car-gallery mb-4">
+                    <!-- Main Carousel -->
+                    <div id="carImageCarousel" class="carousel slide shadow mb-2">
+                        <div class="carousel-inner rounded">
+                            {% for image in car.carimages_set.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}"
+                                     class="d-block w-100"
+                                     alt="{{ car.brand }} {{ car.model }}"
+                                     style="height: 400px; object-fit: cover;">
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
+                        {% if car.carimages_set.count > 1 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carImageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carImageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        {% endif %}
                     </div>
+
+                    <!-- Thumbnails -->
                     {% if car.carimages_set.count > 1 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carImageCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carImageCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <div class="thumbnails-wrapper">
+                        <div class="d-flex overflow-auto">
+                            {% for image in car.carimages_set.all %}
+                            <div class="thumbnail-item me-2" style="min-width: 80px;">
+                                <img src="{{ image.image.url }}"
+                                     class="img-thumbnail {% if forloop.first %}active{% endif %}"
+                                     alt="Thumbnail {{ forloop.counter }}"
+                                     data-bs-target="#carImageCarousel"
+                                     data-bs-slide-to="{{ forloop.counter0 }}"
+                                     style="width: 80px; height: 60px; object-fit: cover; cursor: pointer;">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
 
@@ -48,18 +90,6 @@
                                 <i class="fas fa-calendar-alt me-1"></i>
                                 {{ car.year }}
                             </span>
-                        </div>
-                    </div>
-
-                    <!-- New: Availability Status -->
-                    <div class="card bg-light ps-3 rounded mb-4">
-                        <div class="card-body">
-                            <div class="card-title d-flex align-items-center">
-                                <i class="fas fa-layer-group me-2 fa-2x text-muted"></i>
-                                <div>
-                                    <h6 class="mb-0 text-muted">Total Units: <span class="h4 text-danger">{{ car.quantity }} Available</span></h6>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -317,6 +347,31 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+    // Add thumbnail functionality
+    const thumbnails = document.querySelectorAll('.thumbnail-item img');
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            // Remove active class from all thumbnails
+            thumbnails.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked thumbnail
+            this.classList.add('active');
+        });
+    });
+
+    // Update active thumbnail when carousel slides
+    const carousel = document.getElementById('carImageCarousel');
+    if (carousel) {
+        carousel.addEventListener('slid.bs.carousel', function(event) {
+            // Remove active class from all thumbnails
+            thumbnails.forEach(t => t.classList.remove('active'));
+            // Add active class to current thumbnail
+            const activeIndex = event.to;
+            thumbnails[activeIndex].classList.add('active');
+        });
+    }
+
+
     const hourlyRate = {{ car.hourly_rate }};
     const dailyRate = {{ car.daily_rate }};
     const weeklyRate = {{ car.weekly_rate }};
@@ -332,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const availabilityMessage = form.querySelector('.availability-message');
         const agreementCheckbox = form.querySelector('.form-check-input');
 
-        function updatePrice() {
+        function calculateTotalPrice() {
             let baseRate;
             switch(rateType) {
                 case 'hourly':
@@ -346,28 +401,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
             }
             const duration = parseInt(durationSelect.value);
-            const total = baseRate * duration;
+            return baseRate * duration;
+        }
+
+        function updatePrice() {
+            const total = calculateTotalPrice();
             priceDisplay.textContent = `₱${total.toFixed(2)}`;
         }
 
         function checkAvailability() {
             if (!startInput.value || !durationSelect.value) return;
-
-            const startDate = new Date(startInput.value);
-            let endDate = new Date(startInput.value);
-
-            // Calculate end date based on rate type and duration
-            switch(rateType) {
-                case 'hourly':
-                    endDate.setHours(endDate.getHours() + parseInt(durationSelect.value));
-                    break;
-                case 'daily':
-                    endDate.setDate(endDate.getDate() + parseInt(durationSelect.value));
-                    break;
-                case 'weekly':
-                    endDate.setDate(endDate.getDate() + (parseInt(durationSelect.value) * 7));
-                    break;
-            }
 
             // Show loading state
             availabilityMessage.innerHTML = `
@@ -382,47 +425,50 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             submitButton.disabled = true;
 
-            // Format dates for the backend
-            const formattedStart = startDate.toISOString().split('T')[0];
-            const formattedEnd = endDate.toISOString().split('T')[0];
+            const formData = new FormData();
+            formData.append('car_id', '{{ car.id }}');
+            formData.append('rate_type', rateType);
+            formData.append('duration', durationSelect.value);
+
+            if (rateType === 'hourly') {
+                formData.append('start_datetime', startInput.value);
+            } else {
+                formData.append('start_date', startInput.value);
+            }
 
             // Make AJAX call to check availability
             fetch('{% url "check_car_availability" %}', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
                     'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
                 },
-                body: new URLSearchParams({
-                    'car_id': '{{ car.id }}',
-                    'start_date': formattedStart,
-                    'end_date': formattedEnd,
-                })
+                body: formData
             })
             .then(response => response.json())
             .then(data => {
                 if (data.available) {
                     availabilityMessage.innerHTML = `
                         <div class="alert alert-success">
-                            <i class="bi bi-check-circle me-2"></i>
-                            Car is available for these dates!
+                            <i class="fas fa-check-circle me-2"></i>
+                            Car is available for this time slot!
                         </div>
                     `;
                     submitButton.disabled = !agreementCheckbox.checked;
                 } else {
                     availabilityMessage.innerHTML = `
                         <div class="alert alert-danger">
-                            <i class="bi bi-exclamation-circle me-2"></i>
-                            ${data.message || 'Car is not available for these dates.'}
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            ${data.message || 'Car is not available for this time slot.'}
                         </div>
                     `;
                     submitButton.disabled = true;
                 }
             })
             .catch(error => {
+                console.error('Error:', error);
                 availabilityMessage.innerHTML = `
                     <div class="alert alert-danger">
-                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <i class="fas fa-exclamation-triangle me-2"></i>
                         Error checking availability. Please try again.
                     </div>
                 `;
@@ -431,78 +477,57 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function validateDates() {
-            const startDate = new Date(startInput.value);
             const now = new Date();
+            const startDate = startInput.type === 'datetime-local'
+                ? new Date(startInput.value)
+                : new Date(startInput.value + 'T00:00:00');
 
-            // Reset any previous error messages
             startInput.classList.remove('is-invalid');
 
-            // Check if start date is in the past
-            if (startDate < now) {
-                startInput.classList.add('is-invalid');
-                availabilityMessage.innerHTML = `
-                    <div class="alert alert-danger">
-                        <i class="bi bi-exclamation-circle me-2"></i>
-                        Start date cannot be in the past
-                    </div>
-                `;
-                submitButton.disabled = true;
-                return false;
+            if (startInput.type === 'datetime-local') {
+                if (startDate < now) {
+                    startInput.classList.add('is-invalid');
+                    availabilityMessage.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Start time cannot be in the past
+                        </div>
+                    `;
+                    submitButton.disabled = true;
+                    return false;
+                }
+            } else {
+                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const startDay = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+
+                if (startDay < today) {
+                    startInput.classList.add('is-invalid');
+                    availabilityMessage.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Start date cannot be in the past
+                        </div>
+                    `;
+                    submitButton.disabled = true;
+                    return false;
+                }
             }
 
             return true;
         }
 
-        // Set minimum date/time
-        if (startInput.type === 'datetime-local') {
-            const now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            startInput.min = now.toISOString().slice(0, 16);
-        } else {
-            const today = new Date().toISOString().split('T')[0];
-            startInput.min = today;
-        }
-
-        // Event Listeners
-        startInput.addEventListener('change', () => {
-            if (validateDates()) {
-                checkAvailability();
-                updatePrice();
-            }
-        });
-
-        durationSelect.addEventListener('change', () => {
-            if (validateDates()) {
-                checkAvailability();
-                updatePrice();
-            }
-        });
-
-        agreementCheckbox.addEventListener('change', function() {
-            // Only enable submit if agreement is checked and car is available
-            if (this.checked && availabilityMessage.querySelector('.alert-success')) {
-                submitButton.disabled = false;
-            } else {
-                submitButton.disabled = true;
-            }
-        });
-
         // Handle form submission
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            if (!validateDates()) {
+            if (!validateDates() || !form.checkValidity()) {
                 return;
             }
 
-            if (!form.checkValidity()) {
-                return;
-            }
-
+            // Calculate end date
             const startDate = new Date(startInput.value);
             let endDate = new Date(startInput.value);
 
-            // Calculate end date based on rate type and duration
             switch(rateType) {
                 case 'hourly':
                     endDate.setHours(endDate.getHours() + parseInt(durationSelect.value));
@@ -515,31 +540,67 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
             }
 
-            // Add hidden inputs for end date and total price
-            const endDateInput = document.createElement('input');
-            endDateInput.type = 'hidden';
-            endDateInput.name = rateType === 'hourly' ? 'end_datetime' : 'end_date';
-            endDateInput.value = endDate.toISOString().split('.')[0];
-            form.appendChild(endDateInput);
+            // Always calculate and add total price before submission
+            const totalPrice = calculateTotalPrice();
 
+            // Remove any existing total_price input to avoid duplicates
+            const existingTotalPrice = form.querySelector('input[name="total_price"]');
+            if (existingTotalPrice) {
+                existingTotalPrice.remove();
+            }
+
+            // Add the total price to the form
             const totalPriceInput = document.createElement('input');
             totalPriceInput.type = 'hidden';
             totalPriceInput.name = 'total_price';
-            totalPriceInput.value = parseFloat(priceDisplay.textContent.replace('₱', ''));
+            totalPriceInput.value = totalPrice;
             form.appendChild(totalPriceInput);
+
+            // Debug log
+            console.log('Submitting form with total price:', totalPrice);
 
             // Submit the form
             form.submit();
         });
 
-        // Initialize price display
-        updatePrice();
-    });
+        // Event Listeners
+        startInput.addEventListener('change', () => {
+            if (validateDates()) {
+                checkAvailability();
+                updatePrice();
+            }
+        });
 
-    // Initialize Bootstrap tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
+        durationSelect.addEventListener('change', () => {
+            if (validateDates() && startInput.value) {
+                checkAvailability();
+                updatePrice();
+            }
+        });
+
+        agreementCheckbox.addEventListener('change', function() {
+            if (this.checked && availabilityMessage.querySelector('.alert-success')) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        });
+
+        // Initialize the form
+        function initForm() {
+            const now = new Date();
+            if (startInput.type === 'datetime-local') {
+                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                startInput.min = now.toISOString().slice(0, 16);
+            } else {
+                startInput.min = now.toISOString().split('T')[0];
+            }
+
+            updatePrice();
+            submitButton.disabled = true;
+        }
+
+        initForm();
     });
 });
 </script>

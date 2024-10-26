@@ -54,7 +54,7 @@
                 <label for="license_image" class="form-label"><i class="fas fa-image me-2"></i>License Image</label>
                 {% if user.userprofile.license_image %}
                     <div class="mb-2">
-                        <img src="{{ user.userprofile.license_image.url }}" alt="Current License Image" class="img-thumbnail" style="max-width: 200px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#licenseModal">
+                        <img src="{{ user.userprofile.license_image.url }}" alt="Current License Image" class="img-thumbnail" style="max-width: 200px;">
                     </div>
                 {% endif %}
                 <input type="file" class="form-control" id="license_image" name="license_image">
@@ -65,22 +65,4 @@
     </div>
 </div>
 
-<!-- License Image Modal -->
-{% if user.userprofile.license_image and user.userprofile.license_image.url %}
-<div class="modal fade" id="licenseModal" tabindex="-1" aria-labelledby="licenseModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="licenseModalLabel">License Image - {{ user.get_full_name }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <img src="{{ user.userprofile.license_image.url }}"
-                     class="img-fluid"
-                     alt="Full size license image">
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
 {% endblock %}

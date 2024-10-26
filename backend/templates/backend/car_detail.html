@@ -74,12 +74,21 @@
                         <li class="list-group-item"><i class="fas fa-clock me-2"></i><strong>Hourly Rate:</strong> ₱{{ car.hourly_rate }}</li>
                         <li class="list-group-item"><i class="fas fa-calendar-day me-2"></i><strong>Daily Rate:</strong> ₱{{ car.daily_rate }}</li>
                         <li class="list-group-item"><i class="fas fa-calendar-week me-2"></i><strong>Weekly Rate:</strong> ₱{{ car.weekly_rate }}</li>
-                        <li class="list-group-item"><i class="fas fa-calculator me-2"></i><strong>Quantity:</strong> {{ car.quantity }}</li>
+                        <li class="list-group-item"><i class="fas fas fa-clipboard-check me-2"></i><strong>Available Units:</strong> {{ car.available_units }}/{{ car.total_units }}</li>
                     </ul>
                 </div>
                 <div class="mt-4">
                     <h5 class="card-title"><i class="fas fa-list-ul me-2"></i>Features</h5>
-                    <p>{{ car.features|linebreaks }}</p>
+                    <div class="row">
+                        {% for feature in features %}
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span>{{ feature }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,18 +116,15 @@
                                 <td>{{ reservation.start_date|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.start_date|date:"| g:i A"}}{% endif %}</td>
                                 <td>{{ reservation.end_date|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.end_date|date:"| g:i A"}}{% endif %}</td>
                                 <td>
-                                    <span class="badge bg-{% if reservation.status == 'pending' %}warning{% elif reservation.status == 'active' %}primary{% elif reservation.status == 'completed' %}info{% elif reservation.status == 'cancelled' %}danger{% elif reservation.status == 'paid' %}success{% endif %}">
-                                        {% if reservation.status == 'pending' %}
-                                        <i class="fas fa-clock me-1"></i>
-                                        {% elif reservation.status == 'active' %}
-                                        <i class="fas fa-play me-1"></i>
-                                        {% elif reservation.status == 'completed' %}
-                                        <i class="fas fa-check me-1"></i>
-                                        {% elif reservation.status == 'cancelled' %}
-                                        <i class="fas fa-times me-1"></i>
-                                        {% elif reservation.status == 'paid' %}
-                                        <i class="fas fa-peso-sign me-1"></i>
-                                        {% endif %}
+                                    <span class="badge
+                                                {% if reservation.status == 'pending' %}bg-warning text-dark
+                                                {% elif reservation.status == 'partial' %}bg-info text-dark
+                                                {% elif reservation.status == 'paid' %}bg-success
+                                                {% elif reservation.status == 'active' %}bg-primary
+                                                {% elif reservation.status == 'completed' %}bg-secondary
+                                                {% elif reservation.status == 'cancelled' %}bg-danger
+                                                {% endif %}
+                                                ">
                                         {{ reservation.get_status_display }}
                                     </span>
                                 </td>

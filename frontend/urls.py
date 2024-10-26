@@ -18,7 +18,6 @@ urlpatterns = [
 
     # User Profile Management
     path('profile/', views.user_profile, name='profile'),
-    path('user-dashboard/', views.user_dashboard, name='user_dashboard'),
 
     # Car Browsing
     path('cars/', views.view_cars, name='cars'),
@@ -26,9 +25,10 @@ urlpatterns = [
     path('check-car-availability/', views.check_car_availability, name='check_car_availability'),
 
     # Reservation Management
-    path('create-reservation/<int:car_id>/', views.create_reservation, name='create_reservation'),
     path('reservations/', views.view_reservations, name='reservations'),
+    path('create-reservation/<int:car_id>/', views.create_reservation, name='create_reservation'),
     path('cancel-reservation/<int:reservation_id>/', views.cancel_reservation, name='cancel_reservation'),
+    path('delete-reservation/<int:reservation_id>/', views.delete_reservation, name='delete_reservation'),
 
     # Payment Processing
     path('payment/<int:reservation_id>/', views.view_payment, name='payment'),

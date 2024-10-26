@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form method="post">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
                 <label class="form-label" for="user"><i class="fas fa-user me-2"></i>User</label>
@@ -53,6 +53,25 @@
                 <label class="form-label" for="end_date"><i class="fas fa-calendar-minus me-2"></i>End Date</label>
                 <input class="form-control" id="end_date" name="end_date" required
                        type="date" value="{{ reservation.end_date|date:'Y-m-d' }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="receipt_image"><i class="fas fa-receipt me-2"></i>Receipt Image</label>
+                {% if reservation.receipt_image %}
+                    <div class="mb-2">
+                        <img src="{{ reservation.receipt_image.url }}" alt="Current Receipt Image" class="img-thumbnail" style="max-width: 200px;">
+                    </div>
+                {% endif %}
+                <input type="file" class="form-control" id="receipt_image" name="receipt_image" accept="image/*">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="reference_number"><i class="fas fa-barcode me-2"></i>Reference Number</label>
+                <input class="form-control" id="reference_number" name="reference_number" required
+                       type="text" value="{{ reservation.reference_number }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="amount"><i class="fas fa-money-bill-wave me-2"></i>Amount</label>
+                <input class="form-control" id="amount" name="amount" required
+                       type="number" value="{{ reservation.amount }}">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="status"><i class="fas fa-info-circle me-2"></i>Status</label>
