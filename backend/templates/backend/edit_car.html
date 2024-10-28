@@ -120,11 +120,11 @@
                     <div id="new-image-preview" class="image-preview-container mt-2"></div>
                 </div>
             </div>
-            <div class="mt-4">
+            <div class="mt-3">
+                <div id="submission-status"></div>
                 <button type="submit" class="btn btn-primary w-100"><i class="fas fa-save me-2"></i>Save Changes</button>
             </div>
         </form>
-        <div id="submission-status" class="mt-3" style="display: none;"></div>
     </div>
 </div>
 {% endblock %}
@@ -139,9 +139,8 @@
         console.log('Showing alert:', message, type);
         const statusDiv = document.getElementById('submission-status');
         statusDiv.innerHTML = `
-            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            <div class="alert alert-${type} alert-dismissible fade show text-center" role="alert">
                 ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         `;
         statusDiv.style.display = 'block';

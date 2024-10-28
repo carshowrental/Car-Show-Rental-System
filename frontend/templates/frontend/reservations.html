@@ -29,7 +29,8 @@
                                 <thead>
                                     <tr>
                                         <th>Car</th>
-                                        <th>Dates & Time</th>
+                                        <th>Start Date & Time</th>
+                                        <th>End Date & Time</th>
                                         <th>Total Price</th>
                                         <th>Status</th>
                                         <th>Actions</th>
@@ -39,7 +40,8 @@
                                 {% for reservation in reservations %}
                                     <tr>
                                         <td>{{ reservation.car.brand }} {{ reservation.car.model }}</td>
-                                        <td>{{ reservation.start_datetime }} to {{ reservation.end_datetime }}</td>
+                                        <td>{{ reservation.start_datetime|date:"M d, Y g:i A"}}</td>
+                                        <td>{{ reservation.end_datetime|date:"M d, Y g:i A"}}</td>
                                         <td>₱{{ reservation.total_price }}</td>
                                         <td>
                                             {% if reservation.status == 'pending' %}
@@ -93,6 +95,34 @@
                         <p class="text-center alert alert-info">
                             <i class="fas fa-info-circle me-2"></i>You have no reservations yet.
                         </p>
+                    {% endif %}
+
+                    {% if reservations.has_other_pages %}
+                    <nav aria-label="Page navigation" class="mt-2">
+                        <ul class="pagination justify-content-center">
+                            {% if reservations.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link text-danger" href="?page={{ reservations.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for i in reservations.paginator.page_range %}
+                                {% if reservations.number == i %}
+                                    <li class="page-item active"><span class="page-link bg-danger border-danger">{{ i }}</span></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link text-danger" href="?page={{ i }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if reservations.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link text-danger" href="?page={{ reservations.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
                     {% endif %}
                 </div>
             </div>

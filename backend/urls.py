@@ -30,7 +30,6 @@ urlpatterns = [
     path('reservations/', views.view_reservations, name='admin_reservations'),
     path('reservations/add/', views.add_reservation, name='admin_add_reservation'),
     path('reservations/<int:reservation_id>/edit/', views.edit_reservation, name='admin_edit_reservation'),
-    path('reservations/<int:reservation_id>/cancel/', views.cancel_reservation, name='admin_cancel_reservation'),
     path('reservations/<int:reservation_id>/delete/', views.delete_reservation, name='admin_delete_reservation'),
 
     # Payment Management

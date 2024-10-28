@@ -609,18 +609,6 @@ def edit_reservation(request, reservation_id):
 
 @admin_required
 @require_POST
-def cancel_reservation(request, reservation_id):
-    reservation = get_object_or_404(Reservation, id=reservation_id)
-    if reservation.status != 'cancelled':
-        reservation.status = 'cancelled'
-        reservation.save()
-        messages.success(request, 'Reservation cancelled successfully.')
-
-        return redirect('admin_reservations')
-
-
-@admin_required
-@require_POST
 def delete_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id)
     reservation.delete()
@@ -631,7 +619,7 @@ def delete_reservation(request, reservation_id):
 
 @admin_required
 def view_payments(request):
-    payment_list = Reservation.objects.filter(status='paid').order_by('-updated_at')
+    payment_list = Reservation.objects.filter(status='paid')
     paginator = Paginator(payment_list, 10)  # Show 10 payments per page
     page = request.GET.get('page')
     payments = paginator.get_page(page)  # This handles all edge cases automatically

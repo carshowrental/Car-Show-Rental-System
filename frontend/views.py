@@ -26,12 +26,13 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import strip_tags
 from django.views.decorators.http import require_http_methods
+from torch.distributed.autograd import context
 
 from backend.models import Car, Reservation, UserProfile, PasswordResetToken
 
 
 def view_home(request):
-    all_cars = Car.objects.all().order_by('-year')
+    all_cars = Car.objects.all()
     featured_cars = [car for car in all_cars if car.is_currently_available][:3]  # Get the first 3 available cars
 
     return render(request, 'frontend/home.html', {'featured_cars': featured_cars})
@@ -550,26 +551,17 @@ def check_car_availability(request):
 
 @login_required
 def view_reservations(request):
-    now = timezone.localtime(timezone.now())
     reservations = Reservation.objects.filter(user=request.user).order_by('-start_datetime')
 
-    # Classify reservations
-    for reservation in reservations:
-        # Convert datetime to date for comparison if rate_type is not hourly
-        if reservation.rate_type == 'hourly':
-            start = reservation.start_datetime
-            end = reservation.end_datetime
-            current = now
-        else:
-            start = reservation.start_datetime.date()
-            end = reservation.end_datetime.date()
-            current = now.date()
-
-        if reservation.status == 'paid' and start <= current <= end:
-            reservation.status = 'active'
-        elif reservation.status == 'paid' and end < current:
-            reservation.status = 'completed'
-        reservation.save()
+    # Pagination
+    paginator = Paginator(reservations, 10)
+    page = request.GET.get('page')
+    try:
+        reservations = paginator.page(page)
+    except PageNotAnInteger:
+        reservations = paginator.page(1)
+    except EmptyPage:
+        reservations = paginator.page(paginator.num_pages)
 
     return render(request, 'frontend/reservations.html', {'reservations': reservations})
 
@@ -652,43 +644,68 @@ def delete_reservation(request, reservation_id):
     return redirect('reservations')
 
 
-# views.py
-
 @login_required
 def view_payment(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
 
     if request.method == 'POST':
-
         try:
-            # Get the reference number and amount
             reference_number = request.POST.get('reference_number')
             amount = float(request.POST.get('amount', 0))
+            payment_type = request.POST.get('payment_type')
 
-            # # Verify the amount matches the reservation total
-            # if amount != float(reservation.total_price):
-            #     messages.error(request, 'Payment amount does not match the reservation total')
-            #     return redirect('payment', reservation_id=reservation_id)
+            # Convert total_price to float for comparison
+            total_price = float(reservation.total_price)
 
-            # Update receipt image if a new one is provided
-            if 'receipt_image' in request.FILES:
-                receipt_image = request.FILES['receipt_image']
+            # Calculate expected amount as float
+            if payment_type == 'full':
+                expected_amount = total_price
+                status = 'paid'
+            else:  # partial payment
+                expected_amount = total_price / 2
+                status = 'partial'
+
+            # Round both numbers to 2 decimal places for comparison
+            amount = round(amount, 2)
+            expected_amount = round(expected_amount, 2)
+
+            # Direct comparison after rounding
+            if amount != expected_amount:
+                messages.error(
+                    request,
+                    f'Payment amount must match the {"full payment" if payment_type == "full" else "down payment"} '
+                    f'amount of ₱{expected_amount:,.2f}'
+                )
+                return redirect('payment', reservation_id=reservation_id)
+
+            # Update receipt image if provided
+            if 'receipt' in request.FILES:
+                receipt_image = request.FILES['receipt']
                 reservation.receipt_image = receipt_image
 
-            # Update reservation with all fields
-            reservation.status = 'paid'
+            # Update reservation
+            reservation.status = status
             reservation.reference_number = reference_number
             reservation.amount = amount
+            reservation.payment_type = payment_type
             reservation.save()
 
             messages.success(request, 'Payment processed successfully')
             return redirect('payment_confirmation', reservation_id=reservation_id)
 
+        except ValueError:
+            messages.error(request, 'Invalid payment amount provided')
+            return redirect('payment', reservation_id=reservation_id)
         except Exception as e:
             messages.error(request, f'Error processing payment: {str(e)}')
             return redirect('payment', reservation_id=reservation_id)
 
-    return render(request, 'frontend/payment.html', {'reservation': reservation})
+    context = {
+        'reservation': reservation,
+        'down_payment': float(reservation.total_price) / 2
+    }
+
+    return render(request, 'frontend/payment.html', context)
 
 
 def extract_gcash_info(image_file):
@@ -795,6 +812,12 @@ def process_receipt(request):
 
     try:
         receipt_image = request.FILES['receipt']
+        payment_type = request.POST.get('payment_type')
+        reservation_id = request.POST.get('reservation_id')
+
+        # Get reservation for amount validation
+        reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
+        expected_amount = reservation.total_price if payment_type == 'full' else reservation.total_price / 2
 
         # Check file type
         allowed_types = ['image/jpeg', 'image/png', 'image/jpg']
@@ -808,6 +831,15 @@ def process_receipt(request):
         result = extract_gcash_info(receipt_image)
 
         if result and (result['reference_number'] or result['total_amount']):
+            # Validate amount if detected
+            if result['total_amount']:
+                detected_amount = float(result['total_amount'])
+                if abs(detected_amount - expected_amount) > 0.01:
+                    return JsonResponse({
+                        'success': False,
+                        'error': f'Detected amount (₱{detected_amount:,.2f}) does not match the required {"full payment" if payment_type == "full" else "down payment"} amount (₱{expected_amount:,.2f})'
+                    })
+
             response_data = {
                 'success': True,
                 'reference_number': result['reference_number'],
@@ -832,7 +864,18 @@ def process_receipt(request):
 @login_required
 def payment_confirmation(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
-    return render(request, 'frontend/payment_confirmation.html', {'reservation': reservation})
+
+    if reservation.total_price == reservation.amount:
+        payment_type = 'full_payment'
+    else:
+        payment_type = 'down_payment'
+
+    context = {
+        'reservation': reservation,
+        'payment_type': payment_type,
+        'remaining_balance': reservation.total_price - reservation.amount
+    }
+    return render(request, 'frontend/payment_confirmation.html', context)
 
 
 def contact_us(request):

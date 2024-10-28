@@ -12,11 +12,19 @@
                     <h1 class="card-title mb-4">Reservation Confirmed</h1>
                     <p class="lead">Thank you for your payment. Your reservation has been confirmed.</p>
                     <hr>
+                    {% if payment_type == 'down_payment' %}
+                    <div class="alert alert-info">
+                        Please note: The remaining balance must be paid before or upon pickup of the vehicle.
+                    </div>
+                    {% endif %}
                     <h2 class="h4 mb-3">Reservation Details</h2>
                     <p><strong>Car:</strong> {{ reservation.car.brand }} {{ reservation.car.model }}</p>
-                    <p><strong>Start Date:</strong> {{ reservation.start_datetime }}</p>
-                    <p><strong>End Date:</strong> {{ reservation.end_datetime }}</p>
-                    <p><strong>Total Price:</strong> ₱{{ reservation.total_price }}</p>
+                    <p><strong>Start Date & Time:</strong> {{ reservation.start_datetime|date:"M d, Y g:i A"}}</p>
+                    <p><strong>End Date & Time:</strong> {{ reservation.end_datetime|date:"M d, Y g:i A"}}</p>
+                    <p><strong>Amount Paid:</strong> ₱{{ reservation.amount }}</p>
+                    {% if payment_type == 'down_payment' %}
+                    <p><strong>Remaining Balance:</strong> ₱{{ remaining_balance }}</p>
+                    {% endif %}
                     <p><strong>Reference Number:</strong> {{ reservation.reference_number }}</p>
                     <hr>
                     <a href="{% url 'reservations' %}" class="btn btn-primary">Go to Reservations</a>

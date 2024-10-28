@@ -23,6 +23,10 @@ class Car(models.Model):
     hourly_rate = models.DecimalField(max_digits=8, decimal_places=2)
     daily_rate = models.DecimalField(max_digits=8, decimal_places=2)
     features = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return f"{self.brand} {self.model} ({self.year})"
@@ -146,6 +150,9 @@ class Reservation(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at', '-updated_at']
 
     def __str__(self):
         return f"{self.user.username}'s reservation for {self.car.brand} {self.car.model}"

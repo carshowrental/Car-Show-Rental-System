@@ -30,8 +30,8 @@
                 <tr>
                     <td>{{ reservation.user.username }}</td>
                     <td>{{ reservation.car.brand }} {{ reservation.car.model }}</td>
-                    <td>{{ reservation.start_datetime|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.start_datetime|date:"| g:i A"}}{% endif %}</td>
-                    <td>{{ reservation.end_datetime|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.end_datetime|date:"| g:i A"}}{% endif %}</td>
+                    <td>{{ reservation.start_datetime|date:"M d, Y g:i A"}}</td>
+                    <td>{{ reservation.end_datetime|date:"M d, Y g:i A"}}</td>
                     <td>
                         {% if reservation.receipt_image %}
                         <img src="{{ reservation.receipt_image.url }}" alt="Receipt"
@@ -60,53 +60,46 @@
                             <a href="{% url 'admin_edit_reservation' reservation.id %}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            {% if reservation.status == 'cancelled' or reservation.status == 'completed' %}
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal-{{ reservation.id }}">
                                 <i class="fas fa-trash"></i>
                             </button>
-                            {% else %}
-                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#cancelModal-{{ reservation.id }}">
-                                <i class="fas fa-calendar-times"></i>
-                            </button>
-                            {% endif %}
                         </div>
                     </td>
                 </tr>
-<!-- Receipt Image Modal for each Reservation -->
-<div class="modal fade" id="receiptModal-{{ reservation.id }}" tabindex="-1"
-     aria-labelledby="receiptModalLabel-{{ reservation.id }}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="receiptModalLabel-{{ reservation.id }}">Payment Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row ps-2">
-                    <div class="col-md-6">
-                        <p class="mb-0"><strong><i class="fas fa-barcode me-1"></i>Reference Number:</strong></p>
-                        <p class="ms-3 text-primary">{{ reservation.reference_number|default:"N/A" }}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="mb-0"><strong><i class="fas fa-money-bill-wave me-1"></i>Amount Paid:</strong></p>
-                        <p class="ms-3 text-success">₱{{ reservation.amount|default:"0.00" }}</p>
+                <!-- Receipt Image Modal for each Reservation -->
+                <div class="modal fade" id="receiptModal-{{ reservation.id }}" tabindex="-1"
+                     aria-labelledby="receiptModalLabel-{{ reservation.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="receiptModalLabel-{{ reservation.id }}">Payment Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row ps-2">
+                                    <div class="col-md-6">
+                                        <p class="mb-0"><strong><i class="fas fa-barcode me-1"></i>Reference Number:</strong></p>
+                                        <p class="ms-3 text-primary">{{ reservation.reference_number|default:"N/A" }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="mb-0"><strong><i class="fas fa-money-bill-wave me-1"></i>Amount Paid:</strong></p>
+                                        <p class="ms-3 text-success">₱{{ reservation.amount|default:"0.00" }}</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <p class="mb-2"><strong><i class="fas fa-receipt me-2"></i>Receipt Image:</strong></p>
+                                    {% if reservation.receipt_image %}
+                                        <img src="{{ reservation.receipt_image.url }}" class="img-fluid" alt="Full size receipt image">
+                                    {% else %}
+                                        <p class="text-muted">No receipt image available</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="text-center">
-                    <p class="mb-2"><strong><i class="fas fa-receipt me-2"></i>Receipt Image:</strong></p>
-                    {% if reservation.receipt_image %}
-                        <img src="{{ reservation.receipt_image.url }}" class="img-fluid" alt="Full size receipt image">
-                    {% else %}
-                        <p class="text-muted">No receipt image available</p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
                 <!-- Delete Modal for each Reservation -->
                 <div class="modal fade" id="deleteModal-{{ reservation.id }}" tabindex="-1"
                      aria-labelledby="deleteModalLabel-{{ reservation.id }}" aria-hidden="true">
@@ -125,29 +118,6 @@
                                 <form method="POST" action="{% url 'admin_delete_reservation' reservation.id %}" class="d-inline">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Cancel Modal for each Reservation -->
-                <div class="modal fade" id="cancelModal-{{ reservation.id }}" tabindex="-1"
-                     aria-labelledby="cancelModalLabel-{{ reservation.id }}" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="cancelModalLabel-{{ reservation.id }}">Confirm Cancellation</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to cancel this reservation?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <form method="POST" action="{% url 'admin_cancel_reservation' reservation.id %}" class="d-inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">Confirm</button>
                                 </form>
                             </div>
                         </div>
