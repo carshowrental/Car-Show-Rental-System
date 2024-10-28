@@ -77,48 +77,210 @@
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h2 class="card-title h4 mb-4"><i class="fas fa-id-card me-2"></i>Upload Driver's License</h2>
-                    <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
+                    <h2 class="card-title h4 mb-4" id="upload-drivers-license">Upload Driver's License</h2>
+                    <div id="licenseAlertPlaceholder"></div>
+
+                    <form method="POST" enctype="multipart/form-data" id="licenseForm">
                         {% csrf_token %}
                         <input type="hidden" name="action" value="upload_license">
 
                         <div class="mb-3">
-                            <label for="license_image" class="form-label"><i class="fas fa-image me-2"></i>License Image</label>
-                            <input type="file" class="form-control" id="license_image" name="license_image" accept="image/*" required>
+                            <label for="license_image" class="form-label">License Image</label>
+                            <input type="file"
+                                   class="form-control"
+                                   id="license_image"
+                                   name="license_image"
+                                   value="{{ user_profile.license_image.url|default:'' }}"
+                                   accept="image/*"
+                                   {% if not user_profile.license_image %}required{% endif %}>
+                            <div id="processing-status" class="text-muted mt-2" style="display: none;">
+                                Processing image... Please wait...
+                            </div>
+                        </div>
+
+                        <!-- Image Preview Container -->
+                        <div class="mb-3">
+                            <div id="imagePreview" class="mt-2" style="display: none;">
+                                <img src="" alt="License Preview" class="img-fluid" style="max-height: 200px; width: auto;">
+                            </div>
+                            {% if user_profile.license_image %}
+                            <div id="currentImage" class="mt-2">
+                                <p class="text-muted mb-2">Current License Image:</p>
+                                <img src="{{ user_profile.license_image.url }}" alt="Current License" class="img-fluid" style="max-height: 200px; width: auto;">
+                            </div>
+                            {% endif %}
                         </div>
 
                         <div class="mb-3">
-                            <label for="license_number" class="form-label"><i class="fas fa-hashtag me-2"></i>License Number</label>
-                            <input type="text" class="form-control" id="license_number" name="license_number" value="{{ user_profile.license_number }}" readonly>
+                            <label for="license_number" class="form-label">License Number</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="license_number"
+                                   name="license_number"
+                                   value="{{ user_profile.license_number|default:'' }}"
+                                   required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="license_expiration" class="form-label"><i class="fas fa-calendar-alt me-2"></i>Expiration Date</label>
-                            <input type="text" class="form-control" id="license_expiration" name="license_expiration" value="{{ user_profile.license_expiration|date:'m/d/Y' }}" readonly>
+                            <label for="license_expiration" class="form-label">Expiration Date</label>
+                            <input type="date"
+                                   class="form-control"
+                                   id="license_expiration"
+                                   name="license_expiration"
+                                   value="{{ user_profile.license_expiration|date:'Y-m-d'|default:'' }}"
+                                   required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-upload me-1"></i>Upload License
-                        </button>
+                        <button type="submit" class="btn btn-primary">Upload License</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    document.getElementById('license_image').addEventListener('change', function(e) {
-        var file = e.target.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('preview-image').src = e.target.result;
-            document.getElementById('preview-container').style.display = 'block';
+document.addEventListener('DOMContentLoaded', function() {
+    const licenseImageInput = document.getElementById('license_image');
+    const licenseNumberInput = document.getElementById('license_number');
+    const licenseExpirationInput = document.getElementById('license_expiration');
+    const processingStatus = document.getElementById('processing-status');
+    const form = document.getElementById('licenseForm');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const alertPlaceholder = document.getElementById('licenseAlertPlaceholder');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImage = imagePreview.querySelector('img');
+    const currentImage = document.getElementById('currentImage');
+
+    // Function to toggle submit button state
+    function toggleSubmitButton(disabled) {
+        submitButton.disabled = disabled;
+        submitButton.innerHTML = disabled ?
+            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...' :
+            'Upload License';
+    }
+
+    // Function to show image preview
+    function showImagePreview(file) {
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                imagePreview.style.display = 'block';
+                // Hide current image if it exists
+                if (currentImage) {
+                    currentImage.style.display = 'none';
+                }
+            }
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none';
+            if (currentImage) {
+                currentImage.style.display = 'block';
+            }
         }
-        reader.readAsDataURL(file);
+    }
+
+    // Function to create and show Bootstrap alert
+    function showAlert(message, type = 'warning') {
+        // Remove any existing alerts
+        const existingAlert = alertPlaceholder.querySelector('.alert');
+        if (existingAlert) {
+            existingAlert.remove();
+        }
+
+        // Create new alert
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show mb-4`;
+        alertDiv.role = 'alert';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+
+        // Insert alert in the placeholder
+        alertPlaceholder.appendChild(alertDiv);
+
+        // Auto-dismiss after 5 seconds
+        setTimeout(() => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertDiv);
+            alert.close();
+        }, 5000);
+    }
+
+    // Prevent default form submission if no image is selected
+    form.addEventListener('submit', function(e) {
+        const fileInput = this.querySelector('input[type="file"]');
+        const licenseNumber = licenseNumberInput.value.trim();
+        const expirationDate = licenseExpirationInput.value.trim();
+
+        // Only require the image if there's no existing image and no values in other fields
+        const needsImage = !currentImage && !licenseNumber && !expirationDate;
+
+        if (needsImage && !fileInput.files.length) {
+            e.preventDefault();
+            showAlert('Please select an image or enter license details manually.', 'warning');
+        }
     });
+
+    // Listen for file selection
+    licenseImageInput.addEventListener('change', async function(e) {
+        if (!this.files || !this.files[0]) return;
+
+        const file = this.files[0];
+        showImagePreview(file);
+
+        const formData = new FormData();
+        formData.append('license_image', file);
+        formData.append('csrfmiddlewaretoken', form.querySelector('[name=csrfmiddlewaretoken]').value);
+
+        // Show processing status and disable submit button
+        processingStatus.style.display = 'block';
+        toggleSubmitButton(true);
+
+        try {
+            const response = await fetch('{% url "process_license" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                if (data.license_number) {
+                    licenseNumberInput.value = data.license_number;
+                }
+                if (data.expiration_date) {
+                    // Convert YYYY/MM/DD to YYYY-MM-DD for the date input
+                    const formattedDate = data.expiration_date.replace(/\//g, '-');
+                    licenseExpirationInput.value = formattedDate;
+                }
+
+                if (!data.license_number || !data.expiration_date) {
+                    showAlert('Could not automatically extract license details. Please enter them manually.', 'warning');
+                }
+            } else {
+                console.error('Error processing license:', data.error);
+                showAlert('Could not automatically extract license details. Please enter them manually.', 'warning');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showAlert('An error occurred while processing the image. Please try again or enter details manually.', 'danger');
+        } finally {
+            // Hide processing status and enable submit button
+            processingStatus.style.display = 'none';
+            toggleSubmitButton(false);
+        }
+    });
+});
 </script>
 {% endblock %}

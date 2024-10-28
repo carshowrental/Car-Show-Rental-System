@@ -113,8 +113,8 @@
                             <tr>
                                 <td>{{ reservation.user.username }}</td>
                                 <td>{{ reservation.get_rate_type_display }}</td>
-                                <td>{{ reservation.start_date|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.start_date|date:"| g:i A"}}{% endif %}</td>
-                                <td>{{ reservation.end_date|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.end_date|date:"| g:i A"}}{% endif %}</td>
+                                <td>{{ reservation.start_datetime|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.start_datetime|date:"| g:i A"}}{% endif %}</td>
+                                <td>{{ reservation.end_datetime|date:"M d, Y"}}{% if reservation.rate_type == 'hourly' %} {{ reservation.end_datetime|date:"| g:i A"}}{% endif %}</td>
                                 <td>
                                     <span class="badge
                                                 {% if reservation.status == 'pending' %}bg-warning text-dark

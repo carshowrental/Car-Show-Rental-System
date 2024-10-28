@@ -18,6 +18,7 @@ urlpatterns = [
 
     # User Profile Management
     path('profile/', views.user_profile, name='profile'),
+    path('process-license/', views.process_license, name='process_license'),
 
     # Car Browsing
     path('cars/', views.view_cars, name='cars'),
@@ -32,7 +33,7 @@ urlpatterns = [
 
     # Payment Processing
     path('payment/<int:reservation_id>/', views.view_payment, name='payment'),
-    path('process-receipt/<int:reservation_id>/', views.process_payment, name='process_payment'),
+    path('process-receipt/', views.process_receipt, name='process_receipt'),
     path('payment-confirmation/<int:reservation_id>/', views.payment_confirmation,
          name='payment_confirmation'),
 

@@ -1,7 +1,7 @@
 import re
 from datetime import datetime
 from datetime import timedelta
-
+import io
 import cv2
 import numpy as np
 import pytesseract
@@ -164,28 +164,35 @@ def reset_password(request, token):
         return redirect('login')
 
 
-API4AI_URL = "https://api.api4ai.com/ocr/v1/extract"
-API4AI_HEADERS = {
-    'X-Api-Key': '2c9371458amsh8ce97c8f8b8e6bcp17ec30jsn01addc3e9068'  # Replace with your actual API key
-}
+def compress_image(image_file, max_size_mb=1):
+    """
+    Compress image to ensure it's under the specified size in MB
+    Returns the compressed image as bytes
+    """
+    # Convert MB to bytes
+    max_size_bytes = max_size_mb * 1024 * 1024
 
+    # Open the image from InMemoryUploadedFile
+    img = Image.open(image_file)
 
-def extract_license_info(ocr_result):
-    text = ocr_result['text']
+    # Convert to RGB if PNG (removes alpha channel)
+    if img.format == 'PNG':
+        img = img.convert('RGB')
 
-    license_number_match = re.search(r'[A-Z]\d{2}-\d{2}-\d{6}', text)
-    license_number = license_number_match.group(0) if license_number_match else None
+    # Initial quality
+    quality = 95
+    output = io.BytesIO()
 
-    date_match = re.search(r'(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])/(19|20)\d{2}', text)
-    expiration_date = date_match.group(0) if date_match else None
+    # Try compressing with different quality values until size is under max_size_bytes
+    while quality > 5:
+        output.seek(0)
+        output.truncate(0)
+        img.save(output, format='JPEG', quality=quality)
+        if output.tell() <= max_size_bytes:
+            break
+        quality -= 5
 
-    name_match = re.search(r'([A-Z]+\s){2,}[A-Z]+', text)
-    name = name_match.group(0) if name_match else None
-
-    address_match = re.search(r'ADDRESS:\s*(.*)', text)
-    address = address_match.group(1) if address_match else None
-
-    return license_number, expiration_date, name, address
+    return output.getvalue()
 
 
 @login_required
@@ -243,50 +250,173 @@ def user_profile(request):
                 messages.success(request, 'Your password was successfully updated!')
             return redirect('profile')
         elif action == 'upload_license':
-            license_image = request.FILES.get('license_image')
-            if license_image:
-                try:
-                    files = {'image': license_image}
-                    response = requests.post(API4AI_URL, headers=API4AI_HEADERS, files=files)
-                    response.raise_for_status()
+            try:
+                # Get the license number and expiration date
+                license_number = request.POST.get('license_number')
+                license_expiration = request.POST.get('license_expiration')
 
-                    ocr_result = response.json()
-                    license_number, expiration_date, name, address = extract_license_info(
-                        ocr_result['results'][0]['ocr'][0])
+                # Update license image if a new one is provided
+                if 'license_image' in request.FILES:
+                    license_image = request.FILES['license_image']
+                    user_profile.license_image = license_image
 
-                    if license_number and expiration_date:
-                        user_profile.license_image = license_image
-                        user_profile.license_number = license_number
-                        user_profile.license_expiration = expiration_date
-                        user_profile.save()
+                # Update license details
+                user_profile.license_number = license_number
+                user_profile.license_expiration = license_expiration
+                user_profile.save()
 
-                        if name:
-                            name_parts = name.split()
-                            if len(name_parts) > 1:
-                                user.first_name = name_parts[0]
-                                user.last_name = ' '.join(name_parts[1:])
-                                user.save()
+                messages.success(request, "Driver's license information updated successfully.")
+            except Exception as e:
+                messages.error(request, f"An error occurred while saving license information: {str(e)}")
 
-                        if address:
-                            user_profile.address = address
-                            user_profile.save()
-
-                        messages.success(request, "Your driver's license has been uploaded and processed successfully.")
-                    else:
-                        messages.warning(request,
-                                         "Could not extract all required information. Please verify and correct the details.")
-                except requests.RequestException as e:
-                    messages.error(request, f"An error occurred while processing the image: {str(e)}")
-                except Exception as e:
-                    messages.error(request, f"An unexpected error occurred: {str(e)}")
-            else:
-                messages.error(request, "Please upload a license image.")
             return redirect('profile')
-
     return render(request, 'frontend/user_profile.html', {
         'user': user,
         'user_profile': user_profile,
     })
+
+
+def extract_license_info(image_file):
+    """
+    Extract License Number and Expiration Date from Philippine Driver's License using OCR.Space API
+    """
+    url = "https://api.ocr.space/parse/image"
+    api_key = settings.OCR_SPACE_API_KEY  # Add this to your Django settings
+
+    try:
+        # Compress and convert image to JPEG
+        compressed_image = compress_image(image_file)
+
+        files = {
+            'file': ('license.jpg', compressed_image, 'image/jpeg')
+        }
+
+        payload = {
+            'apikey': api_key,
+            'language': 'eng',
+            'isOverlayRequired': False,
+            'detectOrientation': True,
+            'scale': True,
+            'OCREngine': 2,  # Using OCR Engine 2 for better results
+            'filetype': 'jpg'  # Explicitly specify file type
+        }
+
+        try:
+            response = requests.post(url, files=files, data=payload)
+            response.raise_for_status()  # Raise an exception for bad status codes
+
+            result = response.json()
+
+            if result.get('ParsedResults'):
+                text = result['ParsedResults'][0]['ParsedText']
+
+                if not text.strip():  # Check if extracted text is empty
+                    return None
+
+                lines = text.split('\n')
+
+                # Initialize variables
+                license_number = None
+                expiration_date = None
+
+                # Method 1: Find by license number pattern and check next date
+                license_pattern = r'[A-Z]\d{2}-\d{2}-\d{6}'
+                date_pattern = r'\d{4}/\d{2}/\d{2}'
+
+                for i, line in enumerate(lines):
+                    # Look for license number
+                    license_match = re.search(license_pattern, line)
+                    if license_match:
+                        license_number = license_match.group(0)
+                        # Check the same line and next few lines for a date
+                        for j in range(i, min(i + 3, len(lines))):
+                            date_match = re.search(date_pattern, lines[j])
+                            if date_match:
+                                expiration_date = date_match.group(0)
+                                break
+
+                # Method 2: If first method fails, find date below "Expiration Date" text
+                if not expiration_date:
+                    for i, line in enumerate(lines):
+                        if 'expiration date' in line.lower():
+                            # Check next lines for a date
+                            for j in range(i + 1, min(i + 3, len(lines))):
+                                date_match = re.search(date_pattern, lines[j])
+                                if date_match:
+                                    expiration_date = date_match.group(0)
+                                    break
+
+                # Method 3: If both methods fail, search for date after license number in the whole text
+                if not expiration_date:
+                    full_text = ' '.join(lines)
+                    license_pos = full_text.find(license_number) if license_number else -1
+                    if license_pos != -1:
+                        # Search for date pattern after license number
+                        remaining_text = full_text[license_pos:]
+                        date_match = re.search(date_pattern, remaining_text)
+                        if date_match:
+                            expiration_date = date_match.group(0)
+
+                # Only return data if at least one field was found
+                if license_number or expiration_date:
+                    return {
+                        'license_number': license_number,
+                        'expiration_date': expiration_date
+                    }
+
+            return None
+
+        except requests.RequestException as e:
+            print(f"Request error: {str(e)}")
+            return None
+
+    except Exception as e:
+        print(f"Processing error: {str(e)}")
+        return None
+
+
+@login_required
+def process_license(request):
+    if not request.FILES.get('license_image'):
+        return JsonResponse({
+            'success': False,
+            'error': 'No image provided'
+        })
+
+    try:
+        license_image = request.FILES['license_image']
+
+        # Check file type
+        allowed_types = ['image/jpeg', 'image/png', 'image/jpg']
+        if license_image.content_type not in allowed_types:
+            return JsonResponse({
+                'success': False,
+                'error': 'Please upload a JPG or PNG image'
+            })
+
+        # Process the image
+        result = extract_license_info(license_image)
+
+        if result and (result['license_number'] or result['expiration_date']):
+            response_data = {
+                'success': True,
+                'license_number': result['license_number'],
+                'expiration_date': result['expiration_date']
+            }
+        else:
+            response_data = {
+                'success': False,
+                'error': 'Could not extract license information. Please ensure the image is clear and contains the required information.'
+            }
+
+        return JsonResponse(response_data)
+
+    except Exception as e:
+        print(f"Error processing license: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'An error occurred while processing the image. Please try again.'
+        })
 
 
 def view_cars(request):
@@ -355,10 +485,14 @@ def car_detail(request, car_id):
     # Split the features string into a list, respecting newlines
     features = [feature.strip() for feature in car.features.split('\n') if feature.strip()]
 
+    # Add current datetime for min attribute
+    now = timezone.localtime(timezone.now())
+
     context = {
         'car': car,
         'images': images,
-        'features': features,  # Pass the processed features to the template
+        'features': features,
+        'now': now,
     }
     return render(request, 'frontend/car_detail.html', context)
 
@@ -372,26 +506,17 @@ def check_car_availability(request):
         car = get_object_or_404(Car, id=car_id)
         now = timezone.localtime(timezone.now())
 
+        # For all rental types, we now use datetime
+        start_str = request.POST.get('start_datetime')
+        start_datetime = timezone.make_aware(datetime.strptime(start_str, '%Y-%m-%dT%H:%M'))
+        duration = int(request.POST.get('duration', 1))
+
         if rate_type == 'hourly':
-            # For hourly rentals, we need both date and time
-            start_str = request.POST.get('start_datetime')
-            start_datetime = timezone.make_aware(datetime.strptime(start_str, '%Y-%m-%dT%H:%M'))
-            duration_hours = int(request.POST.get('duration', 1))
-            end_datetime = start_datetime + timedelta(hours=duration_hours)
-        else:
-            # For daily and weekly rentals, we work with dates
-            start_str = request.POST.get('start_date')
-            start_date = datetime.strptime(start_str, '%Y-%m-%d').date()
-            duration = int(request.POST.get('duration', 1))
-
-            if rate_type == 'weekly':
-                end_date = start_date + timedelta(weeks=duration)
-            else:  # daily
-                end_date = start_date + timedelta(days=duration)
-
-            # Convert to datetime for consistent handling
-            start_datetime = timezone.make_aware(datetime.combine(start_date, datetime.min.time()))
-            end_datetime = timezone.make_aware(datetime.combine(end_date, datetime.min.time()))
+            end_datetime = start_datetime + timedelta(hours=duration)
+        elif rate_type == 'weekly':
+            end_datetime = start_datetime + timedelta(weeks=duration)
+        else:  # daily
+            end_datetime = start_datetime + timedelta(days=duration)
 
         # Validate dates/times
         if start_datetime >= end_datetime:
@@ -426,18 +551,18 @@ def check_car_availability(request):
 @login_required
 def view_reservations(request):
     now = timezone.localtime(timezone.now())
-    reservations = Reservation.objects.filter(user=request.user).order_by('-start_date')
+    reservations = Reservation.objects.filter(user=request.user).order_by('-start_datetime')
 
     # Classify reservations
     for reservation in reservations:
         # Convert datetime to date for comparison if rate_type is not hourly
         if reservation.rate_type == 'hourly':
-            start = reservation.start_date
-            end = reservation.end_date
+            start = reservation.start_datetime
+            end = reservation.end_datetime
             current = now
         else:
-            start = reservation.start_date.date()
-            end = reservation.end_date.date()
+            start = reservation.start_datetime.date()
+            end = reservation.end_datetime.date()
             current = now.date()
 
         if reservation.status == 'paid' and start <= current <= end:
@@ -468,23 +593,16 @@ def create_reservation(request, car_id):
             return redirect('profile')
 
         try:
-            # Handle different date formats based on rate type
+            # All rental types now use datetime
+            start_str = request.POST.get('start_datetime')
+            start_datetime = timezone.make_aware(datetime.strptime(start_str, '%Y-%m-%dT%H:%M'))
+
             if rate_type == 'hourly':
-                start_str = request.POST.get('start_datetime')
-                start_datetime = timezone.make_aware(datetime.strptime(start_str, '%Y-%m-%dT%H:%M'))
                 end_datetime = start_datetime + timedelta(hours=duration)
-            else:
-                start_str = request.POST.get('start_date')
-                start_date = datetime.strptime(start_str, '%Y-%m-%d').date()
-
-                if rate_type == 'weekly':
-                    end_date = start_date + timedelta(weeks=duration)
-                else:  # daily
-                    end_date = start_date + timedelta(days=duration)
-
-                # Convert to datetime for consistent handling
-                start_datetime = timezone.make_aware(datetime.combine(start_date, datetime.min.time()))
-                end_datetime = timezone.make_aware(datetime.combine(end_date, datetime.min.time()))
+            elif rate_type == 'weekly':
+                end_datetime = start_datetime + timedelta(weeks=duration)
+            else:  # daily
+                end_datetime = start_datetime + timedelta(days=duration)
 
             # Get the available total units for the period
             get_available_total_units = car.get_available_total_units(start_datetime, end_datetime)
@@ -493,8 +611,8 @@ def create_reservation(request, car_id):
                 reservation = Reservation.objects.create(
                     user=request.user,
                     car=car,
-                    start_date=start_datetime,
-                    end_date=end_datetime,
+                    start_datetime=start_datetime,
+                    end_datetime=end_datetime,
                     rate_type=rate_type,
                     total_price=total_price,
                     status='pending'
@@ -534,54 +652,181 @@ def delete_reservation(request, reservation_id):
     return redirect('reservations')
 
 
+# views.py
+
 @login_required
 def view_payment(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
+
+    if request.method == 'POST':
+
+        try:
+            # Get the reference number and amount
+            reference_number = request.POST.get('reference_number')
+            amount = float(request.POST.get('amount', 0))
+
+            # # Verify the amount matches the reservation total
+            # if amount != float(reservation.total_price):
+            #     messages.error(request, 'Payment amount does not match the reservation total')
+            #     return redirect('payment', reservation_id=reservation_id)
+
+            # Update receipt image if a new one is provided
+            if 'receipt_image' in request.FILES:
+                receipt_image = request.FILES['receipt_image']
+                reservation.receipt_image = receipt_image
+
+            # Update reservation with all fields
+            reservation.status = 'paid'
+            reservation.reference_number = reference_number
+            reservation.amount = amount
+            reservation.save()
+
+            messages.success(request, 'Payment processed successfully')
+            return redirect('payment_confirmation', reservation_id=reservation_id)
+
+        except Exception as e:
+            messages.error(request, f'Error processing payment: {str(e)}')
+            return redirect('payment', reservation_id=reservation_id)
+
     return render(request, 'frontend/payment.html', {'reservation': reservation})
+
+
+def extract_gcash_info(image_file):
+    """
+    Extract Reference Number and Total Amount from GCash receipt using OCR.Space API
+    """
+    url = "https://api.ocr.space/parse/image"
+    api_key = settings.OCR_SPACE_API_KEY
+
+    try:
+        # Compress and convert image to JPEG
+        compressed_image = compress_image(image_file)
+
+        files = {
+            'file': ('receipt.jpg', compressed_image, 'image/jpeg')
+        }
+
+        payload = {
+            'apikey': api_key,
+            'language': 'eng',
+            'isOverlayRequired': False,
+            'detectOrientation': True,
+            'scale': True,
+            'OCREngine': 2,
+            'filetype': 'jpg'
+        }
+
+        try:
+
+            response = requests.post(url, files=files, data=payload)
+            response.raise_for_status()  # Raise an exception for bad status codes
+
+            result = response.json()
+
+            if result.get('ParsedResults'):
+                text = result['ParsedResults'][0]['ParsedText']
+
+                if not text.strip():  # Check if extracted text is empty
+                    return None
+
+                lines = text.split('\n')
+
+                # Initialize variables
+                ref_number = None
+                total_amount = None
+
+                # Method 1: Find Reference Number
+                ref_pattern = r'\d{4}\s*\d{3}\s*\d{6}'  # Pattern: XXXX XXX XXXXXX
+                for line in lines:
+                    if 'ref' in line.lower() or 'reference' in line.lower():
+                        ref_match = re.search(ref_pattern, line)
+                        if ref_match:
+                            ref_number = ref_match.group(0).replace(' ', '')
+                            break
+
+                # Method 2: Find Total Amount
+                amount_pattern = r'₱\s*([\d,]+\.?\d*)|([\d,]+\.?\d*)'
+                for line in lines:
+                    if 'total amount' in line.lower() or 'amount' in line.lower():
+                        amount_match = re.search(amount_pattern, line)
+                        if amount_match:
+                            amount_str = amount_match.group(1) or amount_match.group(2)
+                            # Remove commas and convert to float
+                            total_amount = amount_str.replace(',', '')
+                            break
+
+                if not total_amount:  # Alternative method for Total Amount
+                    for line in lines:
+                        if 'amount sent' in line.lower():
+                            next_line_index = lines.index(line) + 1
+                            if next_line_index < len(lines):
+                                amount_match = re.search(amount_pattern, lines[next_line_index])
+                                if amount_match:
+                                    amount_str = amount_match.group(1) or amount_match.group(2)
+                                    total_amount = amount_str.replace(',', '')
+                                    break
+
+                # Only return data if at least one field was found
+                if ref_number or total_amount:
+                    return {
+                        'reference_number': ref_number,
+                        'total_amount': total_amount
+                    }
+
+            return None
+
+        except requests.RequestException as e:
+            print(f"Request error: {str(e)}")
+            return None
+
+    except Exception as e:
+        print(f"Processing error: {str(e)}")
+        return None
 
 
 @login_required
 @require_http_methods(["POST"])
-def process_payment(request, reservation_id):
-    reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
+def process_receipt(request):
+    if not request.FILES.get('receipt'):
+        return JsonResponse({
+            'success': False,
+            'error': 'No image provided'
+        })
 
-    if 'receipt' not in request.FILES:
-        return JsonResponse({'success': False, 'error': 'No receipt uploaded'})
+    try:
+        receipt_image = request.FILES['receipt']
 
-    receipt_image = request.FILES['receipt']
+        # Check file type
+        allowed_types = ['image/jpeg', 'image/png', 'image/jpg']
+        if receipt_image.content_type not in allowed_types:
+            return JsonResponse({
+                'success': False,
+                'error': 'Please upload a JPG or PNG image'
+            })
 
-    # Convert the uploaded file to an image that OpenCV can process
-    image = Image.open(receipt_image)
-    image = np.array(image.convert('RGB'))
-    image = image[:, :, ::-1].copy()
+        # Process the image
+        result = extract_gcash_info(receipt_image)
 
-    # Preprocess the image
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+        if result and (result['reference_number'] or result['total_amount']):
+            response_data = {
+                'success': True,
+                'reference_number': result['reference_number'],
+                'total_amount': result['total_amount']
+            }
+        else:
+            response_data = {
+                'success': False,
+                'error': 'Could not extract receipt information. Please ensure the image is clear and contains the required information.'
+            }
 
-    # Perform OCR
-    text = pytesseract.image_to_string(thresh)
+        return JsonResponse(response_data)
 
-    # Extract reference number and amount
-    ref_number_match = re.search(r'Reference Number:\s*(\w+)', text)
-    amount_match = re.search(r'Amount:\s*₱?([\d,]+\.?\d*)', text)
-
-    if not ref_number_match or not amount_match:
-        return JsonResponse({'success': False, 'error': 'Could not extract reference number or amount from receipt'})
-
-    ref_number = ref_number_match.group(1)
-    amount = float(amount_match.group(1).replace(',', ''))
-
-    # Verify the amount
-    if amount != float(reservation.total_price):
-        return JsonResponse({'success': False, 'error': 'Payment amount does not match the reservation total'})
-
-    # Update reservation status
-    reservation.status = 'paid'
-    reservation.payment_id = ref_number
-    reservation.save()
-
-    return JsonResponse({'success': True, 'reference_number': ref_number})
+    except Exception as e:
+        print(f"Error processing receipt: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'An error occurred while processing the image. Please try again.'
+        })
 
 
 @login_required

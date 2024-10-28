@@ -13,8 +13,8 @@
                     <div class="card-body">
                         <h2 class="card-title h4 mb-3"><i class="fas fa-info-circle text-secondary me-2"></i>Reservation Details</h2>
                         <p><strong><i class="fas fa-car me-1"></i> Car:</strong> {{ reservation.car.brand }} {{ reservation.car.model }}</p>
-                        <p><strong><i class="fas fa-calendar-alt me-1"></i> Start Date:</strong> {{ reservation.start_date }}</p>
-                        <p><strong><i class="fas fa-calendar-check me-1"></i> End Date:</strong> {{ reservation.end_date }}</p>
+                        <p><strong><i class="fas fa-calendar-alt me-1"></i> Start Date:</strong> {{ reservation.start_datetime }}</p>
+                        <p><strong><i class="fas fa-calendar-check me-1"></i> End Date:</strong> {{ reservation.end_datetime }}</p>
                         <p><strong><i class="fas fa-map-marker-alt me-1"></i> Pickup Location:</strong> Ortega Subdivision, Kidapawan City</p>
                     </div>
                 </div>
@@ -36,12 +36,38 @@
                             <img src="{% static 'images/gcash_qr.jpg' %}" alt="GCash QR Code" class="img-fluid mb-3" style="max-width: 200px;">
                             <p><strong><i class="fas fa-tag me-1"></i>Total Price:</strong> ₱{{ reservation.total_price }}</p>
                         </div>
+                        <div id="receiptAlertPlaceholder"></div>
 
-                        <form method="post" enctype="multipart/form-data" id="receipt-upload-form">
+                        <form method="post" enctype="multipart/form-data" id="receiptForm">
                             {% csrf_token %}
-                            <div class="mb-3">
+                            <div class="mb-2">
                                 <label for="receipt" class="form-label"><i class="fas fa-file-upload me-1"></i>Upload your GCash payment receipt</label>
                                 <input type="file" class="form-control" id="receipt" name="receipt" accept="image/*" required>
+                                <div id="processing-status" class="text-muted mt-2" style="display: none;">
+                                    Processing image... Please wait...
+                                </div>
+                            </div>
+
+                            <!-- Image Preview Container -->
+                            <div class="mb-3">
+                                <div id="imagePreview" class="mt-2" style="display: none;">
+                                    <img src="" alt="Receipt Preview" class="img-fluid" style="max-height: 200px; width: auto;">
+                                </div>
+                                {% if reservation.receipt_image %}
+                                <div id="currentImage" class="mt-2">
+                                    <p class="text-muted mb-2">Current Receipt Image:</p>
+                                    <img src="{{ reservation.receipt_image.url }}" alt="Current Receipt" class="img-fluid" style="max-height: 200px; width: auto;">
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="reference_number" class="form-label"><i class="fas fa-barcode me-1"></i>Reference Number</label>
+                                <input type="text" class="form-control" id="reference_number" name="reference_number" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="amount" class="form-label"><i class="fas fa-peso-sign me-1"></i>Amount</label>
+                                <input type="number" class="form-control" id="amount" name="amount" step="0.01" required>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <button type="submit" class="btn btn-danger"><i class="fas fa-upload me-1"></i>Upload Receipt</button>
@@ -52,55 +78,147 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="processingModal" tabindex="-1" aria-labelledby="processingModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <p class="mt-2">Processing your receipt...</p>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    $(document).ready(function() {
-        $('#receipt-upload-form').on('submit', function(e) {
+document.addEventListener('DOMContentLoaded', function() {
+    const receiptInput = document.getElementById('receipt');
+    const referenceNumberInput = document.getElementById('reference_number');
+    const amountInput = document.getElementById('amount');
+    const processingStatus = document.getElementById('processing-status');
+    const form = document.getElementById('receiptForm');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const alertPlaceholder = document.getElementById('receiptAlertPlaceholder');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImage = imagePreview.querySelector('img');
+    const currentImage = document.getElementById('currentImage');
+
+    // Function to toggle submit button state
+    function toggleSubmitButton(disabled) {
+        submitButton.disabled = disabled;
+        submitButton.innerHTML = disabled ?
+            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...' :
+            '<i class="fas fa-upload me-1"></i>Upload Receipt';
+    }
+
+    // Function to show image preview
+    function showImagePreview(file) {
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                imagePreview.style.display = 'block';
+                // Hide current image if it exists
+                if (currentImage) {
+                    currentImage.style.display = 'none';
+                }
+            }
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none';
+            if (currentImage) {
+                currentImage.style.display = 'block';
+            }
+        }
+    }
+
+    // Function to create and show Bootstrap alert
+    function showAlert(message, type = 'warning') {
+        // Remove any existing alerts
+        const existingAlert = alertPlaceholder.querySelector('.alert');
+        if (existingAlert) {
+            existingAlert.remove();
+        }
+
+        // Create new alert
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show mb-4`;
+        alertDiv.role = 'alert';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+
+        // Insert alert in the placeholder
+        alertPlaceholder.appendChild(alertDiv);
+
+        // Auto-dismiss after 5 seconds
+        setTimeout(() => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertDiv);
+            alert.close();
+        }, 5000);
+    }
+
+    // Prevent default form submission if no image is selected
+    form.addEventListener('submit', function(e) {
+        const referenceNumber = referenceNumberInput.value.trim();
+        const amount = amountInput.value.trim();
+
+        // Only require the image if there's no existing image and no values in other fields
+        const needsImage = !currentImage && !referenceNumber && !amount;
+
+        if (needsImage && !receiptInput.files.length) {
             e.preventDefault();
-            var formData = new FormData(this);
+            showAlert('Please select an image or enter receipt details manually.', 'warning');
+        }
+    });
 
-            $('#processingModal').modal('show');
+    // Listen for file selection
+    receiptInput.addEventListener('change', async function(e) {
+        if (!this.files || !this.files[0]) return;
 
-            $.ajax({
-                url: '{% url "process_payment" reservation.id %}',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
+        const file = this.files[0];
+        showImagePreview(file);
+
+        const formData = new FormData();
+        formData.append('receipt', file);
+        formData.append('csrfmiddlewaretoken', form.querySelector('[name=csrfmiddlewaretoken]').value);
+
+        // Show processing status and disable submit button
+        processingStatus.style.display = 'block';
+        toggleSubmitButton(true);
+
+        try {
+            const response = await fetch('{% url "process_receipt" %}', {
+                method: 'POST',
+                body: formData,
                 headers: {
-                    'X-CSRFToken': '{{ csrf_token }}'
-                },
-                success: function(data) {
-                    $('#processingModal').modal('hide');
-                    if (data.success) {
-                        alert('Payment verified successfully! Reference number: ' + data.reference_number);
-                        window.location.href = '{% url "payment_confirmation" reservation.id %}';
-                    } else {
-                        alert('Error processing receipt: ' + data.error);
-                    }
-                },
-                error: function() {
-                    $('#processingModal').modal('hide');
-                    alert('An error occurred while processing the receipt.');
+                    'X-Requested-With': 'XMLHttpRequest',
                 }
             });
-        });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                if (data.reference_number) {
+                    referenceNumberInput.value = data.reference_number;
+                }
+                if (data.total_amount) {
+                    amountInput.value = data.total_amount;
+                }
+
+                if (!data.reference_number || !data.total_amount) {
+                    showAlert('Could not automatically extract receipt details. Please enter them manually.', 'warning');
+                }
+            } else {
+                console.error('Error processing receipt:', data.error);
+                showAlert('Could not automatically extract receipt details. Please enter them manually.', 'warning');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showAlert('An error occurred while processing the image. Please try again or enter details manually.', 'danger');
+        } finally {
+            // Hide processing status and enable submit button
+            processingStatus.style.display = 'none';
+            toggleSubmitButton(false);
+        }
     });
+});
 </script>
 {% endblock %}

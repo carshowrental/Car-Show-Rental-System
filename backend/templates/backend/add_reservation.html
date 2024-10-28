@@ -40,12 +40,12 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="start_date" class="form-label"><i class="fas fa-calendar-plus me-2"></i>Start Date & Time</label>
-                <input type="date" class="form-control" id="start_date" name="start_date" required>
+                <label for="start_datetime" class="form-label"><i class="fas fa-calendar-plus me-2"></i>Start Date & Time</label>
+                <input type="date" class="form-control" id="start_datetime" name="start_datetime" required>
             </div>
             <div class="mb-3">
-                <label for="end_date" class="form-label"><i class="fas fa-calendar-minus me-2"></i>End Date & Time</label>
-                <input type="date" class="form-control" id="end_date" name="end_date" required>
+                <label for="end_datetime" class="form-label"><i class="fas fa-calendar-minus me-2"></i>End Date & Time</label>
+                <input type="date" class="form-control" id="end_datetime" name="end_datetime" required>
             </div>
             <div class="mb-3">
                 <label for="receipt_image" class="form-label"><i class="fas fa-receipt me-2"></i>Receipt Image</label>
@@ -79,8 +79,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const rateTypeSelect = document.getElementById('rate_type');
-        const startDateInput = document.getElementById('start_date');
-        const endDateInput = document.getElementById('end_date');
+        const startDateInput = document.getElementById('start_datetime');
+        const endDateInput = document.getElementById('end_datetime');
 
         function updateDateInputTypes() {
             const selectedRateType = rateTypeSelect.value;

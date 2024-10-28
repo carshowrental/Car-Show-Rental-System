@@ -48,11 +48,11 @@ class Car(models.Model):
 
         # Count only truly overlapping reservations
         overlapping_count = existing_reservations.filter(
-            start_date__lt=end_datetime,
-            end_date__gt=start_datetime
+            start_datetime__lt=end_datetime,
+            end_datetime__gt=start_datetime
         ).exclude(
-            models.Q(start_date=end_datetime) |  # Reservation starts exactly when requested period ends
-            models.Q(end_date=start_datetime)    # Reservation ends exactly when requested period starts
+            models.Q(start_datetime=end_datetime) |  # Reservation starts exactly when requested period ends
+            models.Q(end_datetime=start_datetime)    # Reservation ends exactly when requested period starts
         ).count()
 
         return overlapping_count
@@ -137,11 +137,11 @@ class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     rate_type = models.CharField(max_length=10, choices=RATE_TYPES)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    start_datetime = models.DateTimeField()
+    end_datetime = models.DateTimeField()
     receipt_image = models.ImageField(upload_to='receipts/', blank=True, null=True)
     reference_number = models.CharField(max_length=50, blank=True, null=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)

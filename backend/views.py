@@ -164,7 +164,7 @@ def view_cars(request):
 @admin_required
 def car_detail(request, car_id):
     car = get_object_or_404(Car, id=car_id)
-    reservation_list = car.reservation_set.all().order_by('-start_date')
+    reservation_list = car.reservation_set.all().order_by('-start_datetime')
     paginator = Paginator(reservation_list, 5)  # Show 5 reservations per page
     page = request.GET.get('page')
     reservations = paginator.get_page(page)
@@ -453,8 +453,8 @@ def add_reservation(request):
         user_id = request.POST.get('user')
         car_id = request.POST.get('car')
         rate_type = request.POST.get('rate_type')
-        start_date = request.POST.get('start_date')
-        end_date = request.POST.get('end_date')
+        start_datetime = request.POST.get('start_datetime')
+        end_datetime = request.POST.get('end_datetime')
         receipt_image = request.FILES.get('receipt_image')
         reference_number = request.POST.get('reference_number')
         amount = request.POST.get('amount')
@@ -468,13 +468,13 @@ def add_reservation(request):
                 return redirect('admin_reservations')
 
             # Convert string dates to datetime objects
-            start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
-            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+            start_datetime = datetime.strptime(start_datetime, '%Y-%m-%d').date()
+            end_datetime = datetime.strptime(end_datetime, '%Y-%m-%d').date()
 
             # Check availability
-            if car.is_available(start_date, end_date):
+            if car.is_available(start_datetime, end_datetime):
                 # Calculate duration
-                duration = (end_date - start_date).days
+                duration = (end_datetime - start_datetime).days
 
                 # Calculate total price based on rate type
                 if rate_type == 'hourly':
@@ -492,8 +492,8 @@ def add_reservation(request):
                     user_id=user_id,
                     car_id=car_id,
                     rate_type=rate_type,
-                    start_date=start_date,
-                    end_date=end_date,
+                    start_datetime=start_datetime,
+                    end_datetime=end_datetime,
                     receipt_image=receipt_image,
                     reference_number=reference_number,
                     amount=amount,
@@ -536,8 +536,8 @@ def edit_reservation(request, reservation_id):
         user_id = request.POST.get('user')
         car_id = request.POST.get('car')
         rate_type = request.POST.get('rate_type')
-        start_date = request.POST.get('start_date')
-        end_date = request.POST.get('end_date')
+        start_datetime = request.POST.get('start_datetime')
+        end_datetime = request.POST.get('end_datetime')
         new_receipt_image = request.FILES.get('receipt_image')
         reference_number = request.POST.get('reference_number')
         amount = request.POST.get('amount')
@@ -545,14 +545,14 @@ def edit_reservation(request, reservation_id):
 
         try:
             # Convert string dates to datetime objects
-            start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
-            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
+            start_datetime = datetime.strptime(start_datetime, '%Y-%m-%d').date()
+            end_datetime = datetime.strptime(end_datetime, '%Y-%m-%d').date()
 
             # Get the car
             car = Car.objects.get(id=car_id)
 
             # Calculate duration
-            duration = (end_date - start_date).days
+            duration = (end_datetime - start_datetime).days
 
             # Calculate total price based on rate type
             if rate_type == 'hourly':
@@ -576,8 +576,8 @@ def edit_reservation(request, reservation_id):
             reservation.user_id = user_id
             reservation.car_id = car_id
             reservation.rate_type = rate_type
-            reservation.start_date = start_date
-            reservation.end_date = end_date
+            reservation.start_datetime = start_datetime
+            reservation.end_datetime = end_datetime
             reservation.reference_number = reference_number
             reservation.amount = amount
             reservation.status = status

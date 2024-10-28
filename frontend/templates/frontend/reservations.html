@@ -39,7 +39,7 @@
                                 {% for reservation in reservations %}
                                     <tr>
                                         <td>{{ reservation.car.brand }} {{ reservation.car.model }}</td>
-                                        <td>{{ reservation.start_date }} to {{ reservation.end_date }}</td>
+                                        <td>{{ reservation.start_datetime }} to {{ reservation.end_datetime }}</td>
                                         <td>₱{{ reservation.total_price }}</td>
                                         <td>
                                             {% if reservation.status == 'pending' %}

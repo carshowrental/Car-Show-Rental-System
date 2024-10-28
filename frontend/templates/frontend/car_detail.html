@@ -243,8 +243,8 @@
                                 <input type="hidden" name="rate_type" value="daily">
 
                                 <div class="mb-3">
-                                    <label class="form-label">Start Date</label>
-                                    <input type="date" class="form-control" name="start_date" required>
+                                    <label class="form-label">Start Date & Time</label>
+                                    <input type="datetime-local" class="form-control" name="start_datetime" required>
                                 </div>
 
                                 <div class="mb-3">
@@ -293,8 +293,8 @@
                                 <input type="hidden" name="rate_type" value="weekly">
 
                                 <div class="mb-3">
-                                    <label class="form-label">Start Date</label>
-                                    <input type="date" class="form-control" name="start_date" required>
+                                    <label class="form-label">Start Date & Time</label>
+                                    <input type="datetime-local" class="form-control" name="start_datetime" required>
                                 </div>
 
                                 <div class="mb-3">
@@ -347,31 +347,25 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-
-    // Add thumbnail functionality
+    // Thumbnail functionality remains the same
     const thumbnails = document.querySelectorAll('.thumbnail-item img');
     thumbnails.forEach(thumbnail => {
         thumbnail.addEventListener('click', function() {
-            // Remove active class from all thumbnails
             thumbnails.forEach(t => t.classList.remove('active'));
-            // Add active class to clicked thumbnail
             this.classList.add('active');
         });
     });
 
-    // Update active thumbnail when carousel slides
     const carousel = document.getElementById('carImageCarousel');
     if (carousel) {
         carousel.addEventListener('slid.bs.carousel', function(event) {
-            // Remove active class from all thumbnails
             thumbnails.forEach(t => t.classList.remove('active'));
-            // Add active class to current thumbnail
             const activeIndex = event.to;
             thumbnails[activeIndex].classList.add('active');
         });
     }
 
-
+    // Reservation form handling
     const hourlyRate = {{ car.hourly_rate }};
     const dailyRate = {{ car.daily_rate }};
     const weeklyRate = {{ car.weekly_rate }};
@@ -380,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     forms.forEach(form => {
         const rateType = form.querySelector('[name="rate_type"]').value;
-        const startInput = form.querySelector('[name="start_date"], [name="start_datetime"]');
+        const startDateTimeInput = form.querySelector('[name="start_datetime"]');
         const durationSelect = form.querySelector('[name="duration"]');
         const submitButton = form.querySelector('button[type="submit"]');
         const priceDisplay = form.querySelector('.price-display');
@@ -410,9 +404,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function checkAvailability() {
-            if (!startInput.value || !durationSelect.value) return;
+            if (!startDateTimeInput.value || !durationSelect.value) return;
 
-            // Show loading state
             availabilityMessage.innerHTML = `
                 <div class="alert alert-info">
                     <div class="d-flex align-items-center">
@@ -429,14 +422,8 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('car_id', '{{ car.id }}');
             formData.append('rate_type', rateType);
             formData.append('duration', durationSelect.value);
+            formData.append('start_datetime', startDateTimeInput.value);
 
-            if (rateType === 'hourly') {
-                formData.append('start_datetime', startInput.value);
-            } else {
-                formData.append('start_date', startInput.value);
-            }
-
-            // Make AJAX call to check availability
             fetch('{% url "check_car_availability" %}', {
                 method: 'POST',
                 headers: {
@@ -450,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     availabilityMessage.innerHTML = `
                         <div class="alert alert-success">
                             <i class="fas fa-check-circle me-2"></i>
-                            Car is available for this time slot!
+                            ${data.message}
                         </div>
                     `;
                     submitButton.disabled = !agreementCheckbox.checked;
@@ -458,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     availabilityMessage.innerHTML = `
                         <div class="alert alert-danger">
                             <i class="fas fa-exclamation-circle me-2"></i>
-                            ${data.message || 'Car is not available for this time slot.'}
+                            ${data.message}
                         </div>
                     `;
                     submitButton.disabled = true;
@@ -478,45 +465,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function validateDates() {
             const now = new Date();
-            const startDate = startInput.type === 'datetime-local'
-                ? new Date(startInput.value)
-                : new Date(startInput.value + 'T00:00:00');
+            const startDateTime = new Date(startDateTimeInput.value);
 
-            startInput.classList.remove('is-invalid');
+            startDateTimeInput.classList.remove('is-invalid');
 
-            if (startInput.type === 'datetime-local') {
-                if (startDate < now) {
-                    startInput.classList.add('is-invalid');
-                    availabilityMessage.innerHTML = `
-                        <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-circle me-2"></i>
-                            Start time cannot be in the past
-                        </div>
-                    `;
-                    submitButton.disabled = true;
-                    return false;
-                }
-            } else {
-                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                const startDay = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-
-                if (startDay < today) {
-                    startInput.classList.add('is-invalid');
-                    availabilityMessage.innerHTML = `
-                        <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-circle me-2"></i>
-                            Start date cannot be in the past
-                        </div>
-                    `;
-                    submitButton.disabled = true;
-                    return false;
-                }
+            if (startDateTime < now) {
+                startDateTimeInput.classList.add('is-invalid');
+                availabilityMessage.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        Cannot book in the past
+                    </div>
+                `;
+                submitButton.disabled = true;
+                return false;
             }
 
             return true;
         }
 
-        // Handle form submission
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -524,26 +491,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Calculate end date
-            const startDate = new Date(startInput.value);
-            let endDate = new Date(startInput.value);
-
-            switch(rateType) {
-                case 'hourly':
-                    endDate.setHours(endDate.getHours() + parseInt(durationSelect.value));
-                    break;
-                case 'daily':
-                    endDate.setDate(endDate.getDate() + parseInt(durationSelect.value));
-                    break;
-                case 'weekly':
-                    endDate.setDate(endDate.getDate() + (parseInt(durationSelect.value) * 7));
-                    break;
-            }
-
-            // Always calculate and add total price before submission
             const totalPrice = calculateTotalPrice();
 
-            // Remove any existing total_price input to avoid duplicates
+            // Remove any existing total_price input
             const existingTotalPrice = form.querySelector('input[name="total_price"]');
             if (existingTotalPrice) {
                 existingTotalPrice.remove();
@@ -556,15 +506,11 @@ document.addEventListener('DOMContentLoaded', function() {
             totalPriceInput.value = totalPrice;
             form.appendChild(totalPriceInput);
 
-            // Debug log
-            console.log('Submitting form with total price:', totalPrice);
-
-            // Submit the form
             form.submit();
         });
 
         // Event Listeners
-        startInput.addEventListener('change', () => {
+        startDateTimeInput.addEventListener('change', () => {
             if (validateDates()) {
                 checkAvailability();
                 updatePrice();
@@ -572,7 +518,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         durationSelect.addEventListener('change', () => {
-            if (validateDates() && startInput.value) {
+            if (validateDates() && startDateTimeInput.value) {
                 checkAvailability();
                 updatePrice();
             }
@@ -589,13 +535,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize the form
         function initForm() {
             const now = new Date();
-            if (startInput.type === 'datetime-local') {
-                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                startInput.min = now.toISOString().slice(0, 16);
-            } else {
-                startInput.min = now.toISOString().split('T')[0];
-            }
-
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            startDateTimeInput.min = now.toISOString().slice(0, 16);
             updatePrice();
             submitButton.disabled = true;
         }

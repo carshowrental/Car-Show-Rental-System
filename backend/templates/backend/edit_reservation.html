@@ -45,14 +45,14 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="start_date"><i class="fas fa-calendar-plus me-2"></i>Start Date</label>
-                <input class="form-control" id="start_date" name="start_date" required
-                       type="date" value="{{ reservation.start_date|date:'Y-m-d' }}">
+                <label class="form-label" for="start_datetime"><i class="fas fa-calendar-plus me-2"></i>Start Date</label>
+                <input class="form-control" id="start_datetime" name="start_datetime" required
+                       type="date" value="{{ reservation.start_datetime|date:'Y-m-d' }}">
             </div>
             <div class="mb-3">
-                <label class="form-label" for="end_date"><i class="fas fa-calendar-minus me-2"></i>End Date</label>
-                <input class="form-control" id="end_date" name="end_date" required
-                       type="date" value="{{ reservation.end_date|date:'Y-m-d' }}">
+                <label class="form-label" for="end_datetime"><i class="fas fa-calendar-minus me-2"></i>End Date</label>
+                <input class="form-control" id="end_datetime" name="end_datetime" required
+                       type="date" value="{{ reservation.end_datetime|date:'Y-m-d' }}">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="receipt_image"><i class="fas fa-receipt me-2"></i>Receipt Image</label>
@@ -95,8 +95,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const rateTypeSelect = document.getElementById('rate_type');
-        const startDateInput = document.getElementById('start_date');
-        const endDateInput = document.getElementById('end_date');
+        const startDateInput = document.getElementById('start_datetime');
+        const endDateInput = document.getElementById('end_datetime');
 
         function updateDateInputTypes() {
             const selectedRateType = rateTypeSelect.value;
