@@ -13,7 +13,8 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db import transaction
-from django.db.models import Sum
+from django.db.models import Sum, Count
+from django.db.models.functions import ExtractMonth, TruncWeek, TruncDay
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
@@ -43,19 +44,72 @@ def admin_required(view_func):
 
 @admin_required
 def view_dashboard(request):
+    # Base statistics
     total_cars = Car.objects.count()
     total_users = User.objects.filter(is_superuser=False).count()
     total_reservations = Reservation.objects.count()
     revenue = Reservation.objects.filter(status='completed').aggregate(Sum('total_price'))['total_price__sum'] or 0
+
+    # Recent reservations
+    recent_reservations = (
+        Reservation.objects
+        .select_related('user', 'car')
+        .order_by('-created_at')[:5]
+    )
+
+    # Popular cars
+    popular_cars = (
+        Car.objects
+        .annotate(total_rentals=Count('reservation'))
+        .order_by('-total_rentals')[:5]
+    )
+
+    # Get data for Reservations Line Chart
+    current_year = timezone.localtime(timezone.now()).year
+    reservations_by_month = (
+        Reservation.objects
+        .filter(created_at__year=current_year)
+        .annotate(month=ExtractMonth('created_at'))
+        .values('month')
+        .annotate(count=Count('id'))
+        .order_by('month')
+    )
+
+    # Create a list of all months with 0 counts for months without reservations
+    months_data = {i: 0 for i in range(1, 13)}
+    for item in reservations_by_month:
+        months_data[item['month']] = item['count']
+
+    # Format data for the chart
+    months_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    reservations_data = [months_data[i] for i in range(1, 13)]
+
+    # Get data for Revenue Pie Chart - Fixed version
+    revenue_data = {
+        'Hourly': Reservation.objects.filter(status='completed', rate_type='hourly').aggregate(Sum('total_price'))['total_price__sum'] or 0,
+        'Daily': Reservation.objects.filter(status='completed', rate_type='daily').aggregate(Sum('total_price'))['total_price__sum'] or 0,
+        'Weekly': Reservation.objects.filter(status='completed', rate_type='weekly').aggregate(Sum('total_price'))['total_price__sum'] or 0
+    }
+
+    # Remove rate types with 0 revenue and convert to lists
+    revenue_by_type = {k: float(v) for k, v in revenue_data.items() if v > 0}
+    revenue_labels = list(revenue_by_type.keys())
+    revenue_values = list(revenue_by_type.values())
 
     context = {
         'total_cars': total_cars,
         'total_users': total_users,
         'total_reservations': total_reservations,
         'revenue': revenue,
+        'recent_reservations': recent_reservations,
+        'popular_cars': popular_cars,
+        # Chart data
+        'months_labels': json.dumps(months_labels),
+        'reservations_data': json.dumps(reservations_data),
+        'revenue_labels': json.dumps(revenue_labels),
+        'revenue_data': json.dumps(revenue_values)
     }
     return render(request, 'backend/dashboard.html', context)
-
 
 @require_http_methods(["GET", "POST"])
 def admin_login(request):
@@ -468,8 +522,8 @@ def add_reservation(request):
                 return redirect('admin_reservations')
 
             # Convert string dates to datetime objects
-            start_datetime = datetime.strptime(start_datetime, '%Y-%m-%d').date()
-            end_datetime = datetime.strptime(end_datetime, '%Y-%m-%d').date()
+            start_datetime = datetime.strptime(start_datetime, '%Y-%m-%dT%H:%M')
+            end_datetime = datetime.strptime(end_datetime, '%Y-%m-%dT%H:%M')
 
             # Check availability
             if car.is_available(start_datetime, end_datetime):
@@ -545,8 +599,8 @@ def edit_reservation(request, reservation_id):
 
         try:
             # Convert string dates to datetime objects
-            start_datetime = datetime.strptime(start_datetime, '%Y-%m-%d').date()
-            end_datetime = datetime.strptime(end_datetime, '%Y-%m-%d').date()
+            start_datetime = datetime.strptime(start_datetime, '%Y-%m-%dT%H:%M')
+            end_datetime = datetime.strptime(end_datetime, '%Y-%m-%dT%H:%M')
 
             # Get the car
             car = Car.objects.get(id=car_id)

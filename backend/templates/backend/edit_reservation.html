@@ -47,12 +47,12 @@
             <div class="mb-3">
                 <label class="form-label" for="start_datetime"><i class="fas fa-calendar-plus me-2"></i>Start Date</label>
                 <input class="form-control" id="start_datetime" name="start_datetime" required
-                       type="date" value="{{ reservation.start_datetime|date:'Y-m-d' }}">
+                       type="datetime-local" value="{{ reservation.start_datetime|date:'Y-m-d\TH:i' }}">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="end_datetime"><i class="fas fa-calendar-minus me-2"></i>End Date</label>
                 <input class="form-control" id="end_datetime" name="end_datetime" required
-                       type="date" value="{{ reservation.end_datetime|date:'Y-m-d' }}">
+                       type="datetime-local" value="{{ reservation.end_datetime|date:'Y-m-d\TH:i' }}">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="receipt_image"><i class="fas fa-receipt me-2"></i>Receipt Image</label>
@@ -89,64 +89,4 @@
         </form>
     </div>
 </div>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const rateTypeSelect = document.getElementById('rate_type');
-        const startDateInput = document.getElementById('start_datetime');
-        const endDateInput = document.getElementById('end_datetime');
-
-        function updateDateInputTypes() {
-            const selectedRateType = rateTypeSelect.value;
-            if (selectedRateType === 'hourly') {
-                startDateInput.type = 'datetime-local';
-                endDateInput.type = 'datetime-local';
-                startDateInput.step = '3600'; // 1 hour steps
-                endDateInput.step = '3600';   // 1 hour steps
-
-                // Convert the date values to datetime-local format if they exist
-                if (startDateInput.value) {
-                    const startDate = new Date(startDateInput.value);
-                    startDateInput.value = startDate.toISOString().slice(0, 16);
-                }
-                if (endDateInput.value) {
-                    const endDate = new Date(endDateInput.value);
-                    endDateInput.value = endDate.toISOString().slice(0, 16);
-                }
-            } else {
-                startDateInput.type = 'date';
-                endDateInput.type = 'date';
-                startDateInput.removeAttribute('step');
-                endDateInput.removeAttribute('step');
-
-                // Convert the datetime values to date format if they exist
-                if (startDateInput.value) {
-                    const startDate = new Date(startDateInput.value);
-                    startDateInput.value = startDate.toISOString().slice(0, 10);
-                }
-                if (endDateInput.value) {
-                    const endDate = new Date(endDateInput.value);
-                    endDateInput.value = endDate.toISOString().slice(0, 10);
-                }
-            }
-        }
-
-        // Update date input types when rate type changes
-        rateTypeSelect.addEventListener('change', updateDateInputTypes);
-
-        // Set initial state
-        updateDateInputTypes();
-
-        // Set min/max dates
-        startDateInput.addEventListener('change', function() {
-            endDateInput.min = this.value;
-        });
-
-        endDateInput.addEventListener('change', function() {
-            startDateInput.max = this.value;
-        });
-    });
-</script>
 {% endblock %}

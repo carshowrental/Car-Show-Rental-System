@@ -3,64 +3,205 @@
 
 {% block title %}Dashboard - Car Show Rental Admin{% endblock %}
 
-{% block page_title %}Dashboard{% endblock %}
-
 {% block content %}
-<div class="row">
-    <div class="col-md-3 mb-4">
-        <div class="card bg-primary text-white">
-            <div class="card-body">
-                <h5 class="card-title">Total Cars</h5>
-                <h2 class="card-text">{{ total_cars }}</h2>
-                <a href="{% url 'admin_cars' %}" class="btn btn-light btn-sm">View Cars</a>
+<div class="container-fluid">
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card card bg-primary bg-gradient text-light h-100">
+                <div class="card-body">
+                    <div class="row g-0 align-items-center">
+                        <div class="col mr-2">
+                            <div class="fs-6 fw-bold text-uppercase mb-1">Total Cars</div>
+                            <div class="h5 mb-0 fw-bold">{{ total_cars }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-car fa-2x"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'admin_cars' %}" class="btn btn-sm btn-light">View Cars</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 mb-4">
-        <div class="card bg-secondary text-white">
-            <div class="card-body">
-                <h5 class="card-title">Total Users</h5>
-                <h2 class="card-text">{{ total_users }}</h2>
-                <a href="{% url 'admin_user_accounts' %}" class="btn btn-light btn-sm">View Users</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4">
-        <div class="card bg-success text-white">
-            <div class="card-body">
-                <h5 class="card-title">Total Reservations</h5>
-                <h2 class="card-text">{{ total_reservations }}</h2>
-                <a href="{% url 'admin_reservations' %}" class="btn btn-light btn-sm">View Reservations</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4">
-        <div class="card bg-info text-white">
-            <div class="card-body">
-                <h5 class="card-title">Total Revenue</h5>
-                <h2 class="card-text">₱{{ revenue }}</h2>
-                <a href="{% url 'admin_payments' %}" class="btn btn-light btn-sm">View Payments</a>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title" style="color: var(--primary-color);">Reservations Overview</h5>
-                <!-- Add a chart or graph here -->
-                <p>Placeholder for reservations chart</p>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card card bg-danger bg-gradient text-light h-100">
+                <div class="card-body">
+                    <div class="row g-0 align-items-center">
+                        <div class="col mr-2">
+                            <div class="fs-6 fw-bold text-uppercase mb-1">Total Users</div>
+                            <div class="h5 mb-0 fw-bold">{{ total_users }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'admin_user_accounts' %}" class="btn btn-sm btn-light">View Users</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card card bg-warning bg-gradient text-dark h-100">
+                <div class="card-body">
+                    <div class="row g-0 align-items-center">
+                        <div class="col mr-2">
+                            <div class="fs-6 fw-bold text-uppercase mb-1">Total Reservations</div>
+                            <div class="h5 mb-0 fw-bold">{{ total_reservations }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar-alt fa-2x"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'admin_reservations' %}" class="btn btn-sm btn-light">View Reservations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="stat-card card bg-success bg-gradient text-light h-100">
+                <div class="card-body">
+                    <div class="row g-0 align-items-center">
+                        <div class="col mr-2">
+                            <div class="fs-6 fw-bold text-uppercase mb-1">Total Revenue</div>
+                            <div class="h5 mb-0 fw-bold">₱{{ revenue|floatformat:2 }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-money-bill-wave fa-2x"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{% url 'admin_payments' %}" class="btn btn-sm btn-light">View Payments</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title" style="color: var(--secondary-color);">Revenue Sources</h5>
-                <!-- Add a chart or graph here -->
-                <p>Placeholder for revenue sources chart</p>
+
+    <!-- Charts Row -->
+    <div class="row">
+        <div class="col-xl-8 col-lg-7 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 fw-bold text-primary">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        Reservations Overview
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="reservationsChart" style="height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-5 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 fw-bold text-primary">
+                        <i class="fas fa-chart-pie mr-2"></i>
+                        Revenue Sources
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-pie">
+                        <canvas id="revenuePieChart" style="height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Row -->
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                    <h6 class="m-0 fw-bold text-primary">
+                        <i class="fas fa-list mr-2"></i>
+                        Recent Reservations
+                    </h6>
+                    <a href="{% url 'admin_reservations' %}" class="btn btn-sm btn-primary">View All</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Car</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for reservation in recent_reservations %}
+                                <tr>
+                                    <td>{{ reservation.user.username }}</td>
+                                    <td>{{ reservation.car.brand }} {{ reservation.car.model }}</td>
+                                    <td>
+                                        <span class="badge
+                                                    {% if reservation.status == 'pending' %}bg-warning text-dark
+                                                    {% elif reservation.status == 'partial' %}bg-info text-dark
+                                                    {% elif reservation.status == 'paid' %}bg-success
+                                                    {% elif reservation.status == 'active' %}bg-primary
+                                                    {% elif reservation.status == 'completed' %}bg-secondary
+                                                    {% elif reservation.status == 'cancelled' %}bg-danger
+                                                    {% endif %}
+                                                    ">
+                                            {{ reservation.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ reservation.created_at|date:"M d, Y" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                    <h6 class="m-0 fw-bold text-primary">
+                        <i class="fas fa-car mr-2"></i>
+                        Popular Cars
+                    </h6>
+                    <a href="{% url 'admin_cars' %}" class="btn btn-sm btn-primary">View All</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Car</th>
+                                    <th>Type</th>
+                                    <th>Total Rentals</th>
+                                    <th>Available Units</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for car in popular_cars %}
+                                <tr>
+                                    <td>{{ car.brand }} {{ car.model }}</td>
+                                    <td>{{ car.car_type|title }}</td>
+                                    <td>{{ car.total_rentals }}</td>
+                                    <td>{{ car.available_units }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -70,56 +211,118 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var reservationsCtx = document.getElementById('reservationsChart').getContext('2d');
-        new Chart(reservationsCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Reservations',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderColor: '#6C63FF',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Monthly Reservations'
-                    }
-                }
-            }
-        });
+    // Parse the JSON data from the template
+    const monthsLabels = JSON.parse('{{ months_labels|safe }}');
+    const reservationsData = JSON.parse('{{ reservations_data|safe }}');
+    const revenueLabels = JSON.parse('{{ revenue_labels|safe }}');
+    const revenueData = JSON.parse('{{ revenue_data|safe }}');
 
-        var revenueCtx = document.getElementById('revenueChart').getContext('2d');
-        new Chart(revenueCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Car A', 'Car B', 'Car C', 'Car D'],
-                datasets: [{
-                    data: [300, 50, 100, 80],
-                    backgroundColor: ['#6C63FF', '#FF6584', '#4CAF50', '#FFC107']
-                }]
+    // Reservations Line Chart
+    const reservationsCtx = document.getElementById('reservationsChart').getContext('2d');
+    const reservationsChart = new Chart(reservationsCtx, {
+        type: 'line',
+        data: {
+            labels: monthsLabels,
+            datasets: [{
+                label: 'Reservations',
+                data: reservationsData,
+                borderColor: '#ff0000',
+                backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            return `Reservations: ${context.raw}`;
+                        }
+                    }
+                }
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        drawBorder: false
                     },
-                    title: {
-                        display: true,
-                        text: 'Revenue by Car Type'
+                    ticks: {
+                        stepSize: 1
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
                     }
                 }
             }
-        });
+        }
     });
+
+    // Color palette for the pie chart
+    const pieColors = [
+        '#1e1e1e',  // Black
+        '#ff6b6b',  // Light Red
+        '#8c8c8c'   // Gray
+    ];
+
+    // Revenue Pie Chart
+    const revenueCtx = document.getElementById('revenuePieChart').getContext('2d');
+    const revenuePieChart = new Chart(revenueCtx, {
+        type: 'doughnut',
+        data: {
+            labels: revenueLabels,
+            datasets: [{
+                data: revenueData,
+                backgroundColor: pieColors.slice(0, revenueLabels.length),
+                borderWidth: 0
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `₱${value.toLocaleString()} (${percentage}%)`;
+                        }
+                    }
+                }
+            },
+            cutout: '70%'
+        }
+    });
+
+    // Add a fallback message if there's no data
+    if (revenueData.length === 0) {
+        const noDataMsg = document.createElement('div');
+        noDataMsg.style.position = 'absolute';
+        noDataMsg.style.top = '50%';
+        noDataMsg.style.left = '50%';
+        noDataMsg.style.transform = 'translate(-50%, -50%)';
+        noDataMsg.style.textAlign = 'center';
+        noDataMsg.innerHTML = 'No revenue data available';
+        revenuePieChart.canvas.parentNode.appendChild(noDataMsg);
+    }
 </script>
 {% endblock %}
