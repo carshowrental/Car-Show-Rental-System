@@ -90,7 +90,9 @@
                                    class="form-control"
                                    id="license_image"
                                    name="license_image"
+                                   {% if user_profile.license_image %
                                    value="{{ user_profile.license_image.url|default:'' }}"
+                                   {% endif %
                                    accept="image/*"
                                    {% if not user_profile.license_image %}required{% endif %}>
                             <div id="processing-status" class="text-muted mt-2" style="display: none;">
