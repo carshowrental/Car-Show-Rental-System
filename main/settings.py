@@ -156,6 +156,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PAYMONGO_API_URL = 'https://api.paymongo.com/v1'
 PAYMONGO_SECRET_KEY = 'sk_test_YmgWDKyver1ED5zFrXZspNnT'
 
-OCR_SPACE_API_KEY = 'K82065214288957'  # Replace with your actual API key
+OCR_SPACE_API_KEY = 'K89859334288957'  # Replace with your actual API key
 
 
