@@ -16,7 +16,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -502,16 +502,14 @@ def car_detail(request, car_id):
 def check_car_availability(request):
     try:
         car_id = request.POST.get('car_id')
-        rate_type = request.POST.get('rate_type', 'daily')
-
-        car = get_object_or_404(Car, id=car_id)
-        now = timezone.localtime(timezone.now())
-
-        # For all rental types, we now use datetime
-        start_str = request.POST.get('start_datetime')
-        start_datetime = timezone.make_aware(datetime.strptime(start_str, '%Y-%m-%dT%H:%M'))
+        rate_type = request.POST.get('rate_type')
+        start_datetime_str = request.POST.get('start_datetime')
         duration = int(request.POST.get('duration', 1))
 
+        # For all rental types, we now use datetime
+        start_datetime = timezone.make_aware(datetime.strptime(start_datetime_str, '%Y-%m-%dT%H:%M'))
+
+        # Calculate end datetime
         if rate_type == 'hourly':
             end_datetime = start_datetime + timedelta(hours=duration)
         elif rate_type == 'weekly':
@@ -520,18 +518,14 @@ def check_car_availability(request):
             end_datetime = start_datetime + timedelta(days=duration)
 
         # Validate dates/times
-        if start_datetime >= end_datetime:
-            return JsonResponse({
-                'available': False,
-                'message': 'End time must be after start time'
-            })
-
-        if start_datetime < now:
+        if start_datetime < timezone.localtime(timezone.now()):
             return JsonResponse({
                 'available': False,
                 'message': 'Cannot book in the past'
             })
 
+        # Get car with select_for_update to lock the row
+        car = get_object_or_404(Car, id=car_id)
         # Check availability and get total units
         get_available_total_units = car.get_available_total_units(start_datetime, end_datetime)
 
@@ -547,6 +541,55 @@ def check_car_availability(request):
             'message': str(e)
         }, status=400)
 
+
+@login_required
+def create_reservation(request, car_id):
+    if request.method == 'POST':
+        rate_type = request.POST.get('rate_type')
+        duration = int(request.POST.get('duration', 1))
+        total_price = float(request.POST.get('total_price', 0))
+        start_datetime_str = request.POST.get('start_datetime')
+
+        try:
+            with transaction.atomic():
+                # Get car with lock for atomic operation
+                car = Car.objects.select_for_update().get(id=car_id)
+
+                # Convert and validate datetime
+                start_datetime = timezone.make_aware(datetime.strptime(start_datetime_str, '%Y-%m-%dT%H:%M'))
+
+                if rate_type == 'hourly':
+                    end_datetime = start_datetime + timedelta(hours=duration)
+                elif rate_type == 'weekly':
+                    end_datetime = start_datetime + timedelta(weeks=duration)
+                else:  # daily
+                    end_datetime = start_datetime + timedelta(days=duration)
+
+                # Get the available total units for the period
+                get_available_total_units = car.get_available_total_units(start_datetime, end_datetime)
+
+                if get_available_total_units > 0:
+                    reservation = Reservation.objects.create(
+                        user=request.user,
+                        car=car,
+                        start_datetime=start_datetime,
+                        end_datetime=end_datetime,
+                        rate_type=rate_type,
+                        total_price=total_price
+                    )
+                    return redirect('payment', reservation_id=reservation.id)
+                else:
+                    messages.error(request, 'No units available for the selected dates/times.')
+                    return redirect('car_detail', car_id=car.id)
+
+        except ValueError as e:
+            messages.error(request, f'Invalid date/time format: {str(e)}')
+            return redirect('car_detail', car_id=car.id)
+        except Exception as e:
+            messages.error(request, f'An error occurred: {str(e)}')
+            return redirect('car_detail', car_id=car.id)
+
+    return redirect('cars')
 
 
 @login_required
@@ -564,64 +607,6 @@ def view_reservations(request):
         reservations = paginator.page(paginator.num_pages)
 
     return render(request, 'frontend/reservations.html', {'reservations': reservations})
-
-
-@login_required
-def create_reservation(request, car_id):
-    if request.method == 'POST':
-        car = get_object_or_404(Car, id=car_id)
-        rate_type = request.POST.get('rate_type')
-        duration = int(request.POST.get('duration', 1))
-        total_price = float(request.POST.get('total_price', 0))
-
-        try:
-            user_profile = request.user.userprofile
-            if not user_profile.license_image:
-                messages.error(request, "Please upload your driver's license before making a reservation.")
-                return redirect('profile')
-        except UserProfile.DoesNotExist:
-            messages.error(request,
-                           "Please complete your profile and upload your driver's license before making a reservation.")
-            return redirect('profile')
-
-        try:
-            # All rental types now use datetime
-            start_str = request.POST.get('start_datetime')
-            start_datetime = timezone.make_aware(datetime.strptime(start_str, '%Y-%m-%dT%H:%M'))
-
-            if rate_type == 'hourly':
-                end_datetime = start_datetime + timedelta(hours=duration)
-            elif rate_type == 'weekly':
-                end_datetime = start_datetime + timedelta(weeks=duration)
-            else:  # daily
-                end_datetime = start_datetime + timedelta(days=duration)
-
-            # Get the available total units for the period
-            get_available_total_units = car.get_available_total_units(start_datetime, end_datetime)
-
-            if get_available_total_units > 0:
-                reservation = Reservation.objects.create(
-                    user=request.user,
-                    car=car,
-                    start_datetime=start_datetime,
-                    end_datetime=end_datetime,
-                    rate_type=rate_type,
-                    total_price=total_price,
-                    status='pending'
-                )
-                return redirect('payment', reservation_id=reservation.id)
-            else:
-                messages.error(request, 'No units available for the selected dates/times.')
-                return redirect('car_detail', car_id=car.id)
-
-        except ValueError as e:
-            messages.error(request, f'Invalid date/time format: {str(e)}')
-            return redirect('car_detail', car_id=car.id)
-        except Exception as e:
-            messages.error(request, f'An error occurred: {str(e)}')
-            return redirect('car_detail', car_id=car.id)
-
-    return redirect('cars')
 
 
 @login_required

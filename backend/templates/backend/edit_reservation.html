@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" id="reservationForm">
             {% csrf_token %}
             <div class="mb-3">
                 <label class="form-label" for="user"><i class="fas fa-user me-2"></i>User</label>
@@ -45,33 +45,35 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="start_datetime"><i class="fas fa-calendar-plus me-2"></i>Start Date</label>
+                <label class="form-label" for="start_datetime"><i class="fas fa-calendar-plus me-2"></i>Start Date & Time</label>
                 <input class="form-control" id="start_datetime" name="start_datetime" required
-                       type="datetime-local" value="{{ reservation.start_datetime|date:'Y-m-d\TH:i' }}">
+                       type="datetime-local" value="{{ reservation.start_datetime|date:'Y-m-d\TH:i' }}" min="{{ now|date:'Y-m-d\TH:i' }}">
             </div>
             <div class="mb-3">
-                <label class="form-label" for="end_datetime"><i class="fas fa-calendar-minus me-2"></i>End Date</label>
-                <input class="form-control" id="end_datetime" name="end_datetime" required
-                       type="datetime-local" value="{{ reservation.end_datetime|date:'Y-m-d\TH:i' }}">
+                <label class="form-label" for="duration"><i class="fas fa-clock me-2"></i>Duration</label>
+                <select class="form-select" id="duration" name="duration" required>
+                    <!-- Options will be dynamically populated based on rate type -->
+                </select>
+            </div>
+            <!-- Availability Info -->
+            <div class="alert d-none mb-3" id="availabilityInfo" role="alert">
+                <i class="fas fa-info-circle me-2"></i>
+                <span id="availabilityMessage"></span>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="receipt_image"><i class="fas fa-receipt me-2"></i>Receipt Image</label>
                 {% if reservation.receipt_image %}
+                <label class="form-label" for="receipt_image"><i class="fas fa-receipt me-2"></i>Receipt Image</label>
                     <div class="mb-2">
                         <img src="{{ reservation.receipt_image.url }}" alt="Current Receipt Image" class="img-thumbnail" style="max-width: 200px;">
                     </div>
                 {% endif %}
+                <label class="form-label" for="receipt_image"><i class="fas fa-sync me-2"></i>Change Receipt Image</label>
                 <input type="file" class="form-control" id="receipt_image" name="receipt_image" accept="image/*">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="reference_number"><i class="fas fa-barcode me-2"></i>Reference Number</label>
                 <input class="form-control" id="reference_number" name="reference_number" required
                        type="text" value="{{ reservation.reference_number }}">
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="amount"><i class="fas fa-money-bill-wave me-2"></i>Amount</label>
-                <input class="form-control" id="amount" name="amount" required
-                       type="number" value="{{ reservation.amount }}">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="status"><i class="fas fa-info-circle me-2"></i>Status</label>
@@ -83,10 +85,154 @@
                     {% endfor %}
                 </select>
             </div>
-            <button class="btn btn-primary w-100" type="submit">
+            <button class="btn btn-primary w-100" type="submit" id="submitButton">
                 <i class="fas fa-save me-2"></i>Save Changes
             </button>
         </form>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('reservationForm');
+    const carSelect = document.getElementById('car');
+    const rateTypeSelect = document.getElementById('rate_type');
+    const durationSelect = document.getElementById('duration');
+    const startDateTimeInput = document.getElementById('start_datetime');
+    const availabilityInfo = document.getElementById('availabilityInfo');
+    const availabilityMessage = document.getElementById('availabilityMessage');
+    const submitButton = document.getElementById('submitButton');
+
+    // Store original values
+    const originalValues = {
+        carId: {{ reservation.car.id }},
+        rateType: '{{ reservation.rate_type }}',
+        startDateTime: '{{ reservation.start_datetime|date:"Y-m-d\TH:i" }}',
+        duration: {{ current_duration }},
+    };
+
+    function updateDurationOptions(rateType) {
+        durationSelect.innerHTML = '<option value="">Select duration</option>';
+
+        if (!rateType) return;
+
+        let maxDuration;
+        let suffix;
+
+        switch(rateType) {
+            case 'hourly':
+                maxDuration = 9;
+                suffix = ' Hour';
+                break;
+            case 'daily':
+                maxDuration = 6;
+                suffix = ' Day';
+                break;
+            case 'weekly':
+                maxDuration = 4;
+                suffix = ' Week';
+                break;
+            default:
+                return;
+        }
+
+        for(let i = 1; i <= maxDuration; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i + suffix + (i > 1 ? 's' : '');
+            if (i === originalValues.duration) {
+                option.selected = true;
+            }
+            durationSelect.appendChild(option);
+        }
+    }
+
+    function hasChanges() {
+        const currentValues = {
+            carId: parseInt(carSelect.value),
+            rateType: rateTypeSelect.value,
+            startDateTime: startDateTimeInput.value,
+            duration: parseInt(durationSelect.value)
+        };
+
+        return currentValues.carId !== originalValues.carId ||
+               currentValues.rateType !== originalValues.rateType ||
+               currentValues.startDateTime !== originalValues.startDateTime ||
+               currentValues.duration !== originalValues.duration;
+    }
+
+    async function checkAvailability() {
+        const carId = carSelect.value;
+        const rateType = rateTypeSelect.value;
+        const startDateTime = startDateTimeInput.value;
+        const duration = durationSelect.value;
+
+        // Check if all required fields are filled
+        if (!carId || !rateType || !startDateTime || !duration) {
+            availabilityInfo.classList.add('d-none');
+            submitButton.disabled = true;
+            return;
+        }
+
+        // Check if there are any changes from original values
+        if (!hasChanges()) {
+            availabilityInfo.classList.add('d-none');
+            submitButton.disabled = false;
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('car_id', carId);
+        formData.append('rate_type', rateType);
+        formData.append('start_datetime', startDateTime);
+        formData.append('duration', duration);
+        formData.append('reservation_id', {{ reservation.id }});
+
+        try {
+            const response = await fetch('{% url "admin_check_availability" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                }
+            });
+
+            const data = await response.json();
+            availabilityInfo.classList.remove('d-none');
+
+            if (data.available) {
+                availabilityInfo.className = 'alert alert-success';
+                availabilityMessage.textContent = data.message;
+                submitButton.disabled = false;
+            } else {
+                availabilityInfo.className = 'alert alert-danger';
+                availabilityMessage.textContent = data.message;
+                submitButton.disabled = true;
+            }
+        } catch (error) {
+            availabilityInfo.className = 'alert alert-danger';
+            availabilityMessage.textContent = 'Error checking availability';
+            submitButton.disabled = true;
+        }
+    }
+
+    // Event listeners
+    rateTypeSelect.addEventListener('change', () => {
+        updateDurationOptions(rateTypeSelect.value);
+        checkAvailability();
+    });
+
+    [carSelect, durationSelect, startDateTimeInput].forEach(element => {
+        element.addEventListener('change', checkAvailability);
+    });
+
+    // Initialize with current rate type and check availability
+    updateDurationOptions(rateTypeSelect.value);
+
+    // Enable submit button initially since no changes yet
+    submitButton.disabled = false;
+});
+</script>
 {% endblock %}

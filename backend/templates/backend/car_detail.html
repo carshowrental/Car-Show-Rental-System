@@ -21,7 +21,7 @@
         transition: border-color 0.3s ease;
     }
     .thumbnail-gallery img.active {
-        border-color: var(--primary-color);
+        border-color: var(--secondary-color);
     }
 </style>
 {% endblock %}
@@ -36,7 +36,7 @@
     <div class="col-lg-5 mb-4">
         <div class="card shadow">
             <div class="card-body">
-                <div id="carImageCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div id="carImageCarousel" class="carousel slide">
                     <div class="carousel-inner">
                         {% for image in car.carimages_set.all %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -62,9 +62,13 @@
                     {% endif %}
                 </div>
                 <div class="thumbnail-gallery">
-                    {% for image in car.carimages_set.all %}
-                        <img src="{{ image.image.url }}" class="img-thumbnail" alt="Thumbnail {{ forloop.counter }}" onclick="setActiveImage({{ forloop.counter0 }})" {% if forloop.first %}class="active"{% endif %}>
-                    {% endfor %}
+                {% for image in car.carimages_set.all %}
+                    <img
+                        src="{{ image.image.url }}"
+                        class="img-thumbnail {% if forloop.first %}active{% endif %}"
+                        alt="Thumbnail {{ forloop.counter }}"
+                        onclick="setActiveImage({{ forloop.counter0 }})">
+                {% endfor %}
                 </div>
                 <div class="mt-4">
                     <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>Car Details</h5>
@@ -159,9 +163,7 @@
 
 {% block extra_js %}
 <script>
-    var carImageCarousel = new bootstrap.Carousel(document.getElementById('carImageCarousel'), {
-        interval: false // Disable auto-sliding
-    });
+    var carImageCarousel = new bootstrap.Carousel(document.getElementById('carImageCarousel'));
 
     function setActiveImage(index) {
         carImageCarousel.to(index);

@@ -5,7 +5,7 @@ from functools import wraps
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
@@ -14,7 +14,7 @@ from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.db import transaction
 from django.db.models import Sum, Count
-from django.db.models.functions import ExtractMonth, TruncWeek, TruncDay
+from django.db.models.functions import ExtractMonth
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
@@ -22,6 +22,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import strip_tags
 from django.views.decorators.http import require_POST, require_http_methods
+from sympy.physics.units import amount
 
 from backend.models import Car, Reservation, CarImage, UserProfile, PasswordResetToken
 
@@ -31,6 +32,7 @@ def admin_required(view_func):
     Decorator for views that checks that the user is an admin,
     redirecting to the admin login page if necessary.
     """
+
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         is_admin = request.user.is_authenticated and request.user.is_staff
@@ -39,6 +41,7 @@ def admin_required(view_func):
             messages.error(request, 'Please login with admin credentials to access this page.')
             return redirect('admin_login')
         return view_func(request, *args, **kwargs)
+
     return _wrapped_view
 
 
@@ -86,9 +89,12 @@ def view_dashboard(request):
 
     # Get data for Revenue Pie Chart - Fixed version
     revenue_data = {
-        'Hourly': Reservation.objects.filter(status='completed', rate_type='hourly').aggregate(Sum('total_price'))['total_price__sum'] or 0,
-        'Daily': Reservation.objects.filter(status='completed', rate_type='daily').aggregate(Sum('total_price'))['total_price__sum'] or 0,
-        'Weekly': Reservation.objects.filter(status='completed', rate_type='weekly').aggregate(Sum('total_price'))['total_price__sum'] or 0
+        'Hourly': Reservation.objects.filter(status='completed', rate_type='hourly').aggregate(Sum('total_price'))[
+                      'total_price__sum'] or 0,
+        'Daily': Reservation.objects.filter(status='completed', rate_type='daily').aggregate(Sum('total_price'))[
+                     'total_price__sum'] or 0,
+        'Weekly': Reservation.objects.filter(status='completed', rate_type='weekly').aggregate(Sum('total_price'))[
+                      'total_price__sum'] or 0
     }
 
     # Remove rate types with 0 revenue and convert to lists
@@ -110,6 +116,7 @@ def view_dashboard(request):
         'revenue_data': json.dumps(revenue_values)
     }
     return render(request, 'backend/dashboard.html', context)
+
 
 @require_http_methods(["GET", "POST"])
 def admin_login(request):
@@ -499,6 +506,63 @@ def view_reservations(request):
 
 
 @admin_required
+@require_http_methods(["POST"])
+def admin_check_availability(request):
+    try:
+        car_id = request.POST.get('car_id')
+        rate_type = request.POST.get('rate_type')
+        start_datetime_str = request.POST.get('start_datetime')
+        duration = int(request.POST.get('duration', 1))
+        reservation_id = request.POST.get('reservation_id')
+
+        car = get_object_or_404(Car, id=car_id)
+        start_datetime = timezone.make_aware(datetime.strptime(start_datetime_str, '%Y-%m-%dT%H:%M'))
+
+        # Calculate end datetime
+        if rate_type == 'hourly':
+            end_datetime = start_datetime + timedelta(hours=duration)
+        elif rate_type == 'daily':
+            end_datetime = start_datetime + timedelta(days=duration)
+        else:  # weekly
+            end_datetime = start_datetime + timedelta(weeks=duration)
+
+        # Validate dates/times
+        if start_datetime < timezone.localtime(timezone.now()):
+            return JsonResponse({
+                'available': False,
+                'message': 'Cannot book in the past'
+            })
+
+        # Get all overlapping reservations
+        overlapping_reservations = Reservation.objects.filter(
+            car=car,
+            status__in=['pending', 'partial', 'paid', 'active'],
+            start_datetime__lt=end_datetime,
+            end_datetime__gt=start_datetime
+        )
+
+        # If this is an edit, exclude the current reservation from the count
+        if reservation_id:
+            overlapping_reservations = overlapping_reservations.exclude(id=reservation_id)
+
+        # Count overlapping reservations
+        reserved_units = overlapping_reservations.count()
+        available_units = max(0, car.available_units - reserved_units)
+
+        return JsonResponse({
+            'available': available_units > 0,
+            'get_available_total_units': available_units,
+            'message': f'{available_units} units available' if available_units > 0 else 'No units available for these dates/times'
+        })
+
+    except Exception as e:
+        return JsonResponse({
+            'available': False,
+            'message': str(e)
+        }, status=400)
+
+
+@admin_required
 def add_reservation(request):
     users = User.objects.filter(is_superuser=False)
     cars = Car.objects.all()
@@ -507,39 +571,38 @@ def add_reservation(request):
         user_id = request.POST.get('user')
         car_id = request.POST.get('car')
         rate_type = request.POST.get('rate_type')
-        start_datetime = request.POST.get('start_datetime')
-        end_datetime = request.POST.get('end_datetime')
+        start_datetime_str = request.POST.get('start_datetime')
+        duration = int(request.POST.get('duration', 1))
         receipt_image = request.FILES.get('receipt_image')
         reference_number = request.POST.get('reference_number')
-        amount = request.POST.get('amount')
         status = request.POST.get('status')
 
         try:
-            # Get car and check total units
-            car = Car.objects.get(id=car_id)
-            if car.total_units <= 0:
-                messages.error(request, 'No units available for this car model.')
-                return redirect('admin_reservations')
+            with transaction.atomic():
+                # Get car with lock for atomic operation
+                car = Car.objects.select_for_update().get(id=car_id)
 
-            # Convert string dates to datetime objects
-            start_datetime = datetime.strptime(start_datetime, '%Y-%m-%dT%H:%M')
-            end_datetime = datetime.strptime(end_datetime, '%Y-%m-%dT%H:%M')
+                # Convert and validate datetime
+                start_datetime = timezone.make_aware(datetime.strptime(start_datetime_str, '%Y-%m-%dT%H:%M'))
 
-            # Check availability
-            if car.is_available(start_datetime, end_datetime):
-                # Calculate duration
-                duration = (end_datetime - start_datetime).days
-
-                # Calculate total price based on rate type
+                # Calculate end_datetime based on rate_type and duration
                 if rate_type == 'hourly':
-                    total_price = (duration * 24) * car.hourly_rate
+                    end_datetime = start_datetime + timedelta(hours=duration)
+                    total_price = duration * car.hourly_rate
                 elif rate_type == 'daily':
+                    end_datetime = start_datetime + timedelta(days=duration)
                     total_price = duration * car.daily_rate
                 elif rate_type == 'weekly':
-                    weeks = (duration + 6) // 7  # Rounds up to nearest week
-                    total_price = weeks * car.weekly_rate
+                    end_datetime = start_datetime + timedelta(weeks=duration)
+                    total_price = duration * car.weekly_rate
                 else:
-                    total_price = 0
+                    raise ValueError("Invalid rate type")
+
+                # Calculate amount based on status
+                if status == 'paid':
+                    amount = total_price
+                elif status == 'partial':
+                    amount = total_price / 2
 
                 # Create reservation
                 reservation = Reservation.objects.create(
@@ -557,25 +620,21 @@ def add_reservation(request):
 
                 messages.success(request, 'Reservation created successfully.')
                 return redirect('admin_reservations')
-            else:
-                messages.error(request, 'Car is not available for the selected dates.')
-                return redirect('admin_reservations')
 
         except Car.DoesNotExist:
             messages.error(request, 'Selected car does not exist.')
-            return redirect('admin_reservations')
         except ValueError as e:
             messages.error(request, f'Invalid date format: {str(e)}')
-            return redirect('admin_reservations')
         except Exception as e:
             messages.error(request, f'An error occurred: {str(e)}')
-            return redirect('admin_reservations')
+
+        return redirect('admin_reservations')
 
     context = {
         'users': users,
         'cars': cars,
-        'statuses': Reservation.STATUS_CHOICES,
         'rate_types': Reservation.RATE_TYPES,
+        'now': timezone.localtime(timezone.now()),
     }
     return render(request, 'backend/add_reservation.html', context)
 
@@ -590,56 +649,62 @@ def edit_reservation(request, reservation_id):
         user_id = request.POST.get('user')
         car_id = request.POST.get('car')
         rate_type = request.POST.get('rate_type')
-        start_datetime = request.POST.get('start_datetime')
-        end_datetime = request.POST.get('end_datetime')
+        start_datetime_str = request.POST.get('start_datetime')
+        duration = int(request.POST.get('duration', 1))
         new_receipt_image = request.FILES.get('receipt_image')
         reference_number = request.POST.get('reference_number')
-        amount = request.POST.get('amount')
         status = request.POST.get('status')
 
         try:
-            # Convert string dates to datetime objects
-            start_datetime = datetime.strptime(start_datetime, '%Y-%m-%dT%H:%M')
-            end_datetime = datetime.strptime(end_datetime, '%Y-%m-%dT%H:%M')
+            with transaction.atomic():
+                # Get car with lock for atomic operation
+                car = Car.objects.select_for_update().get(id=car_id)
 
-            # Get the car
-            car = Car.objects.get(id=car_id)
+                # Convert and validate datetime
+                start_datetime = timezone.make_aware(datetime.strptime(start_datetime_str, '%Y-%m-%dT%H:%M'))
 
-            # Calculate duration
-            duration = (end_datetime - start_datetime).days
+                # Calculate end_datetime and total_price based on rate_type and duration
+                if rate_type == 'hourly':
+                    end_datetime = start_datetime + timedelta(hours=duration)
+                    total_price = duration * car.hourly_rate
+                elif rate_type == 'daily':
+                    end_datetime = start_datetime + timedelta(days=duration)
+                    total_price = duration * car.daily_rate
+                elif rate_type == 'weekly':
+                    end_datetime = start_datetime + timedelta(weeks=duration)
+                    total_price = duration * car.weekly_rate
+                else:
+                    raise ValueError("Invalid rate type")
 
-            # Calculate total price based on rate type
-            if rate_type == 'hourly':
-                total_price = (duration * 24) * car.hourly_rate
-            elif rate_type == 'daily':
-                total_price = duration * car.daily_rate
-            elif rate_type == 'weekly':
-                weeks = (duration + 6) // 7  # Rounds up to nearest week
-                total_price = weeks * car.weekly_rate
-            else:
-                total_price = 0
+                # Calculate amount based on status
+                if status == 'paid':
+                    amount = total_price
+                elif status == 'partial':
+                    amount = total_price / 2
+                else:  # pending
+                    amount = reservation.amount
 
-            # Handle receipt image update
-            if new_receipt_image:
-                # Delete old receipt image if it exists
-                if reservation.receipt_image:
-                    reservation.receipt_image.delete(save=False)
-                reservation.receipt_image = new_receipt_image
+                # Handle receipt image update
+                if new_receipt_image:
+                    # Delete old receipt image if it exists
+                    if reservation.receipt_image:
+                        reservation.receipt_image.delete(save=False)
+                    reservation.receipt_image = new_receipt_image
 
-            # Update reservation
-            reservation.user_id = user_id
-            reservation.car_id = car_id
-            reservation.rate_type = rate_type
-            reservation.start_datetime = start_datetime
-            reservation.end_datetime = end_datetime
-            reservation.reference_number = reference_number
-            reservation.amount = amount
-            reservation.status = status
-            reservation.total_price = total_price
-            reservation.save()
+                # Update reservation
+                reservation.user_id = user_id
+                reservation.car_id = car_id
+                reservation.rate_type = rate_type
+                reservation.start_datetime = start_datetime
+                reservation.end_datetime = end_datetime
+                reservation.reference_number = reference_number
+                reservation.amount = amount
+                reservation.status = status
+                reservation.total_price = total_price
+                reservation.save()
 
-            messages.success(request, 'Reservation updated successfully.')
-            return redirect('admin_reservations')
+                messages.success(request, 'Reservation updated successfully.')
+                return redirect('admin_reservations')
 
         except Car.DoesNotExist:
             messages.error(request, 'Selected car does not exist.')
@@ -651,12 +716,22 @@ def edit_reservation(request, reservation_id):
             messages.error(request, f'An error occurred: {str(e)}')
             return redirect('admin_reservations')
 
+    # Calculate current duration based on start and end datetime
+    if reservation.rate_type == 'hourly':
+        current_duration = int((reservation.end_datetime - reservation.start_datetime).total_seconds() / 3600)
+    elif reservation.rate_type == 'daily':
+        current_duration = (reservation.end_datetime - reservation.start_datetime).days
+    else:  # weekly
+        current_duration = (reservation.end_datetime - reservation.start_datetime).days // 7
+
     context = {
         'reservation': reservation,
         'users': users,
         'cars': cars,
-        'statuses': Reservation.STATUS_CHOICES,
+        'current_duration': current_duration,
         'rate_types': Reservation.RATE_TYPES,
+        'statuses': Reservation.STATUS_CHOICES,
+        'now': timezone.localtime(timezone.now()),
     }
     return render(request, 'backend/edit_reservation.html', context)
 
@@ -667,7 +742,8 @@ def delete_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id)
     reservation.delete()
 
-    messages.success(request, f'The reservation for { reservation.car.brand } { reservation.car.model } has been successfully deleted.')
+    messages.success(request,
+                     f'The reservation for {reservation.car.brand} {reservation.car.model} has been successfully deleted.')
     return redirect('admin_reservations')
 
 

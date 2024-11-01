@@ -28,6 +28,7 @@ urlpatterns = [
 
     # Reservation Management
     path('reservations/', views.view_reservations, name='admin_reservations'),
+    path('admin/check-availability/', views.admin_check_availability, name='admin_check_availability'),
     path('reservations/add/', views.add_reservation, name='admin_add_reservation'),
     path('reservations/<int:reservation_id>/edit/', views.edit_reservation, name='admin_edit_reservation'),
     path('reservations/<int:reservation_id>/delete/', views.delete_reservation, name='admin_delete_reservation'),
