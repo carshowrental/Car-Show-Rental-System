@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
@@ -199,7 +199,7 @@ def reset_password(request, token):
                 messages.error(request, 'Password must be at least 8 characters long.')
             else:
                 user = reset_token.user
-                user.password = make_password(password1)
+                user.set_password(password1)
                 user.save()
                 reset_token.delete()
                 messages.success(request,
@@ -373,10 +373,16 @@ def view_user_accounts(request):
 def add_user(request):
     if request.method == 'POST':
         try:
-            username = request.POST['username']
-            email = request.POST['email']
-            password = request.POST['password']
-            phone_number = request.POST.get('phone_number', '')
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            phone_number = request.POST.get('phone_number')
+            address = request.POST.get('address')
+            password = request.POST.get('password')
+            confirm_password = request.POST.get('confirm_password')
+            license_image=request.FILES.get('license_image')
+            full_name = request.POST.get('full_name')
+            license_number = request.POST.get('license_number')
+            license_expiration = request.POST.get('license_expiration')
 
             # Check if username already exists
             if User.objects.filter(username=username).exists():
@@ -394,27 +400,30 @@ def add_user(request):
             if len(password) < 8:
                 messages.error(request, 'Password must be at least 8 characters long.')
 
+            # Check if password match
+            if password != confirm_password:
+                messages.error(request, 'Password do not match.')
+
             # Validate password strength
             validate_password(password)
 
             with transaction.atomic():
                 user = User(
                     username=username,
-                    email=email,
-                    first_name=request.POST['first_name'],
-                    last_name=request.POST['last_name'],
-                    password=make_password(password)
+                    email=email
                 )
+                user.set_password(password)
                 user.full_clean()
                 user.save()
 
                 profile = UserProfile(
                     user=user,
                     phone_number=phone_number,
-                    address=request.POST.get('address', ''),
-                    license_number=request.POST.get('license_number', ''),
-                    license_expiration=request.POST.get('license_expiration'),
-                    license_image=request.FILES.get('license_image')
+                    address=address,
+                    full_name=full_name,
+                    license_image=license_image,
+                    license_number=license_number,
+                    license_expiration=license_expiration
                 )
                 profile.full_clean()
                 profile.save()
@@ -433,9 +442,16 @@ def edit_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
         try:
-            username = request.POST['username']
-            email = request.POST['email']
-            phone_number = request.POST.get('phone_number', '')
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            phone_number = request.POST.get('phone_number')
+            address = request.POST.get('address')
+            new_password = request.POST.get('password')
+            confirm_password = request.POST.get('confirm_password')
+            license_image=request.FILES.get('license_image')
+            full_name = request.POST.get('full_name')
+            license_number = request.POST.get('license_number')
+            license_expiration = request.POST.get('license_expiration')
 
             # Check if username already exists (excluding the current user)
             if User.objects.filter(username=username).exclude(id=user_id).exists():
@@ -449,14 +465,16 @@ def edit_user(request, user_id):
             if phone_number and UserProfile.objects.filter(phone_number=phone_number).exclude(user_id=user_id).exists():
                 messages.error(request, 'This phone number is already registered.')
 
+            if new_password:
+                # Check if password match
+                if new_password != confirm_password:
+                    messages.error(request, 'Password do not match.')
+
             with transaction.atomic():
                 user.username = username
                 user.email = email
-                user.first_name = request.POST['first_name']
-                user.last_name = request.POST['last_name']
 
                 # If a new password is provided, validate and update it
-                new_password = request.POST.get('new_password')
                 if new_password:
                     if len(new_password) < 8:
                         messages.error(request, 'New password must be at least 8 characters long.')
@@ -468,9 +486,9 @@ def edit_user(request, user_id):
 
                 profile, created = UserProfile.objects.get_or_create(user=user)
                 profile.phone_number = phone_number
-                profile.address = request.POST.get('address', '')
-                profile.license_number = request.POST.get('license_number', '')
-                license_expiration = request.POST.get('license_expiration')
+                profile.address = address
+                profile.full_name = full_name
+                profile.license_number = license_number
                 if license_expiration:
                     profile.license_expiration = datetime.strptime(license_expiration, '%Y-%m-%d').date()
                 if 'license_image' in request.FILES:
@@ -573,8 +591,6 @@ def add_reservation(request):
         rate_type = request.POST.get('rate_type')
         start_datetime_str = request.POST.get('start_datetime')
         duration = int(request.POST.get('duration', 1))
-        receipt_image = request.FILES.get('receipt_image')
-        reference_number = request.POST.get('reference_number')
         status = request.POST.get('status')
 
         try:
@@ -611,8 +627,6 @@ def add_reservation(request):
                     rate_type=rate_type,
                     start_datetime=start_datetime,
                     end_datetime=end_datetime,
-                    receipt_image=receipt_image,
-                    reference_number=reference_number,
                     amount=amount,
                     status=status,
                     total_price=total_price
@@ -759,13 +773,54 @@ def view_payments(request):
 @admin_required
 def view_profile(request):
     if request.method == 'POST':
-        # Handle profile update
-        user = request.user
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
-        user.email = request.POST['email']
-        user.save()
-        messages.success(request, 'Your profile has been updated successfully.')
+        action = request.POST.get('action')
+
+        if action == 'update_profile':
+            # Handle profile update
+            user = request.user
+            user.first_name = request.POST['firstName']
+            user.last_name = request.POST['lastName']
+            email = request.POST['email']
+
+            # Validate email is not already taken
+            if email != user.email:
+                if user.__class__.objects.filter(email=email).exists():
+                    messages.error(request, 'This email is already in use.')
+                    return redirect('admin_profile')
+                user.email = email
+
+            user.save()
+            messages.success(request, 'Your profile has been updated successfully.')
+
+        elif action == 'change_password':
+            current_password = request.POST.get('currentPassword')
+            new_password = request.POST.get('newPassword')
+            confirm_password = request.POST.get('confirmPassword')
+
+            # Validate current password
+            if not check_password(current_password, request.user.password):
+                messages.error(request, 'Current password is incorrect.')
+                return redirect('admin_profile')
+
+            # Validate new password
+            if new_password != confirm_password:
+                messages.error(request, 'New passwords do not match.')
+                return redirect('admin_profile')
+
+            if len(new_password) < 8:
+                messages.error(request, 'Password must be at least 8 characters long.')
+                return redirect('admin_profile')
+
+            # Update password
+            try:
+                user = request.user
+                user.set_password(new_password)
+                user.save()
+
+                messages.success(request, 'Your password was successfully updated!')
+            except Exception as e:
+                messages.error(request, f'Error changing password: {str(e)}')
+
         return redirect('admin_profile')
 
     return render(request, 'backend/profile.html')

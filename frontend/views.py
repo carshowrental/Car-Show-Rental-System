@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -151,7 +151,7 @@ def reset_password(request, token):
                 messages.error(request, 'Password must be at least 8 characters long.')
             else:
                 user = reset_token.user
-                user.password = make_password(password1)
+                user.set_password(password1)
                 user.save()
                 reset_token.delete()
                 messages.success(request,
@@ -221,8 +221,6 @@ def user_profile(request):
                 messages.error(request, 'This email is already in use. Please use a different email address.')
                 return redirect('profile')
 
-            user.first_name = request.POST.get('first_name', '')
-            user.last_name = request.POST.get('last_name', '')
             user.username = new_username
             user.email = new_email
             user.save()
@@ -253,6 +251,7 @@ def user_profile(request):
         elif action == 'upload_license':
             try:
                 # Get the license number and expiration date
+                full_name = request.POST.get('full_name')
                 license_number = request.POST.get('license_number')
                 license_expiration = request.POST.get('license_expiration')
 
@@ -262,6 +261,7 @@ def user_profile(request):
                     user_profile.license_image = license_image
 
                 # Update license details
+                user_profile.full_name = full_name
                 user_profile.license_number = license_number
                 user_profile.license_expiration = license_expiration
                 user_profile.save()
@@ -317,12 +317,25 @@ def extract_license_info(image_file):
                 lines = text.split('\n')
 
                 # Initialize variables
+                full_name = None
                 license_number = None
                 expiration_date = None
 
                 # Method 1: Find by license number pattern and check next date
                 license_pattern = r'[A-Z]\d{2}-\d{2}-\d{6}'
                 date_pattern = r'\d{4}/\d{2}/\d{2}'
+
+                # Method to extract full name
+                for i, line in enumerate(lines):
+                    # Look for "Last Name, First Name, Middle Name" or after "Name:" label
+                    if 'last name' in line.lower() or 'name:' in line.lower():
+                        # Check next line for the actual name
+                        if i + 1 < len(lines):
+                            name_line = lines[i + 1].strip()
+                            # Remove any common prefixes/labels
+                            name_line = re.sub(r'^(Name:|Last Name:|Full Name:)', '', name_line, flags=re.IGNORECASE)
+                            # Clean and format the name
+                            full_name = name_line.strip().upper()
 
                 for i, line in enumerate(lines):
                     # Look for license number
@@ -358,11 +371,22 @@ def extract_license_info(image_file):
                         if date_match:
                             expiration_date = date_match.group(0)
 
+                # Alternative method for full name if not found
+                if not full_name:
+                    # Look for typical name patterns (ALL CAPS with commas)
+                    name_pattern = r'([A-Z]+,\s*[A-Z\s]+(?:,[A-Z\s]+)?)'
+                    for line in lines:
+                        name_match = re.search(name_pattern, line)
+                        if name_match and ',' in line:  # Ensure it contains a comma to avoid false positives
+                            full_name = name_match.group(0).strip()
+                            break
+
                 # Only return data if at least one field was found
-                if license_number or expiration_date:
+                if license_number or expiration_date or full_name:
                     return {
                         'license_number': license_number,
-                        'expiration_date': expiration_date
+                        'expiration_date': expiration_date,
+                        'full_name': full_name
                     }
 
             return None
@@ -398,11 +422,12 @@ def process_license(request):
         # Process the image
         result = extract_license_info(license_image)
 
-        if result and (result['license_number'] or result['expiration_date']):
+        if result and (result['full_name'] or result['license_number'] or result['expiration_date']):
             response_data = {
                 'success': True,
+                'full_name': result['full_name'],
                 'license_number': result['license_number'],
-                'expiration_date': result['expiration_date']
+                'expiration_date': result['expiration_date'],
             }
         else:
             response_data = {

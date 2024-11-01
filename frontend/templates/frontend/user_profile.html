@@ -16,14 +16,6 @@
                         <input type="hidden" name="action" value="update_profile">
 
                         <div class="mb-3">
-                            <label for="first_name" class="form-label"><i class="fas fa-user me-2"></i>First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="last_name" class="form-label"><i class="fas fa-user me-2"></i>Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}">
-                        </div>
-                        <div class="mb-3">
                             <label for="username" class="form-label"><i class="fas fa-user me-2"></i>Username</label>
                             <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
                         </div>
@@ -77,7 +69,7 @@
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h2 class="card-title h4 mb-4" id="upload-drivers-license">Upload Driver's License</h2>
+                    <h2 class="card-title h4 mb-4" id="upload-drivers-license"><i class="fas fa-upload me-2"></i>Upload Driver's License</h2>
                     <div id="licenseAlertPlaceholder"></div>
 
                     <form method="POST" enctype="multipart/form-data" id="licenseForm">
@@ -85,16 +77,8 @@
                         <input type="hidden" name="action" value="upload_license">
 
                         <div class="mb-3">
-                            <label for="license_image" class="form-label">License Image</label>
-                            <input type="file"
-                                   class="form-control"
-                                   id="license_image"
-                                   name="license_image"
-                                   {% if user_profile.license_image %
-                                   value="{{ user_profile.license_image.url|default:'' }}"
-                                   {% endif %
-                                   accept="image/*"
-                                   {% if not user_profile.license_image %}required{% endif %}>
+                            <label for="license_image" class="form-label"><i class="fas fa-id-card me-2"></i>License Image</label>
+                            <input type="file" class="form-control" id="license_image" name="license_image" accept="image/*">
                             <div id="processing-status" class="text-muted mt-2" style="display: none;">
                                 Processing image... Please wait...
                             </div>
@@ -107,14 +91,19 @@
                             </div>
                             {% if user_profile.license_image %}
                             <div id="currentImage" class="mt-2">
-                                <p class="text-muted mb-2">Current License Image:</p>
+                                <p class="text-muted mb-2"><i class="fas fa-image me-2"></i>Current License Image:</p>
                                 <img src="{{ user_profile.license_image.url }}" alt="Current License" class="img-fluid" style="max-height: 200px; width: auto;">
                             </div>
                             {% endif %}
                         </div>
 
                         <div class="mb-3">
-                            <label for="license_number" class="form-label">License Number</label>
+                            <label for="full_name" class="form-label"><i class="fas fa-user me-2"></i>Full Name</label>
+                            <input type="text" class="form-control" id="full_name" name="full_name" value="{{ user_profile.full_name|default:'' }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="license_number" class="form-label"><i class="fas fa-id-badge me-2"></i>License Number</label>
                             <input type="text"
                                    class="form-control"
                                    id="license_number"
@@ -124,7 +113,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="license_expiration" class="form-label">Expiration Date</label>
+                            <label for="license_expiration" class="form-label"><i class="fas fa-calendar-alt me-2"></i>Expiration Date</label>
                             <input type="date"
                                    class="form-control"
                                    id="license_expiration"
@@ -133,7 +122,7 @@
                                    required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Upload License</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-sync-alt me-2"></i>Update License</button>
                     </form>
                 </div>
             </div>
@@ -146,6 +135,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const licenseImageInput = document.getElementById('license_image');
+    const licenseNameInput = document.getElementById('full_name');
     const licenseNumberInput = document.getElementById('license_number');
     const licenseExpirationInput = document.getElementById('license_expiration');
     const processingStatus = document.getElementById('processing-status');
@@ -161,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.disabled = disabled;
         submitButton.innerHTML = disabled ?
             '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...' :
-            'Upload License';
+            '<i class="fas fa-sync-alt me-2"></i>Upload License';
     }
 
     // Function to show image preview
@@ -215,11 +205,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Prevent default form submission if no image is selected
     form.addEventListener('submit', function(e) {
         const fileInput = this.querySelector('input[type="file"]');
+        const licenseName = licenseNameInput.value.trim();
         const licenseNumber = licenseNumberInput.value.trim();
         const expirationDate = licenseExpirationInput.value.trim();
 
         // Only require the image if there's no existing image and no values in other fields
-        const needsImage = !currentImage && !licenseNumber && !expirationDate;
+        const needsImage = !currentImage && !licenseName && !licenseNumber && !expirationDate;
 
         if (needsImage && !fileInput.files.length) {
             e.preventDefault();
@@ -258,6 +249,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
 
             if (data.success) {
+                showAlert('License details extracted successfully!', 'success');
+                if (data.full_name) {
+                    licenseNameInput.value = data.full_name;
+                }
                 if (data.license_number) {
                     licenseNumberInput.value = data.license_number;
                 }
@@ -267,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     licenseExpirationInput.value = formattedDate;
                 }
 
-                if (!data.license_number || !data.expiration_date) {
+                if (!data.full_name || !data.license_number || !data.expiration_date) {
                     showAlert('Could not automatically extract license details. Please enter them manually.', 'warning');
                 }
             } else {
