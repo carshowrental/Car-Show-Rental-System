@@ -802,7 +802,11 @@ def process_receipt(request):
 
         # Get reservation for amount validation
         reservation = get_object_or_404(Reservation, id=reservation_id, user=request.user)
-        expected_amount = reservation.total_price if payment_type == 'full' else reservation.total_price / 2
+
+        # Convert Decimal to float for consistent type handling
+        expected_amount = float(reservation.total_price) if payment_type == 'full' else float(reservation.total_price) / 2
+        # Round to 2 decimal places to avoid floating point precision issues
+        expected_amount = round(expected_amount, 2)
 
         # Check file type
         allowed_types = ['image/jpeg', 'image/png', 'image/jpg']
@@ -816,19 +820,14 @@ def process_receipt(request):
         result = extract_gcash_info(receipt_image)
 
         if result and (result['reference_number'] or result['total_amount']):
-            # Validate amount if detected
-            if result['total_amount']:
-                detected_amount = float(result['total_amount'])
-                if abs(detected_amount - expected_amount) > 0.01:
-                    return JsonResponse({
-                        'success': False,
-                        'error': f'Detected amount (₱{detected_amount:,.2f}) does not match the required {"full payment" if payment_type == "full" else "down payment"} amount (₱{expected_amount:,.2f})'
-                    })
+
+            detected_reference_number = result['reference_number']
+            detected_amount = round(float(result['total_amount']), 2)
 
             response_data = {
                 'success': True,
-                'reference_number': result['reference_number'],
-                'total_amount': result['total_amount']
+                'reference_number': detected_reference_number,
+                'total_amount': detected_amount
             }
         else:
             response_data = {

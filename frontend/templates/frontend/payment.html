@@ -267,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!data.reference_number || !data.total_amount) {
                     showAlert('Could not automatically extract receipt details. Please enter them manually.', 'warning');
                 }
+                showAlert('Receipt details extracted successfully!', 'success');
             } else {
                 console.error('Error processing receipt:', data.error);
                 showAlert('Could not automatically extract receipt details. Please enter them manually.', 'warning');
