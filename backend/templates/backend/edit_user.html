@@ -11,7 +11,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-body">
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" id="userForm">
             {% csrf_token %}
             <h4 class="mb-3"><i class="fas fa-user-cog me-2"></i>User Information</h4>
             <div class="mb-3">
@@ -40,14 +40,30 @@
             </div>
 
             <h4 class="mt-4 mb-3"><i class="fas fa-id-card me-2"></i>Driver's License Information</h4>
+            <!-- License Info -->
+            <div class="alert d-none mb-3" id="licenseInfo" role="alert">
+                <i class="fas fa-info-circle me-2"></i>
+                <span id="licenseMessage"></span>
+            </div>
             <div class="mb-3">
+                <!-- Image Preview Container -->
                 <label for="license_image" class="form-label"><i class="fas fa-image me-2"></i>License Image</label>
+                <div id="imagePreview" style="display: none;">
+                    <img src="" alt="License Preview" class="img-fluid" style="max-height: 200px; width: auto;">
+                </div>
                 {% if user.userprofile.license_image %}
-                    <div class="mb-2">
-                        <img src="{{ user.userprofile.license_image.url }}" alt="Current License Image" class="img-thumbnail" style="max-width: 200px;">
-                    </div>
+                <div id="currentImage">
+                    <img src="{{ user.userprofile.license_image.url }}" alt="Current License Image" class="img-thumbnail" style="max-width: 200px;">
+                </div>
                 {% endif %}
-                <input type="file" class="form-control" id="license_image" name="license_image">
+
+                <div id="processing-status" class="text-muted mt-2" style="display: none;">
+                    Processing image... Please wait...
+                </div>
+                <div class="mt-2">
+                    <label for="license_image" class="form-label"><i class="fas fa-sync me-2"></i>Change License Image</label>
+                    <input type="file" class="form-control" id="license_image" name="license_image">
+                </div>
             </div>
             <div class="mb-3">
                 <label for="full_name" class="form-label"><i class="fas fa-user-circle me-2"></i>Full Name</label>
@@ -66,5 +82,133 @@
         </form>
     </div>
 </div>
+{% endblock %}
 
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get DOM elements
+    const licenseImageInput = document.getElementById('license_image');
+    const licenseNameInput = document.getElementById('full_name');
+    const licenseNumberInput = document.getElementById('license_number');
+    const licenseExpirationInput = document.getElementById('license_expiration');
+    const processingStatus = document.getElementById('processing-status');
+    const form = document.getElementById('userForm');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImage = imagePreview.querySelector('img');
+    const currentImage = document.getElementById('currentImage');
+    const licenseInfo = document.getElementById('licenseInfo');
+    const licenseMessage = document.getElementById('licenseMessage');
+
+    // Function to toggle submit button state
+    function toggleSubmitButton(disabled) {
+        submitButton.disabled = disabled;
+        submitButton.innerHTML = disabled ?
+            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...' :
+            '<i class="fas fa-save me-2"></i>Save Changes';
+    }
+
+    // Function to show image preview
+    function showImagePreview(file) {
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                imagePreview.style.display = 'block';
+                if (currentImage) {
+                    currentImage.style.display = 'none';
+                }
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = 'none';
+            if (currentImage) {
+                currentImage.style.display = 'block';
+            }
+        }
+    }
+
+    // Function to update license info alert
+    function updateLicenseInfo(type, message) {
+        licenseInfo.className = `alert alert-${type} d-block`;
+        licenseMessage.textContent = message;
+    }
+
+    // Handle form submission
+    form.addEventListener('submit', function(e) {
+        const fileInput = this.querySelector('input[type="file"]');
+        const licenseName = licenseNameInput.value.trim();
+        const licenseNumber = licenseNumberInput.value.trim();
+        const expirationDate = licenseExpirationInput.value.trim();
+
+        // Check if we need image validation
+        const needsImage = !currentImage && !licenseName && !licenseNumber && !expirationDate;
+
+        if (needsImage && !fileInput.files.length) {
+            e.preventDefault();
+            updateLicenseInfo('warning', 'Please select an image or enter license details manually.');
+        }
+    });
+
+    // Handle license image processing
+    licenseImageInput.addEventListener('change', async function(e) {
+        const file = this.files[0];
+        if (!file) return;
+
+        showImagePreview(file);
+
+        processingStatus.style.display = 'block';
+        toggleSubmitButton(true);
+
+        const formData = new FormData();
+        formData.append('license_image', file);
+        formData.append('csrfmiddlewaretoken', form.querySelector('[name=csrfmiddlewaretoken]').value);
+
+        try {
+            const response = await fetch('{% url "process_license" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                if (data.full_name || data.license_number || data.expiration_date) {
+                    updateLicenseInfo('success', 'License details extracted successfully!');
+
+                    // Only update fields if they're not already filled
+                    if (data.full_name) {
+                        licenseNameInput.value = data.full_name;
+                    }
+                    if (data.license_number) {
+                        licenseNumberInput.value = data.license_number;
+                    }
+                    if (data.expiration_date) {
+                        const formattedDate = data.expiration_date.replace(/\//g, '-');
+                        licenseExpirationInput.value = formattedDate;
+                    }
+                } else {
+                    updateLicenseInfo('warning', 'Could not extract new license details. Previous information has been retained.');
+                }
+            } else {
+                updateLicenseInfo('warning', 'Could not process the new license image. Previous information has been retained.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            updateLicenseInfo('danger', 'An error occurred while processing the new image. Previous information has been retained.');
+        } finally {
+            processingStatus.style.display = 'none';
+            toggleSubmitButton(false);
+        }
+    });
+});
+</script>
 {% endblock %}

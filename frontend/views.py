@@ -29,6 +29,7 @@ from django.views.decorators.http import require_http_methods
 from torch.distributed.autograd import context
 
 from backend.models import Car, Reservation, UserProfile, PasswordResetToken
+from backend.views import compress_image
 
 
 def view_home(request):
@@ -165,36 +166,6 @@ def reset_password(request, token):
         return redirect('login')
 
 
-def compress_image(image_file, max_size_mb=1):
-    """
-    Compress image to ensure it's under the specified size in MB
-    Returns the compressed image as bytes
-    """
-    # Convert MB to bytes
-    max_size_bytes = max_size_mb * 1024 * 1024
-
-    # Open the image from InMemoryUploadedFile
-    img = Image.open(image_file)
-
-    # Convert to RGB if PNG (removes alpha channel)
-    if img.format == 'PNG':
-        img = img.convert('RGB')
-
-    # Initial quality
-    quality = 95
-    output = io.BytesIO()
-
-    # Try compressing with different quality values until size is under max_size_bytes
-    while quality > 5:
-        output.seek(0)
-        output.truncate(0)
-        img.save(output, format='JPEG', quality=quality)
-        if output.tell() <= max_size_bytes:
-            break
-        quality -= 5
-
-    return output.getvalue()
-
 
 @login_required
 def user_profile(request):
@@ -275,174 +246,6 @@ def user_profile(request):
         'user': user,
         'user_profile': user_profile,
     })
-
-
-def extract_license_info(image_file):
-    """
-    Extract License Number and Expiration Date from Philippine Driver's License using OCR.Space API
-    """
-    url = "https://api.ocr.space/parse/image"
-    api_key = settings.OCR_SPACE_API_KEY  # Add this to your Django settings
-
-    try:
-        # Compress and convert image to JPEG
-        compressed_image = compress_image(image_file)
-
-        files = {
-            'file': ('license.jpg', compressed_image, 'image/jpeg')
-        }
-
-        payload = {
-            'apikey': api_key,
-            'language': 'eng',
-            'isOverlayRequired': False,
-            'detectOrientation': True,
-            'scale': True,
-            'OCREngine': 2,  # Using OCR Engine 2 for better results
-            'filetype': 'jpg'  # Explicitly specify file type
-        }
-
-        try:
-            response = requests.post(url, files=files, data=payload)
-            response.raise_for_status()  # Raise an exception for bad status codes
-
-            result = response.json()
-
-            if result.get('ParsedResults'):
-                text = result['ParsedResults'][0]['ParsedText']
-
-                if not text.strip():  # Check if extracted text is empty
-                    return None
-
-                lines = text.split('\n')
-
-                # Initialize variables
-                full_name = None
-                license_number = None
-                expiration_date = None
-
-                # Method 1: Find by license number pattern and check next date
-                license_pattern = r'[A-Z]\d{2}-\d{2}-\d{6}'
-                date_pattern = r'\d{4}/\d{2}/\d{2}'
-
-                # Method to extract full name
-                for i, line in enumerate(lines):
-                    # Look for "Last Name, First Name, Middle Name" or after "Name:" label
-                    if 'last name' in line.lower() or 'name:' in line.lower():
-                        # Check next line for the actual name
-                        if i + 1 < len(lines):
-                            name_line = lines[i + 1].strip()
-                            # Remove any common prefixes/labels
-                            name_line = re.sub(r'^(Name:|Last Name:|Full Name:)', '', name_line, flags=re.IGNORECASE)
-                            # Clean and format the name
-                            full_name = name_line.strip().upper()
-
-                for i, line in enumerate(lines):
-                    # Look for license number
-                    license_match = re.search(license_pattern, line)
-                    if license_match:
-                        license_number = license_match.group(0)
-                        # Check the same line and next few lines for a date
-                        for j in range(i, min(i + 3, len(lines))):
-                            date_match = re.search(date_pattern, lines[j])
-                            if date_match:
-                                expiration_date = date_match.group(0)
-                                break
-
-                # Method 2: If first method fails, find date below "Expiration Date" text
-                if not expiration_date:
-                    for i, line in enumerate(lines):
-                        if 'expiration date' in line.lower():
-                            # Check next lines for a date
-                            for j in range(i + 1, min(i + 3, len(lines))):
-                                date_match = re.search(date_pattern, lines[j])
-                                if date_match:
-                                    expiration_date = date_match.group(0)
-                                    break
-
-                # Method 3: If both methods fail, search for date after license number in the whole text
-                if not expiration_date:
-                    full_text = ' '.join(lines)
-                    license_pos = full_text.find(license_number) if license_number else -1
-                    if license_pos != -1:
-                        # Search for date pattern after license number
-                        remaining_text = full_text[license_pos:]
-                        date_match = re.search(date_pattern, remaining_text)
-                        if date_match:
-                            expiration_date = date_match.group(0)
-
-                # Alternative method for full name if not found
-                if not full_name:
-                    # Look for typical name patterns (ALL CAPS with commas)
-                    name_pattern = r'([A-Z]+,\s*[A-Z\s]+(?:,[A-Z\s]+)?)'
-                    for line in lines:
-                        name_match = re.search(name_pattern, line)
-                        if name_match and ',' in line:  # Ensure it contains a comma to avoid false positives
-                            full_name = name_match.group(0).strip()
-                            break
-
-                # Only return data if at least one field was found
-                if license_number or expiration_date or full_name:
-                    return {
-                        'license_number': license_number,
-                        'expiration_date': expiration_date,
-                        'full_name': full_name
-                    }
-
-            return None
-
-        except requests.RequestException as e:
-            print(f"Request error: {str(e)}")
-            return None
-
-    except Exception as e:
-        print(f"Processing error: {str(e)}")
-        return None
-
-
-@login_required
-def process_license(request):
-    if not request.FILES.get('license_image'):
-        return JsonResponse({
-            'success': False,
-            'error': 'No image provided'
-        })
-
-    try:
-        license_image = request.FILES['license_image']
-
-        # Check file type
-        allowed_types = ['image/jpeg', 'image/png', 'image/jpg']
-        if license_image.content_type not in allowed_types:
-            return JsonResponse({
-                'success': False,
-                'error': 'Please upload a JPG or PNG image'
-            })
-
-        # Process the image
-        result = extract_license_info(license_image)
-
-        if result and (result['full_name'] or result['license_number'] or result['expiration_date']):
-            response_data = {
-                'success': True,
-                'full_name': result['full_name'],
-                'license_number': result['license_number'],
-                'expiration_date': result['expiration_date'],
-            }
-        else:
-            response_data = {
-                'success': False,
-                'error': 'Could not extract license information. Please ensure the image is clear and contains the required information.'
-            }
-
-        return JsonResponse(response_data)
-
-    except Exception as e:
-        print(f"Error processing license: {str(e)}")
-        return JsonResponse({
-            'success': False,
-            'error': 'An error occurred while processing the image. Please try again.'
-        })
 
 
 def view_cars(request):

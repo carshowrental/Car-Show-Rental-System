@@ -18,7 +18,6 @@ urlpatterns = [
 
     # User Profile Management
     path('profile/', views.user_profile, name='profile'),
-    path('process-license/', views.process_license, name='process_license'),
 
     # Car Browsing
     path('cars/', views.view_cars, name='cars'),

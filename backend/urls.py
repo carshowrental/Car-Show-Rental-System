@@ -38,4 +38,7 @@ urlpatterns = [
 
     # Admin Profile
     path('profile/', views.view_profile, name='admin_profile'),
+
+    # License OCR
+    path('process-license/', views.process_license, name='process_license'),
 ]
