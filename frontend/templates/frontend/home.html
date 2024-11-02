@@ -10,9 +10,10 @@
     <a href="{% url 'cars' %}" class="btn btn-light btn-lg"><i class="fas fa-search me-2"></i>Explore Our Fleet</a>
 </section>
 
+{% if featured_cars %}
 <section class="featured-cars py-5" style="background-color: #f8f9fa;">
     <h2 class="text-center mb-4" style="color: #333;"><i class="fas fa-star me-2 text-danger"></i>Featured Vehicles</h2>
-    <div class="row">
+    <div class="row mx-2">
         {% for car in featured_cars %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
@@ -27,6 +28,7 @@
         {% endfor %}
     </div>
 </section>
+{% endif %}
 
 <section class="bg-dark p-5">
     <h2 class="text-danger text-center mb-4"><i class="fas fa-check-circle me-2"></i>Why Choose Car Show?</h2>

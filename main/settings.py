@@ -89,10 +89,9 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
-database_url = os.environ.get("DATABASE_URL")
 DATABASES = {
     "default": dj_database_url.parse(
-        "postgresql://carshowrental_db_user:guEHSSemMFZKxGJALCsiR4A70PwEAfgL@dpg-csj2lq5svqrc73emfo60-a.singapore-postgres.render.com/carshowrental_db"
+        "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
     )
 }
 
