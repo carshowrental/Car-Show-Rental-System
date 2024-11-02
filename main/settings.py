@@ -89,18 +89,18 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     "default": dj_database_url.parse(
-#         "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
-#     )
-# }
-
 DATABASES = {
-    "default": dj_database_url.config(
-        default="sqlite:///db.sqlite3",  # fallback for local development
-        conn_max_age=600,
+    "default": dj_database_url.parse(
+        "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
     )
 }
+
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default="sqlite:///db.sqlite3",  # fallback for local development
+#         conn_max_age=600,
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

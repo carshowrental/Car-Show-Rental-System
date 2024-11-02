@@ -4,10 +4,8 @@ from django.utils import timezone
 from django.conf import settings
 from django.db import transaction
 import requests
-import logging
 from .models import Reservation
 
-logger = logging.getLogger(__name__)
 
 class SMSService:
     """Handles all SMS-related operations using Teams SMS Program"""
@@ -17,9 +15,8 @@ class SMSService:
         self.api_url = "https://sms.teamssprogram.com/api/send/sms"
 
     def send_sms(self, phone_number, message):
-        """Send SMS with proper error handling and logging"""
+        """Send SMS with proper error handling"""
         if not phone_number:
-            logger.warning("No phone number provided for SMS")
             return False
 
         # Ensure phone number starts with +63
@@ -44,13 +41,10 @@ class SMSService:
             result = response.json()
 
             if result.get('success'):
-                logger.info(f"SMS sent successfully to {phone_number}")
                 return True
             else:
-                logger.error(f"SMS sending failed to {phone_number}: {result.get('message', 'Unknown error')}")
                 return False
         except requests.RequestException as e:
-            logger.error(f"SMS sending failed to {phone_number}: {str(e)}")
             return False
 
 @shared_task
@@ -81,10 +75,8 @@ def cancel_pending_reservations():
                 )
                 sms_service.send_sms(reservation.user.userprofile.phone_number, message)
 
-        logger.info(f"Successfully cancelled {cancelled_count} pending reservations")
         return f"Cancelled {cancelled_count} reservations"
     except Exception as e:
-        logger.error(f"Error in cancel_pending_reservations: {str(e)}")
         raise
 
 @shared_task
@@ -132,10 +124,8 @@ def update_reservation_statuses():
                 )
                 sms_service.send_sms(reservation.user.userprofile.phone_number, message)
 
-        logger.info(f"Updated statuses: {activated_count} activated, {completed_count} completed")
         return f"Updated {activated_count} to active, {completed_count} to completed"
     except Exception as e:
-        logger.error(f"Error in update_reservation_statuses: {str(e)}")
         raise
 
 @shared_task
@@ -185,8 +175,6 @@ def send_reservation_reminders():
             if sms_service.send_sms(reservation.user.userprofile.phone_number, message):
                 return_reminder_count += 1
 
-        logger.info(f"Sent {pickup_reminder_count} pickup reminders and {return_reminder_count} return reminders")
         return f"Sent {pickup_reminder_count} pickup and {return_reminder_count} return reminders"
     except Exception as e:
-        logger.error(f"Error in send_reservation_reminders: {str(e)}")
         raise

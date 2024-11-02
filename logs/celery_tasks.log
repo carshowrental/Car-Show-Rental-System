@@ -1171,3 +1171,227 @@ INFO 2024-11-02 23:27:02,961 tasks 19888 6284 Sent 0 pickup reminders and 0 retu
 ERROR 2024-11-02 23:28:01,546 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
 ERROR 2024-11-02 23:28:11,947 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
 INFO 2024-11-02 23:28:11,949 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:29:01,612 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:29:03,119 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:29:03,121 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:30:01,484 tasks 19888 6284 SMS sending failed to +639358438355: Message has been queued for sending!
+WARNING 2024-11-02 23:30:01,484 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-02 23:30:11,889 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-02 23:30:23,297 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-02 23:30:24,717 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:30:26,139 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:30:27,589 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:30:29,197 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:30:29,197 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-02 23:30:30,580 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:30:31,914 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:30:31,917 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-02 23:30:31,925 tasks 19888 6284 Successfully cancelled 0 pending reservations
+ERROR 2024-11-02 23:31:01,479 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:31:11,901 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+INFO 2024-11-02 23:31:11,905 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:32:01,406 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:32:02,843 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:32:02,843 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:33:01,375 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:33:02,890 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:33:02,894 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:34:01,483 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:34:02,923 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:34:02,928 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:35:01,447 tasks 19888 6284 SMS sending failed to +639358438355: Message has been queued for sending!
+WARNING 2024-11-02 23:35:01,447 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-02 23:35:03,365 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:35:04,946 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:35:15,371 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-02 23:35:16,838 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:35:18,171 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:35:19,527 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:35:19,529 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-02 23:35:21,105 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:35:23,260 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:35:23,263 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:35:25,550 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:35:25,731 tasks 19888 6284 Successfully cancelled 1 pending reservations
+ERROR 2024-11-02 23:36:01,524 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:36:02,943 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:36:02,964 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:37:01,518 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:37:02,917 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:37:02,929 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:38:01,523 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:38:02,958 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:38:02,960 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:39:01,429 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:39:02,888 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:39:02,899 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:40:01,467 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:40:11,864 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+INFO 2024-11-02 23:40:11,870 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:40:13,321 tasks 19888 6284 SMS sending failed to +639358438355: Message has been queued for sending!
+WARNING 2024-11-02 23:40:13,323 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-02 23:40:14,600 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:40:16,061 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:40:17,436 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:40:18,886 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:40:21,981 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:40:23,332 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:40:23,333 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-02 23:40:23,344 tasks 19888 6284 Successfully cancelled 0 pending reservations
+ERROR 2024-11-02 23:41:01,414 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:41:02,814 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:41:02,817 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:42:01,578 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:42:11,981 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+INFO 2024-11-02 23:42:11,982 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:43:01,532 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:43:03,005 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:43:03,014 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:44:01,445 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:44:02,787 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:44:02,791 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-02 23:45:00,107 tasks 19888 6284 Successfully cancelled 0 pending reservations
+ERROR 2024-11-02 23:45:01,583 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:45:03,872 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:45:03,891 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:45:14,309 tasks 19888 6284 SMS sending failed to +639358438355: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+WARNING 2024-11-02 23:45:14,309 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-02 23:45:16,596 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:45:18,976 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:45:29,414 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-02 23:45:30,829 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:45:42,296 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-02 23:45:43,788 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:45:43,800 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-02 23:46:01,432 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:46:11,835 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+INFO 2024-11-02 23:46:11,841 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:47:01,468 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:47:02,928 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:47:02,936 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:48:01,513 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:48:03,725 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:48:03,743 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:49:01,441 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:49:03,501 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:49:03,519 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:50:10,470 tasks 19888 6284 SMS sending failed to +639358438355: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+WARNING 2024-11-02 23:50:10,470 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-02 23:50:11,936 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:50:13,399 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:50:15,635 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:50:18,306 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:50:28,705 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-02 23:50:30,858 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:50:30,858 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-02 23:50:30,873 tasks 19888 6284 Successfully cancelled 0 pending reservations
+ERROR 2024-11-02 23:50:32,301 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:50:42,735 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+INFO 2024-11-02 23:50:42,735 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:51:01,454 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:51:02,915 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:51:02,918 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:52:01,435 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:52:02,884 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:52:02,889 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:53:02,303 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:53:03,802 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:53:03,812 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:54:01,465 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:54:02,858 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:54:02,863 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:55:01,562 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:55:03,231 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:55:03,236 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:55:04,761 tasks 19888 6284 SMS sending failed to +639358438355: Message has been queued for sending!
+WARNING 2024-11-02 23:55:04,775 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-02 23:55:06,081 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:55:16,498 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-02 23:55:17,972 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:55:28,392 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-02 23:55:29,812 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:55:31,283 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:55:31,285 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-02 23:55:31,306 tasks 19888 6284 Successfully cancelled 0 pending reservations
+ERROR 2024-11-02 23:56:01,382 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:56:02,763 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:56:02,767 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:57:01,503 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:57:02,875 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:57:02,894 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:58:01,577 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:58:11,991 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+INFO 2024-11-02 23:58:11,997 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-02 23:59:01,495 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-02 23:59:02,882 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-02 23:59:02,890 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:00:00,024 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:00:00,030 tasks 19888 6284 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 00:00:01,513 tasks 19888 6284 SMS sending failed to +639358438355: Message has been queued for sending!
+WARNING 2024-11-03 00:00:01,513 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-03 00:00:11,916 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-03 00:00:13,292 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:00:15,723 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:00:18,332 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:00:28,726 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-03 00:00:30,215 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 00:00:30,217 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 00:01:00,028 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:02:00,015 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:03:00,032 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:04:00,034 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:05:00,015 tasks 19888 6284 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 00:05:04,072 tasks 19888 6284 SMS sending failed to +639358438355: Message has been queued for sending!
+WARNING 2024-11-03 00:05:04,074 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-03 00:05:06,763 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:05:17,184 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-03 00:05:18,561 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:05:19,930 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:05:21,288 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:05:22,711 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 00:05:22,714 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 00:05:22,740 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:06:00,012 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:07:00,040 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:08:00,035 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:09:00,012 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:10:00,026 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:10:00,031 tasks 19888 6284 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 00:10:02,774 tasks 19888 6284 SMS sending failed to +639358438355: Message has been queued for sending!
+WARNING 2024-11-03 00:10:02,774 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-03 00:10:04,765 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:10:06,551 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:10:08,407 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:10:10,267 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:10:12,169 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:10:14,076 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 00:10:14,077 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 00:11:00,046 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:12:00,028 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:13:00,038 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:14:00,026 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 00:15:10,459 tasks 19888 6284 SMS sending failed to +639358438355: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+WARNING 2024-11-03 00:15:10,459 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-03 00:15:12,276 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:15:14,033 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:15:15,871 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:15:17,651 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:15:19,487 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:15:21,416 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 00:15:21,416 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 00:15:21,448 tasks 19888 6284 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 00:15:21,479 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:16:00,014 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:17:00,092 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:18:00,061 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:19:00,035 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 00:20:00,029 tasks 19888 6284 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 00:20:02,420 tasks 19888 6284 SMS sending failed to +639358438355: Message has been queued for sending!
+WARNING 2024-11-03 00:20:02,422 tasks 19888 6284 No phone number provided for SMS
+ERROR 2024-11-03 00:20:04,320 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:20:14,718 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-03 00:20:25,112 tasks 19888 6284 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+ERROR 2024-11-03 00:20:26,994 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:20:28,828 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 00:20:30,584 tasks 19888 6284 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 00:20:30,584 tasks 19888 6284 Updated statuses: 0 activated, 0 completed
