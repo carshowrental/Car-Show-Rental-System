@@ -1,0 +1,34 @@
+# render.yaml
+services:
+  - type: worker
+    name: carshowrental-celery-worker
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A main worker -l info
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: carshowrental-redis
+          type: redis
+          property: connectionString
+      - key: DATABASE_URL
+        value: "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
+
+  - type: worker
+    name: carshowrental-celery-beat
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A main beat -l info
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          name: carshowrental-redis
+          type: redis
+          property: connectionString
+      - key: DATABASE_URL
+        value: "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
+
+  - type: redis
+    name: carshowrental-redis
+    ipAllowList: []
+    plan: free

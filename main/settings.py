@@ -89,9 +89,16 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     "default": dj_database_url.parse(
+#         "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
+#     )
+# }
+
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
+    "default": dj_database_url.config(
+        default="sqlite:///db.sqlite3",  # fallback for local development
+        conn_max_age=600,
     )
 }
 
@@ -162,14 +169,11 @@ EMAIL_HOST_PASSWORD = 'jutb fnnw vutk odpu'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-PAYMONGO_API_URL = 'https://api.paymongo.com/v1'
-PAYMONGO_SECRET_KEY = 'sk_test_YmgWDKyver1ED5zFrXZspNnT'
-
-OCR_SPACE_API_KEY = 'K89859334288957'  # Replace with your actual API key
+OCR_SPACE_API_KEY = 'K89859334288957'
 
 # Celery Configuration
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
