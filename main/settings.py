@@ -158,4 +158,43 @@ PAYMONGO_SECRET_KEY = 'sk_test_YmgWDKyver1ED5zFrXZspNnT'
 
 OCR_SPACE_API_KEY = 'K89859334288957'  # Replace with your actual API key
 
+# Celery Configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Manila'
+
+# Teams SMS Program API Configuration
+TEAMS_SMS_API_SECRET = "c05c90a95a9925ec7011ea19b7eeadf6a79b767e"
+TEAMS_SMS_DEVICE_ID = "00000000-0000-0000-6255-d4715bb82e99"  # Replace with your device ID
+
+# Logging Configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/celery_tasks.log',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'backend.tasks': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+
 
