@@ -2,9 +2,7 @@ import re
 from datetime import datetime
 from datetime import timedelta
 import io
-import cv2
 import numpy as np
-import pytesseract
 import requests
 from PIL import Image
 from django.conf import settings

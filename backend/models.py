@@ -140,7 +140,7 @@ class Reservation(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    rate_type = models.CharField(max_length=10, choices=RATE_TYPES)
+    rate_type = models.CharField(max_length=20, choices=RATE_TYPES)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
     receipt_image = models.ImageField(upload_to='receipts/', blank=True, null=True)
