@@ -14,14 +14,18 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'cancel-pending-reservations': {
         'task': 'backend.tasks.cancel_pending_reservations',
-        'schedule': crontab(minute='*/5'),  # Run every 5 minutes
+        'schedule': crontab(minute='*/1'),  # Run every 1 minutes
+    },
+    'cancel-partial-payment-reservations': {
+        'task': 'backend.tasks.cancel_partial_payment_reservations',
+        'schedule': crontab(minute='*/1'),  # Run every 1 minutes
     },
     'update-reservation-statuses': {
         'task': 'backend.tasks.update_reservation_statuses',
-        'schedule': crontab(minute='*/5'),  # Run every 5 minutes
+        'schedule': crontab(minute='*/1'),  # Run every 1 minutes
     },
     'send-reservation-reminders': {
         'task': 'backend.tasks.send_reservation_reminders',
-        'schedule': crontab(minute='*/5'),  # Run every 5 minutes
+        'schedule': crontab(minute='*/1'),  # Run every 1 minutes
     },
 }

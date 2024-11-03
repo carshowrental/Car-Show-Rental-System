@@ -1517,3 +1517,984 @@ ERROR 2024-11-03 12:44:04,015 tasks 8580 8608 SMS sending failed to +63935843835
 INFO 2024-11-03 12:44:04,207 tasks 8580 8608 Updated statuses: 0 activated, 0 completed
 INFO 2024-11-03 12:44:05,368 tasks 8580 8608 Successfully cancelled 0 pending reservations
 INFO 2024-11-03 12:44:06,358 tasks 8580 8608 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:44:42,753 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:44:45,911 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:44:49,249 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:44:49,366 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:44:50,726 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:44:52,132 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:44:54,359 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:44:54,492 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:44:56,809 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:44:58,176 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:45:00,278 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:00,364 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:45:02,757 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:45:04,882 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:04,972 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:45:06,996 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:45:09,057 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:45:11,520 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:45:13,660 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:13,760 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:45:15,921 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:16,013 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:45:17,073 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:45:18,420 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:45:19,789 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:45:21,887 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:45:25,034 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:25,144 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:45:27,311 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:27,415 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:45:28,563 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:45:30,927 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:45:33,616 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:45:34,849 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:34,944 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:45:36,047 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:45:37,417 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:45:38,791 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:45:39,977 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:45:43,804 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:45:45,052 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:45,150 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:45:47,791 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:45:49,039 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:49,153 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:45:50,221 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:45:51,682 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:45:53,683 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:45:56,483 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:45:58,331 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:45:58,441 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:46:00,169 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:46:03,157 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:46:03,339 tasks 536 7616 Updated statuses: 1 activated, 0 completed
+ERROR 2024-11-03 16:46:05,431 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:46:05,550 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:46:06,664 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 16:46:07,769 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:46:12,032 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:46:12,217 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:46:14,411 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:46:14,522 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:46:16,588 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:46:16,688 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:46:17,770 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:46:20,808 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:46:21,016 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:46:22,145 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:46:25,148 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:46:25,324 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:46:27,438 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:46:27,556 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:46:30,456 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:46:30,680 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:46:31,848 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:46:33,956 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:46:34,084 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:46:36,249 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:46:36,348 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:46:37,437 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:46:40,400 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:46:40,569 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:46:42,843 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:46:42,940 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:46:44,080 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:46:47,179 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:46:47,341 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:47:19,111 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:47:20,579 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:47:25,986 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:47:28,072 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:47:28,177 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:48:02,989 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:48:03,166 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:48:04,249 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:48:06,264 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:48:06,369 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:49:02,119 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:49:02,215 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:49:03,305 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:49:06,251 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:49:06,446 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:50:03,671 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:50:03,863 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:50:07,530 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:50:08,708 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:50:08,820 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:50:09,981 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:51:03,090 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:51:03,288 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:51:07,014 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:51:08,178 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:51:08,265 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:51:10,271 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:52:02,091 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+INFO 2024-11-03 16:52:02,198 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:52:03,272 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:52:06,387 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:52:08,234 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:52:08,438 tasks 536 7616 Updated statuses: 1 activated, 0 completed
+ERROR 2024-11-03 16:53:03,080 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:53:04,902 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:53:05,097 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:53:06,148 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:53:08,360 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 16:53:10,233 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:53:10,235 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:54:01,074 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:54:04,261 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:54:06,079 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:54:06,255 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:54:08,410 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 16:54:10,267 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:54:10,270 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:55:01,147 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:55:04,363 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:55:06,283 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:55:06,450 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:55:08,610 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 16:55:10,568 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:55:10,568 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:56:02,990 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:56:04,768 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:56:04,963 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:56:06,303 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:56:08,417 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 16:56:10,375 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:56:10,375 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:57:03,557 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:57:05,299 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:57:05,496 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:57:06,586 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:57:09,954 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 16:57:11,860 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:57:11,860 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 16:58:02,941 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 16:58:05,712 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 16:58:07,711 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:58:07,713 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:58:12,748 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:58:15,906 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:58:16,992 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 16:59:04,666 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 16:59:06,718 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:59:06,718 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 16:59:10,335 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 16:59:12,180 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 16:59:12,376 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 16:59:13,519 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:00:01,104 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:00:05,177 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:00:14,274 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:00:16,499 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:00:18,610 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:00:20,031 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:00:20,031 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:01:02,566 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:01:03,947 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:01:04,139 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:01:05,219 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:01:06,919 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:01:08,436 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:01:08,451 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:02:10,338 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:02:36,631 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:02:49,022 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:02:50,273 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:03:13,023 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:03:17,424 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:03:17,424 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:03:21,399 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:03:22,933 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:03:24,257 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:03:24,257 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:03:27,066 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:03:28,404 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:03:28,639 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:04:05,929 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:04:07,166 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:04:07,379 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:04:08,552 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:04:10,051 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:04:11,415 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:04:11,445 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:05:08,026 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:05:13,747 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:05:13,747 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:05:28,081 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:05:29,231 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:05:29,406 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:05:30,495 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:06:01,078 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:06:03,532 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:06:04,695 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:06:06,471 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:06:10,383 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:06:11,735 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:06:11,736 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:07:11,441 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:07:12,790 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:07:14,638 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:07:16,057 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:07:18,585 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:07:19,954 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:07:19,954 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:08:03,004 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:08:04,522 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:08:04,733 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:08:06,403 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:08:08,104 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:08:08,106 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:08:09,596 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:09:01,322 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:09:04,304 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:09:06,045 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:09:06,045 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:09:09,639 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:09:11,041 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:09:11,220 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:10:03,026 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:10:04,737 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:10:04,738 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:10:07,426 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:10:08,791 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:10:08,970 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:10:10,380 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:11:02,711 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:11:04,109 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:11:04,287 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:11:05,940 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:11:07,463 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:11:07,464 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:11:08,866 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:12:01,605 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:12:03,169 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:12:03,169 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:12:05,779 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:12:07,190 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:12:07,371 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:12:08,467 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:13:01,099 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:13:02,858 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:13:04,293 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:13:04,294 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:13:06,886 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:13:08,300 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:13:08,481 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:14:02,685 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:14:04,059 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:14:04,241 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:14:05,317 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:14:08,956 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:14:11,114 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:14:11,114 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:15:01,112 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:15:04,449 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:15:06,106 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:15:06,290 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:15:07,973 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:15:09,483 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:15:09,484 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:16:02,684 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:16:04,139 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:16:04,140 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:16:05,226 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:16:07,832 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:16:09,171 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:16:09,398 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:17:03,677 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:17:05,136 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:17:05,379 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:17:07,099 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:17:08,763 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:17:08,765 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:17:09,824 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:18:02,707 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:18:04,065 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:18:04,251 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:18:05,980 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:18:08,583 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:18:08,618 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:18:09,871 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:19:01,155 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:19:03,700 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:19:05,060 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:19:05,302 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:19:07,015 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:19:08,627 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:19:08,628 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:20:01,932 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:20:03,579 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:20:03,579 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:20:07,107 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:20:08,476 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:20:08,650 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:20:09,702 tasks 536 7616 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:21:01,244 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:21:03,925 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:21:05,501 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:21:05,831 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:21:07,638 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:21:09,034 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:21:09,035 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:22:01,187 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:22:02,888 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:22:04,437 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:22:04,439 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:22:07,202 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:22:08,680 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:22:08,879 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:23:01,604 tasks 536 7616 SMS sending failed to +63956486325412: Invalid phone number!
+ERROR 2024-11-03 17:23:03,157 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:23:03,158 tasks 536 7616 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:23:04,367 tasks 536 7616 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:23:06,935 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+ERROR 2024-11-03 17:23:08,297 tasks 536 7616 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:23:08,502 tasks 536 7616 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:24:55,350 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:24:58,467 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:25:00,419 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:25:02,450 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:25:04,783 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:25:06,017 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:26:01,316 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:26:02,323 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:26:03,377 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:27:01,350 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:27:02,548 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:27:03,584 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:28:01,113 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:28:02,115 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:28:03,286 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:29:01,056 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:29:03,342 tasks 17680 20488 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:29:03,516 tasks 17680 20488 Updated statuses: 1 activated, 0 completed
+INFO 2024-11-03 17:29:05,510 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:30:02,120 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:30:03,273 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:30:04,366 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:31:01,149 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:31:02,177 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:31:03,206 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:32:01,152 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:32:02,190 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:32:03,184 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:33:03,310 tasks 17680 20488 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:33:03,403 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:33:04,483 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:33:05,680 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:34:01,083 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:34:02,311 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 17:34:06,573 tasks 17680 20488 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:34:06,685 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 17:35:02,405 tasks 17680 20488 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:35:02,499 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:35:04,626 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:35:05,695 tasks 17680 20488 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 17:36:01,095 tasks 17680 20488 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:36:04,384 tasks 17680 20488 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:36:04,489 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:36:06,262 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 17:37:01,117 tasks 17680 20488 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 17:37:04,226 tasks 17680 20488 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 17:37:04,333 tasks 17680 20488 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 17:37:05,477 tasks 17680 20488 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:40:23,930 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:40:27,322 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:40:30,661 tasks 23652 12300 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 18:40:30,764 tasks 23652 12300 Updated statuses: 0 activated, 1 completed
+ERROR 2024-11-03 18:40:31,960 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:40:33,079 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:40:34,281 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:40:35,344 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:40:36,394 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:40:38,462 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:40:40,508 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:40:41,734 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:40:43,341 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:40:45,445 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:40:46,535 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:40:47,682 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:40:49,686 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:40:50,839 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:40:51,975 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:40:53,145 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:40:54,213 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:40:55,301 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:40:56,484 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:40:57,578 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:40:58,655 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:00,021 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:41:02,922 tasks 23652 12300 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 18:41:03,102 tasks 23652 12300 Updated statuses: 1 activated, 0 completed
+ERROR 2024-11-03 18:41:04,142 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:05,242 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:07,324 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:08,386 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:09,478 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:10,643 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:11,909 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:12,981 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:14,143 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:15,161 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:17,201 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:19,341 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:41:21,392 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:41:22,424 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:41:23,442 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:24,524 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:41:25,602 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:26,813 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:41:27,911 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:29,084 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:30,253 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:31,423 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:32,522 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:33,577 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:41:34,707 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:35,762 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:36,958 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:38,032 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:39,111 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:40,280 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:41:41,522 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:42,675 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:43,825 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:44,892 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:46,044 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:47,116 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 18:41:48,169 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:49,300 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:50,442 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:41:51,567 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:41:52,637 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:53,853 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:41:55,082 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:56,470 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:41:57,554 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:41:58,673 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:41:59,874 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:42:00,956 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:02,253 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:42:03,372 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:04,781 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:42:06,093 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:42:08,323 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:09,652 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:42:10,784 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:12,813 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:42:13,941 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:15,961 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:42:16,992 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:18,310 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:19,517 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:20,674 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:42:21,724 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:22,900 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:42:24,560 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:25,797 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:27,064 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:42:28,300 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:42:29,351 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 18:42:30,448 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:32,544 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:33,739 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:42:34,961 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:36,110 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:42:37,388 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:38,604 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:42:40,102 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:42:41,349 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 18:42:42,446 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:44,591 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:46,631 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:42:47,688 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:42:48,851 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:42:50,064 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 18:42:51,084 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:52,301 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:53,412 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:42:54,481 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:42:56,478 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:42:57,662 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:42:58,799 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:42:59,849 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:00,959 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:43:01,982 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:43:02,967 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:04,368 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:43:05,591 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:43:06,780 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:07,847 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:43:08,890 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:09,963 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:43:12,126 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:43:13,195 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:43:14,433 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:43:16,540 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:17,592 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:43:18,719 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:43:19,943 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 18:43:21,011 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:22,131 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:43:23,284 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:43:24,553 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:43:25,642 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:26,683 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:43:27,721 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:28,891 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:43:29,950 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:43:31,042 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:43:32,397 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:43:33,497 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:34,701 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:43:35,711 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:43:36,836 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:38,040 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:43:39,126 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:43:40,202 tasks 23652 12300 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:43:41,289 tasks 23652 12300 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:43:42,370 tasks 23652 12300 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:43:43,463 tasks 23652 12300 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 18:54:46,816 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 18:54:49,917 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:54:51,988 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:54:54,117 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:54:55,158 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:54:57,291 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:54:58,380 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:55:00,459 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:55:01,707 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:55:03,804 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:05,259 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:06,325 tasks 16824 11504 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:55:07,409 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:08,499 tasks 16824 11504 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:55:09,557 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:10,758 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:12,067 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:55:13,282 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:14,341 tasks 16824 11504 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:55:15,481 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:16,789 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:18,986 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:55:20,558 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 18:55:22,689 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:23,829 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:55:25,997 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:28,327 tasks 16824 11504 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:55:29,474 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:31,529 tasks 16824 11504 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 18:55:32,708 tasks 16824 11504 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 18:55:33,944 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:35,408 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:55:36,597 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:37,822 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:38,977 tasks 16824 11504 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:55:40,128 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:42,258 tasks 16824 11504 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 18:55:43,277 tasks 16824 11504 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 18:55:44,430 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:45,522 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:55:46,812 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:48,832 tasks 16824 11504 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 18:55:49,898 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:51,040 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:55:52,207 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:53,375 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:55:55,584 tasks 16824 11504 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 18:55:57,618 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:55:58,881 tasks 16824 11504 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 18:56:00,149 tasks 16824 11504 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 18:56:01,216 tasks 16824 11504 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 18:56:02,289 tasks 16824 11504 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 18:56:03,424 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 18:56:05,581 tasks 16824 11504 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 18:56:06,863 tasks 16824 11504 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 18:56:08,068 tasks 16824 11504 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 19:01:49,046 tasks 23016 15436 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:01:49,228 tasks 23016 15436 Updated statuses: 1 activated, 0 completed
+INFO 2024-11-03 19:01:52,382 tasks 23016 15436 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 19:01:54,394 tasks 23016 15436 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 19:01:55,666 tasks 23016 15436 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:01:56,748 tasks 23016 15436 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:01:58,044 tasks 23016 15436 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:07:58,374 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:02,579 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:03,817 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:05,182 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:06,220 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:07,403 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:09,614 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:10,698 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:12,927 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:15,291 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:16,351 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:17,464 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:18,733 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:19,793 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:21,242 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:22,492 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:23,566 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:24,771 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:26,762 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:27,965 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:29,062 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:30,298 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:31,417 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:32,682 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:33,864 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:35,217 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:36,329 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:37,411 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:38,751 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:39,935 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:41,251 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:42,435 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:43,814 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:45,093 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:47,146 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:48,306 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:49,602 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:50,690 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:51,829 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:53,020 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:54,163 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:08:55,259 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:08:56,414 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:08:57,702 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:08:58,974 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:09:00,169 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:09:01,261 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:09:02,446 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:09:04,989 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:09:06,155 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:09:07,251 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:09:08,419 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:09:09,798 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:09:11,829 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:09:13,433 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:09:14,695 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:09:15,926 tasks 6760 19972 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:09:17,044 tasks 6760 19972 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:09:18,114 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:09:19,300 tasks 6760 19972 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:09:20,641 tasks 6760 19972 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 19:13:32,838 tasks 20720 10584 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:13:32,985 tasks 20720 10584 Updated statuses: 1 activated, 0 completed
+INFO 2024-11-03 19:13:36,146 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:13:37,125 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:13:38,183 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:13:39,471 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:13:43,456 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:13:44,461 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:13:45,695 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:13:52,035 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:13:53,056 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:13:54,070 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:13:56,624 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:14:00,176 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:14:04,022 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:14:05,339 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 19:14:20,612 tasks 20720 10584 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:14:20,787 tasks 20720 10584 Updated statuses: 1 activated, 0 completed
+INFO 2024-11-03 19:14:22,125 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:14:23,365 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:14:25,522 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:14:26,635 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 19:14:27,839 tasks 20720 10584 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+ERROR 2024-11-03 19:14:29,015 tasks 20720 10584 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 19:14:30,035 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:14:31,051 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:14:32,138 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:14:33,143 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:14:35,188 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:14:36,308 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:14:38,353 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:14:39,413 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:14:51,333 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:15:00,775 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:15:09,013 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:15:11,978 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:15:14,554 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:15:15,689 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:15:16,790 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:15:17,923 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:15:20,802 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:15:21,842 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:15:22,825 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:15:24,892 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:15:26,856 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:15:27,995 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:15:29,048 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:15:30,134 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 19:15:31,372 tasks 20720 10584 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 19:15:32,402 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:15:33,379 tasks 20720 10584 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 19:15:34,679 tasks 20720 10584 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 19:15:35,715 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:15:36,739 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:15:37,893 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:16:19,465 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:16:20,517 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:16:21,687 tasks 20720 10584 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 19:16:22,882 tasks 20720 10584 Error in send_reservation_reminders: FOR UPDATE cannot be applied to the nullable side of an outer join
+
+INFO 2024-11-03 19:17:01,098 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:17:02,103 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:17:03,172 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:17:04,145 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:18:02,081 tasks 20720 10584 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:18:03,184 tasks 20720 10584 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:18:05,214 tasks 20720 10584 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:18:07,304 tasks 20720 10584 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:19:33,856 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:19:36,922 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:19:38,000 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:19:39,045 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:20:01,194 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:20:02,290 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:20:03,394 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:20:04,529 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:21:01,130 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:21:02,164 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 19:21:08,217 tasks 15640 22100 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:21:08,310 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:21:09,351 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:22:12,147 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:22:14,523 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:22:18,845 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 19:22:50,399 tasks 15640 22100 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+INFO 2024-11-03 19:22:53,849 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:23:13,063 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:23:50,803 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:24:18,260 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:24:49,039 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:24:52,574 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:25:01,487 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:25:32,560 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:25:33,637 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:25:34,696 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:25:35,832 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:25:36,970 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:25:42,170 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:26:14,301 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:26:48,854 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:26:55,556 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:26:57,739 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:27:13,100 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:27:21,053 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:27:23,775 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:27:29,822 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:28:20,581 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:28:27,628 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:28:51,031 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:28:55,963 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:29:02,143 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:29:14,118 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:29:23,206 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-03 19:29:44,013 tasks 15640 22100 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:29:51,618 tasks 15640 22100 Updated statuses: 0 activated, 1 completed
+ERROR 2024-11-03 19:30:23,676 tasks 15640 22100 SMS sending failed to +639358438356: HTTPSConnectionPool(host='sms.teamssprogram.com', port=443): Read timed out. (read timeout=10)
+INFO 2024-11-03 19:30:24,468 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:30:28,199 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:30:42,250 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:30:51,841 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:31:06,224 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:31:36,089 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:31:44,715 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:32:04,878 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:32:24,545 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:32:25,649 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:32:42,344 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:32:43,414 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:33:20,522 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:33:29,419 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:33:40,406 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:33:51,241 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:34:13,896 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:34:41,697 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:35:12,590 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 19:35:33,909 tasks 15640 22100 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:35:34,247 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:35:50,879 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:36:15,676 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:36:16,865 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:36:32,493 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:36:52,013 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:37:03,465 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:37:28,480 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:37:47,945 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:38:17,232 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:38:23,088 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:38:43,730 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:38:46,429 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:38:58,281 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:39:03,159 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:39:25,953 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:39:33,643 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:39:53,164 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:40:01,321 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:40:22,771 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:40:24,173 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:40:25,358 tasks 15640 22100 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:40:26,947 tasks 15640 22100 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:40:27,981 tasks 15640 22100 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:40:28,951 tasks 15640 22100 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:55:21,458 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:55:25,432 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:55:26,550 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:55:28,217 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:55:29,734 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:55:31,369 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:55:36,624 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:55:41,112 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:55:42,325 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:55:44,168 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:55:45,490 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:55:47,161 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 19:55:52,080 tasks 13140 23416 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:55:52,369 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:55:53,777 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:55:55,279 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:55:58,066 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-03 19:56:01,692 tasks 13140 23416 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:56:02,018 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:56:03,534 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:56:04,944 tasks 13140 23416 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 19:56:08,340 tasks 13140 23416 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:56:08,574 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:56:10,540 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:56:12,179 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:56:15,000 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:56:16,420 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-03 19:56:19,987 tasks 13140 23416 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:56:20,169 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:56:21,850 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:56:23,329 tasks 13140 23416 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 19:56:27,528 tasks 13140 23416 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:56:27,717 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:56:29,137 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:56:30,729 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:56:32,504 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:56:34,235 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:56:37,022 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:56:38,372 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:56:39,685 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:56:42,032 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:56:44,287 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:56:45,737 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:56:47,352 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:56:48,594 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:56:50,969 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:56:52,574 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:56:55,103 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:56:56,773 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:56:58,417 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:57:00,371 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:57:01,950 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:57:03,523 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:57:04,979 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:57:06,617 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:57:08,671 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:57:10,358 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:57:12,845 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:57:15,222 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:57:16,766 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:57:19,162 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:57:21,056 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:57:22,479 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:57:24,132 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:57:25,317 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:57:26,742 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:57:28,063 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:57:29,232 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:57:30,654 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:57:31,847 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:57:33,261 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:58:01,904 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:58:03,009 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-03 19:58:04,442 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:58:05,639 tasks 13140 23416 Successfully cancelled 0 pending reservations
+ERROR 2024-11-03 19:59:03,256 tasks 13140 23416 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-03 19:59:04,132 tasks 13140 23416 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-03 19:59:09,736 tasks 13140 23416 Successfully cancelled 0 pending reservations
+INFO 2024-11-03 19:59:10,969 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-03 19:59:12,104 tasks 13140 23416 Successfully cancelled 0 partial payment reservations

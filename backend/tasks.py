@@ -1,16 +1,20 @@
-from celery import shared_task
+import logging
 from datetime import timedelta
-from django.utils import timezone
+
+import requests
+from celery import shared_task
 from django.conf import settings
 from django.db import transaction
-import requests
-import logging
+from django.utils import timezone
+
 from .models import Reservation
 
 logger = logging.getLogger(__name__)
 
+
 class SMSService:
     """Handles all SMS-related operations using Teams SMS Program"""
+
     def __init__(self):
         self.api_secret = settings.TEAMS_SMS_API_SECRET
         self.device_id = settings.TEAMS_SMS_DEVICE_ID
@@ -53,28 +57,34 @@ class SMSService:
             logger.error(f"SMS sending failed to {phone_number}: {str(e)}")
             return False
 
+
 @shared_task
 def cancel_pending_reservations():
     """Cancel reservations that have been pending for more than 1 hour"""
-    cutoff_time = timezone.localtime(timezone.now()) - timedelta(hours=1)
+    now = timezone.localtime(timezone.now())  # Current time
+    one_hour_ago = now - timedelta(hours=1)
     sms_service = SMSService()
 
     try:
         with transaction.atomic():
+            # Get the pending reservations that need to be cancelled
             pending_reservations = Reservation.objects.select_related(
                 'user__userprofile',
                 'car'
             ).filter(
                 status='pending',
-                created_at__lt=cutoff_time
+                created_at__lt=one_hour_ago,
+                start_datetime__gt=now
             )
 
             cancelled_count = 0
             for reservation in pending_reservations:
+                # Update reservation status
                 reservation.status = 'cancelled'
                 reservation.save()
                 cancelled_count += 1
 
+                # Send cancellation message
                 message = (
                     f"Your reservation for {reservation.car.brand} {reservation.car.model} has been cancelled due to pending payment.\n\n"
                     f"- Car Show Car Rental Team"
@@ -87,6 +97,46 @@ def cancel_pending_reservations():
         logger.error(f"Error in cancel_pending_reservations: {str(e)}")
         raise
 
+
+@shared_task
+def cancel_partial_payment_reservations():
+    """Cancel reservations with partial payment status that have reached their start time"""
+    now = timezone.localtime(timezone.now())
+    sms_service = SMSService()
+
+    try:
+        with transaction.atomic():
+            # Get partial payment reservations that have reached their start time
+            partial_reservations = Reservation.objects.select_related(
+                'user__userprofile',
+                'car'
+            ).filter(
+                status='partial',
+                start_datetime__lte=now
+            )
+
+            cancelled_count = 0
+            for reservation in partial_reservations:
+                # Update reservation status
+                reservation.status = 'cancelled'
+                reservation.save()
+                cancelled_count += 1
+
+                # Send cancellation message
+                message = (
+                    f"Your reservation for {reservation.car.brand} {reservation.car.model} has been cancelled due to incomplete payment.\n\n"
+                    f"Please complete the full payment for future reservations.\n\n"
+                    f"- Car Show Car Rental Team"
+                )
+                sms_service.send_sms(reservation.user.userprofile.phone_number, message)
+
+        logger.info(f"Successfully cancelled {cancelled_count} partial payment reservations")
+        return f"Cancelled {cancelled_count} partial payment reservations"
+    except Exception as e:
+        logger.error(f"Error in cancel_partial_payment_reservations: {str(e)}")
+        raise
+
+
 @shared_task
 def update_reservation_statuses():
     """Update reservation statuses based on time and payment status"""
@@ -95,27 +145,32 @@ def update_reservation_statuses():
 
     try:
         with transaction.atomic():
-            # Update to active
-            activated_count = Reservation.objects.select_related(
+            # Get reservations that need to be activated
+            to_activate = Reservation.objects.select_related(
                 'user__userprofile',
                 'car'
             ).filter(
                 status='paid',
                 start_datetime__lte=now,
                 end_datetime__gt=now
-            ).update(status='active')
+            )
 
-            # Update to completed
-            completed_count = Reservation.objects.select_related(
+            # Get reservations that need to be completed
+            to_complete = Reservation.objects.select_related(
                 'user__userprofile',
                 'car'
             ).filter(
                 status='active',
                 end_datetime__lte=now
-            ).update(status='completed')
+            )
 
-            # Send notifications for activated reservations
-            for reservation in Reservation.objects.filter(status='active').select_related('user__userprofile', 'car'):
+            # Update and notify for activations
+            activated_count = 0
+            for reservation in to_activate:
+                reservation.status = 'active'
+                reservation.save()
+                activated_count += 1
+
                 message = (
                     f"Your reservation for {reservation.car.brand} {reservation.car.model} is now active.\n\n"
                     f"Enjoy your ride!\n\n"
@@ -123,10 +178,15 @@ def update_reservation_statuses():
                 )
                 sms_service.send_sms(reservation.user.userprofile.phone_number, message)
 
-            # Send notifications for completed reservations
-            for reservation in Reservation.objects.filter(status='completed').select_related('user__userprofile', 'car'):
+            # Update and notify for completions
+            completed_count = 0
+            for reservation in to_complete:
+                reservation.status = 'completed'
+                reservation.save()
+                completed_count += 1
+
                 message = (
-                    f"Your reservation for {reservation.car.brand} {reservation.car.model} has been completed.\n\n" 
+                    f"Your reservation for {reservation.car.brand} {reservation.car.model} has been completed.\n\n"
                     f"Thank you for choosing our service!\n\n"
                     f"- Car Show Car Rental Team"
                 )
@@ -138,58 +198,77 @@ def update_reservation_statuses():
         logger.error(f"Error in update_reservation_statuses: {str(e)}")
         raise
 
+
 @shared_task
 def send_reservation_reminders():
     """Send SMS reminders for upcoming reservations"""
     now = timezone.localtime(timezone.now())
-    one_day_from_now = now + timedelta(days=1)
-    one_hour_from_now = now + timedelta(hours=1)
+
+    twenty_four_hours_window_start = now + timedelta(hours=23, minutes=59, seconds=30)
+    twenty_four_hours_window_end = now + timedelta(hours=24, minutes=0, seconds=30)
+
+    one_hour_window_start = now + timedelta(minutes=59, seconds=30)
+    one_hour_window_end = now + timedelta(hours=1, seconds=30)
+
     sms_service = SMSService()
 
     try:
-        # Send pickup reminders (1 day before)
-        upcoming_reservations = Reservation.objects.select_related(
-            'user__userprofile',
-            'car'
-        ).filter(
-            status__in=['paid', 'partial'],
-            start_datetime__date=one_day_from_now.date(),
-            pickup_reminder_sent=False
-        )
+        with transaction.atomic():
+            # Lock and fetch upcoming reservations
+            upcoming_reservations = Reservation.objects.filter(
+                status__in=['paid', 'partial'],
+                start_datetime__gte=twenty_four_hours_window_start,
+                start_datetime__lte=twenty_four_hours_window_end,
+                pickup_reminder_sent=False
+            ).select_for_update(skip_locked=True)
 
-        pickup_reminder_count = 0
-        for reservation in upcoming_reservations:
-            message = (
-                f"REMINDER: Your car rental for {reservation.car.brand} {reservation.car.model} starts tomorrow at {reservation.start_datetime.strftime('%I:%M %p')}.\n\n"
-                f"Please arrive on time for pickup.\n\n"
-                f"- Car Show Car Rental Team"
-            )
-            if sms_service.send_sms(reservation.user.userprofile.phone_number, message):
-                reservation.pickup_reminder_sent = True
-                reservation.save(update_fields=['pickup_reminder_sent'])
-                pickup_reminder_count += 1
+            # Lock and fetch ending reservations
+            ending_reservations = Reservation.objects.filter(
+                status='active',
+                end_datetime__gte=one_hour_window_start,
+                end_datetime__lte=one_hour_window_end,
+                return_reminder_sent=False
+            ).select_for_update(skip_locked=True)
 
-        # Send return reminders (1 hour before end)
-        ending_reservations = Reservation.objects.select_related(
-            'user__userprofile',
-            'car'
-        ).filter(
-            status='active',
-            end_datetime__range=(one_hour_from_now, one_hour_from_now + timedelta(minutes=5)),
-            return_reminder_sent=False
-        )
+            pickup_reminder_count = 0
+            for reservation in upcoming_reservations:
+                # Fetch related data separately
+                user_profile = reservation.user.userprofile
+                car = reservation.car
 
-        return_reminder_count = 0
-        for reservation in ending_reservations:
-            message = (
-                f"REMINDER: Your car rental for {reservation.car.brand} {reservation.car.model} ends in 1 hour at {reservation.end_datetime.strftime('%I:%M %p')}.\n\n"
-                f"Please ensure timely return to avoid additional charges.\n\n"
-                f"- Car Show Car Rental Team"
-            )
-            if sms_service.send_sms(reservation.user.userprofile.phone_number, message):
-                reservation.return_reminder_sent = True
-                reservation.save(update_fields=['return_reminder_sent'])
-                return_reminder_count += 1
+                # Convert to local time for display
+                local_start_time = timezone.localtime(reservation.start_datetime)
+
+                message = (
+                    f"REMINDER: Your car rental for {car.brand} {car.model} starts tomorrow at {local_start_time.strftime('%I:%M %p')}.\n\n"
+                    f"Please arrive on time for pickup.\n\n"
+                    f"- Car Show Car Rental Team"
+                )
+                # Send pickup reminder message
+                if sms_service.send_sms(user_profile.phone_number, message):
+                    reservation.pickup_reminder_sent = True
+                    reservation.save(update_fields=['pickup_reminder_sent'])
+                    pickup_reminder_count += 1
+
+            return_reminder_count = 0
+            for reservation in ending_reservations:
+                # Fetch related data separately
+                user_profile = reservation.user.userprofile
+                car = reservation.car
+
+                # Convert to local time for display
+                local_end_time = timezone.localtime(reservation.end_datetime)
+
+                message = (
+                    f"REMINDER: Your car rental for {car.brand} {car.model} ends in 1 hour at {local_end_time.strftime('%I:%M %p')}.\n\n"
+                    f"Please ensure timely return to avoid additional charges.\n\n"
+                    f"- Car Show Car Rental Team"
+                )
+                # Send return reminder message
+                if sms_service.send_sms(user_profile.phone_number, message):
+                    reservation.return_reminder_sent = True
+                    reservation.save(update_fields=['return_reminder_sent'])
+                    return_reminder_count += 1
 
         logger.info(f"Sent {pickup_reminder_count} pickup reminders and {return_reminder_count} return reminders")
         return f"Sent {pickup_reminder_count} pickup and {return_reminder_count} return reminders"
