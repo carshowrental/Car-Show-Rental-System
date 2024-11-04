@@ -89,10 +89,21 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     "default": dj_database_url.parse(
+#         "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
+#     )
+# }
+
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'FaYqFFWBHxAxfECKNQDhpAzCkJMpCPuJ',
+        'HOST': 'junction.proxy.rlwy.net',
+        'PORT': '54492',
+    }
 }
 
 # DATABASES = {

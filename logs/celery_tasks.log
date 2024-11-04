@@ -2498,3 +2498,564 @@ INFO 2024-11-03 19:59:04,132 tasks 13140 23416 Sent 0 pickup reminders and 0 ret
 INFO 2024-11-03 19:59:09,736 tasks 13140 23416 Successfully cancelled 0 pending reservations
 INFO 2024-11-03 19:59:10,969 tasks 13140 23416 Updated statuses: 0 activated, 0 completed
 INFO 2024-11-03 19:59:12,104 tasks 13140 23416 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-04 05:26:48,731 tasks 15240 15472 SMS sending failed to +639666913647: Message has been queued for sending!
+ERROR 2024-11-04 05:26:49,924 tasks 15240 15472 SMS sending failed to +639053229650: Message has been queued for sending!
+INFO 2024-11-04 05:26:50,035 tasks 15240 15472 Successfully cancelled 2 pending reservations
+ERROR 2024-11-04 05:26:54,225 tasks 15240 15472 SMS sending failed to +639666913647: Message has been queued for sending!
+INFO 2024-11-04 05:26:54,297 tasks 15240 15472 Updated statuses: 0 activated, 1 completed
+INFO 2024-11-04 05:26:55,406 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:26:57,377 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:26:58,397 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:26:59,483 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:00,510 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:01,519 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:02,624 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:03,760 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:04,922 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:06,145 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:08,081 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:09,098 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:10,186 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:11,554 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:12,582 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:14,577 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:15,592 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:16,716 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:18,740 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:19,785 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:20,878 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:21,925 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:22,932 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:24,150 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:25,195 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:26,346 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:27,502 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:28,565 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:29,719 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:30,854 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:31,846 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:32,822 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:33,837 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:34,855 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:35,977 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:38,034 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:39,038 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:40,031 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:41,137 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:42,310 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:43,419 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:45,374 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:46,521 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:47,573 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:48,690 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:49,741 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:50,784 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:51,958 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:53,073 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:27:54,153 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:27:55,277 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:56,259 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:57,456 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:27:58,500 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:27:59,504 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:01,623 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:02,758 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:03,791 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:04,854 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:06,927 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:08,053 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:09,104 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:10,111 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:12,203 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:13,224 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:14,325 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:16,393 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:17,488 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:18,531 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:19,659 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:20,819 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:21,837 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:22,985 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:24,053 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:25,120 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:26,234 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:28,316 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:29,451 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:30,484 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:32,455 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:33,599 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:34,653 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:35,666 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:38,066 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:39,177 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:40,234 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:41,249 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:42,374 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:43,511 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:44,590 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:45,734 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:46,836 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:47,922 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:49,080 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:50,103 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:51,237 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:52,352 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:28:53,482 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:28:54,877 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:28:56,166 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:57,399 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:28:58,573 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:00,738 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:01,770 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:02,794 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:04,752 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:06,853 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-04 05:29:09,483 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:29:09,663 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-04 05:29:11,910 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:29:12,082 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:13,079 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:15,187 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:16,200 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:17,330 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:18,334 tasks 15240 15472 Successfully cancelled 0 pending reservations
+ERROR 2024-11-04 05:29:20,582 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:29:20,782 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:21,800 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-04 05:29:24,018 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:29:24,251 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:25,313 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:26,363 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:27,525 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:28,575 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:29,948 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:31,100 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:32,228 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:33,244 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:34,330 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:35,501 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:36,650 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:37,770 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:39,858 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:40,939 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:42,012 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:43,018 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:44,046 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:45,178 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:47,209 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:48,333 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:49,471 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:50,527 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:51,592 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:53,638 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:29:54,660 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:29:55,793 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:29:56,930 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:29:57,967 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:00,074 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:01,233 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:02,281 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:03,420 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:04,590 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:05,619 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:07,698 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:08,816 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:09,886 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:11,012 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:12,963 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:14,125 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:15,156 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:16,271 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:17,294 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:18,337 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:19,439 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:20,558 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:21,604 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:22,741 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:23,823 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:24,837 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:25,972 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:28,038 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:29,089 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:30,240 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:31,251 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:32,279 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:33,401 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:35,519 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:36,533 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:37,635 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:38,714 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:39,737 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:40,816 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:41,848 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:43,001 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:44,381 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:45,397 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:46,507 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:47,538 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:49,618 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:50,660 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:51,685 tasks 15240 15472 Successfully cancelled 0 pending reservations
+ERROR 2024-11-04 05:30:53,951 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:30:54,157 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:30:56,164 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:30:57,368 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:30:58,402 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:30:59,843 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:00,931 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-04 05:31:04,167 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:31:04,334 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-04 05:31:06,685 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:31:06,859 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:08,867 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:09,893 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:11,067 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:12,212 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:13,279 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:14,415 tasks 15240 15472 Successfully cancelled 0 pending reservations
+ERROR 2024-11-04 05:31:16,789 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:31:16,950 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:17,959 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:19,075 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:20,240 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-04 05:31:22,930 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:31:23,119 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:24,335 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+ERROR 2024-11-04 05:31:26,690 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:31:26,858 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:27,928 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:28,948 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:30,023 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:31,155 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:32,222 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:33,364 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:34,598 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:35,753 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:36,862 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:37,869 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:38,896 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:39,969 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:41,141 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:42,310 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:43,420 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:44,584 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:45,601 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:46,721 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:47,851 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:49,942 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:51,025 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:52,038 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:53,267 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:31:54,430 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:31:55,708 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:31:56,762 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:57,835 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:31:59,003 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:00,184 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:01,332 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:02,478 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:03,750 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:04,946 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:05,976 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:07,061 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:09,086 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:10,279 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:11,341 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:12,674 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:13,755 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:15,865 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:17,033 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:18,101 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:19,282 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:20,399 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:21,423 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:22,484 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:23,637 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:25,681 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:26,835 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:27,961 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:29,014 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:30,053 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:31,178 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:32,295 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:33,432 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:34,535 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:35,538 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:36,655 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:37,717 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:38,847 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:39,901 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:40,955 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:41,999 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:43,107 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:44,322 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:46,428 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:47,578 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:48,678 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:49,701 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:50,742 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:51,766 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:52,889 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:32:54,032 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:56,035 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:32:57,433 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:32:58,586 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:32:59,770 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:01,881 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:03,050 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:04,133 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:05,223 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:06,242 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:07,248 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:08,382 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:09,478 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:10,570 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:11,613 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:12,647 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:13,805 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:14,943 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:15,961 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:17,293 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:18,462 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:20,548 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:21,619 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:22,659 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:23,840 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:24,996 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:25,998 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:27,033 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:29,138 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:30,277 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:31,311 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:32,378 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:34,602 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:36,868 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:37,918 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:38,948 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:40,093 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:42,083 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:44,332 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:45,367 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:46,531 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:47,628 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:48,967 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:50,171 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:51,647 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:53,812 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:33:55,098 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:33:56,511 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:33:57,653 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:58,808 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:33:59,973 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:01,010 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:02,045 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:03,067 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:04,149 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:05,289 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:06,469 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:07,617 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:08,720 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:09,814 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:10,887 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:11,929 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:13,001 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:14,150 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:15,595 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:16,728 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:18,214 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:19,280 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:21,283 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:22,448 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:23,526 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:24,590 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:25,673 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:27,720 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:28,733 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:29,868 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:31,011 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:33,081 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:34,239 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:35,400 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:36,446 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:38,420 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:39,471 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:40,603 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:41,753 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:42,802 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:44,008 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:45,067 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:46,184 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:47,215 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:48,269 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:49,372 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:50,487 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:51,588 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:52,595 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:53,678 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:54,702 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:34:55,802 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:34:56,904 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:34:58,852 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:34:59,908 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:35:01,071 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:35:02,428 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:03,946 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:35:05,539 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:35:06,689 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:35:08,095 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:35:09,435 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:35:10,506 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:11,617 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:12,703 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:35:14,545 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:35:16,241 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:35:17,391 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:35:18,540 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:35:19,910 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:35:20,947 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:22,162 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:35:23,485 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:35:24,856 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:35:26,267 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:27,350 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:28,486 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:35:29,590 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:35:30,742 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-04 05:35:33,413 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:35:33,622 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:35:34,674 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-04 05:35:35,822 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:35:36,892 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:38,254 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:35:39,284 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:40,324 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-04 05:35:42,587 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:35:42,771 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:35:43,784 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-04 05:35:46,365 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:35:46,529 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:35:48,879 tasks 15240 15472 Successfully cancelled 0 pending reservations
+INFO 2024-11-04 05:35:51,941 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:36:01,132 tasks 15240 15472 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-04 05:36:02,136 tasks 15240 15472 Successfully cancelled 0 pending reservations
+ERROR 2024-11-04 05:36:04,758 tasks 15240 15472 SMS sending failed to +639358438356: Message has been queued for sending!
+INFO 2024-11-04 05:36:04,947 tasks 15240 15472 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-04 05:36:06,018 tasks 15240 15472 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-04 07:37:11,677 tasks 15240 15472 Error in update_reservation_statuses: connection to server at "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" (3.0.216.9), port 5432 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+ERROR 2024-11-04 19:07:02,688 tasks 15240 15472 Error in send_reservation_reminders: connection to server at "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" (18.142.152.125), port 5432 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+ERROR 2024-11-04 19:28:08,775 tasks 15240 15472 Error in cancel_pending_reservations: connection to server at "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" (3.0.216.9), port 5432 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+ERROR 2024-11-04 19:28:09,195 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,225 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,236 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,258 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,297 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,325 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,348 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,362 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,374 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,400 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,410 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,425 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,434 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,448 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,457 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,465 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,473 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,480 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,510 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,517 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,524 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,532 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,538 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,546 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,552 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,559 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,566 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,576 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,582 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,590 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,598 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,605 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,610 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,615 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,619 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,625 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,631 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,640 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,647 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,667 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,683 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,712 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,726 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,736 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,747 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,760 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,766 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,779 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,794 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,802 tasks 15240 15472 Error in cancel_partial_payment_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,823 tasks 15240 15472 Error in update_reservation_statuses: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,832 tasks 15240 15472 Error in cancel_pending_reservations: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
+ERROR 2024-11-04 19:28:09,844 tasks 15240 15472 Error in send_reservation_reminders: could not translate host name "dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com" to address: No such host is known. 
+
