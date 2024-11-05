@@ -30,7 +30,7 @@
                 <tr>
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.get_full_name }}</td>
+                    <td>{{ user.userprofile.full_name|default:"N/A" }}</td>
                     <td>{{ user.userprofile.phone_number|default:"N/A" }}</td>
                     <td>{{ user.userprofile.license_number|default:"N/A" }}</td>
                     <td>{{ user.userprofile.license_expiration|date:"M d, Y"|default:"N/A" }}</td>
