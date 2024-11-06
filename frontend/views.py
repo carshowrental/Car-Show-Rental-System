@@ -69,9 +69,9 @@ def user_register(request):
             )
 
             messages.success(request, f'Account created for {username}. You can now log in.')
-            return redirect('login')
 
-    return render(request, 'frontend/register.html')
+        return redirect('home')
+
 
 
 def user_login(request):
@@ -82,10 +82,10 @@ def user_login(request):
         if user is not None:
             login(request, user)
             messages.success(request, 'You have been logged in.')
-            return redirect('home')
         else:
             messages.error(request, 'Invalid username or password.')
-    return render(request, 'frontend/login.html')
+
+        return redirect('home')
 
 
 @login_required
@@ -126,11 +126,11 @@ def forgot_password(request):
             )
 
             messages.success(request, 'Password reset instructions have been sent to your email.')
-            return redirect('login')
         except User.DoesNotExist:
             messages.error(request, 'No user with that email address exists.')
 
-    return render(request, 'frontend/forgot_password.html')
+        return redirect('home')
+
 
 
 def reset_password(request, token):
@@ -138,7 +138,7 @@ def reset_password(request, token):
         reset_token = PasswordResetToken.objects.get(token=token)
         if not reset_token.is_valid():
             messages.error(request, 'This password reset link has expired.')
-            return redirect('login')
+            return redirect('home')
 
         if request.method == 'POST':
             password1 = request.POST.get('password1')
@@ -155,13 +155,13 @@ def reset_password(request, token):
                 reset_token.delete()
                 messages.success(request,
                                  'Your password has been reset successfully. You can now log in with your new password.')
-                return redirect('login')
+                return redirect('home')
 
         return render(request, 'frontend/reset_password.html', {'token': token})
 
     except PasswordResetToken.DoesNotExist:
         messages.error(request, 'Invalid password reset link.')
-        return redirect('login')
+        return redirect('home')
 
 
 
