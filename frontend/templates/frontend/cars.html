@@ -43,7 +43,7 @@
             {% for car in cars %}
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm car-card">
-                        <img src="{{ car.get_main_image.image.url }}" class="card-img-top" height="250" alt="{{ car.brand }} {{ car.model }}">
+                        <img src="{{ car.get_main_image.image.url }}" class="card-img-top" height="250" alt="{{ car.brand }} {{ car.model }}" style="object-fit: contain;">
                         <div class="card-body">
                             <h5 class="card-title text-danger"><i class="fas fa-car me-2"></i>{{ car.brand }} {{ car.model }}</h5>
                             <p class="card-text">

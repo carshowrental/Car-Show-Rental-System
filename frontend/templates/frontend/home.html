@@ -17,7 +17,7 @@
         {% for car in featured_cars %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="{{ car.get_main_image.image.url }}" class="card-img-top" height="250" alt="{{ car.brand }} {{ car.model }}">
+                    <img src="{{ car.get_main_image.image.url }}" class="card-img-top" height="250" alt="{{ car.brand }} {{ car.model }}" style="object-fit: contain;">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-car me-2 text-danger"></i>{{ car.brand }} {{ car.model }}</h5>
                         <p class="card-text"><i class="fas fa-tag me-2 text-danger"></i>₱{{ car.daily_rate }} / day</p>

@@ -40,7 +40,7 @@
                     <div class="carousel-inner">
                         {% for image in car.carimages_set.all %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="{{ car.brand }} {{ car.model }}" style="height: 300px; object-fit: cover;">
+                                <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="{{ car.brand }} {{ car.model }}" style="height: 300px; object-fit: contain;">
                             </div>
                         {% empty %}
                             <div class="carousel-item active">

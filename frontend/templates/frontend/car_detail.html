@@ -44,7 +44,7 @@
                                 <img src="{{ image.image.url }}"
                                      class="d-block w-100"
                                      alt="{{ car.brand }} {{ car.model }}"
-                                     style="height: 400px; object-fit: cover;">
+                                     style="height: 400px; object-fit: contain;">
                             </div>
                             {% endfor %}
                         </div>
@@ -71,7 +71,7 @@
                                      alt="Thumbnail {{ forloop.counter }}"
                                      data-bs-target="#carImageCarousel"
                                      data-bs-slide-to="{{ forloop.counter0 }}"
-                                     style="width: 80px; height: 60px; object-fit: cover; cursor: pointer;">
+                                     style="width: 80px; height: 60px; object-fit: contain; cursor: pointer;">
                             </div>
                             {% endfor %}
                         </div>

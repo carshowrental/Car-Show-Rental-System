@@ -35,7 +35,7 @@
                         {% if main_image %}
                         <img src="{{ main_image.image.url }}" class="img-thumbnail"
                              alt="{{ car.brand }} {{ car.model }}"
-                             style="width: 100px; height: 60px; object-fit: cover; cursor: pointer">
+                             style="width: 100px; height: 60px; object-fit: contain; cursor: pointer">
                         {% else %}
                         <span>No image</span>
                         {% endif %}
