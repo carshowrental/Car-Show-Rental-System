@@ -82,7 +82,7 @@
                 <!-- Car Information -->
                 <div class="bg-white p-4 rounded shadow">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="mb-0 text-danger">
+                        <h2 class="mb-0 text-danger audiowide-font">
                             <i class="fas fa-car me-2"></i>
                             {{ car.brand }} {{ car.model }}</h2>
                         <div>
@@ -130,9 +130,9 @@
                             </div>
                         </div>
                     </div>
-
+                    <hr>
                     <!-- Features -->
-                    <h5 class="mb-3">
+                    <h5 class="mb-3 text-danger">
                         <i class="fas fa-list-check me-2"></i>Features
                     </h5>
                     <div class="row mb-3">
@@ -151,7 +151,7 @@
             <!-- Right Column - Booking Form -->
             <div class="col-lg-5">
                 <div class="bg-white rounded shadow p-4 sticky-top" style="top: 20px;">
-                    <h4 class="mb-4 text-center">
+                    <h4 class="mb-4 text-center audiowide-font text-danger">
                         <i class="fas fa-calendar-check me-2"></i>Choose Your Rental Plan
                     </h4>
 
@@ -231,7 +231,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" required id="agreeHourly">
                                         <label class="form-check-label" for="agreeHourly">
-                                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#rentalPolicyModal">Rental Policy</a>
+                                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#rentalPolicyModal" class="text-decoration-none">Rental Policy</a>.
                                         </label>
                                     </div>
                                 </div>
@@ -350,19 +350,19 @@
             <div class="modal-dialog modal-dialog-scrollable modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="rentalPolicyModalLabel"><i class="fas fa-file-contract me-2 text-secondary"></i>Car Show Car Rental Policy</h4>
+                        <h4 class="modal-title audiowide-font" style="color: #2b3d5b;" id="rentalPolicyModalLabel"><i class="fas fa-file-contract me-2"></i>Car Show Car Rental Policy</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="card shadow-sm border-0">
                             <div class="card-body">
-                                <h5 class="mb-3"><i class="fas fa-user-edit me-2 text-secondary"></i>1. Customer Information</h5>
+                                <h5 class="mb-3" style="color: #2b3d5b;"><i class="fas fa-user-edit me-2"></i>1. Customer Information</h5>
                                 <ul>
                                     <li>Full name, contact number, Facebook/email address, and home address are required.</li>
                                     <li>Valid IDs must be presented at the time of rental.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-car me-2 text-secondary"></i>2. Rental Details</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-car me-2"></i>2. Rental Details</h5>
                                 <ul>
                                     <li>Specify start time, destination, vehicle type, return time, and number of days.</li>
                                     <li>Vehicle plate number and odometer reading will be recorded.</li>
@@ -370,33 +370,33 @@
                                     <li>Mileage limit: 300 kilometers per 24 hours. Excess charged at P5 per kilometer.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-money-bill-wave me-2 text-secondary"></i>3. Payment Terms</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-money-bill-wave me-2"></i>3. Payment Terms</h5>
                                 <ul>
                                     <li>Payment options: Cash or GCash.</li>
                                     <li>Reservation and washing fees may apply.</li>
                                     <li>Full payment is due at the time of vehicle pick-up.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-gas-pump me-2 text-secondary"></i>4. Fuel Policy</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-gas-pump me-2"></i>4. Fuel Policy</h5>
                                 <ul>
                                     <li>Fuel consumption is shouldered by the renter.</li>
                                     <li>Vehicle must be returned with a full tank.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-clock me-2 text-secondary"></i>5. Excess Hours and Extension</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-clock me-2"></i>5. Excess Hours and Extension</h5>
                                 <ul>
                                     <li>Excess hours charged at the hourly rate depending on vehicle type.</li>
                                     <li>No fraction of time allowed for 24-hour rental periods.</li>
                                     <li>Extensions must be requested 5 hours prior to return time. P1,000 fee for failure to inform.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-map-marked-alt me-2 text-secondary"></i>6. Destination and Routes</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-map-marked-alt me-2"></i>6. Destination and Routes</h5>
                                 <ul>
                                     <li>Renter must notify the company of any route or destination changes.</li>
                                     <li>Failure to inform may result in reporting to authorities.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-car-crash me-2 text-secondary"></i>7. Damage and Theft</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-car-crash me-2"></i>7. Damage and Theft</h5>
                                 <ul>
                                     <li>Renter is responsible for all repair costs in case of damage.</li>
                                     <li>Police report required for accidents.</li>
@@ -404,26 +404,26 @@
                                     <li>P15,000 charge for lost or damaged keys.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-ban me-2 text-secondary"></i>8. Cancellations and Refunds</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-ban me-2"></i>8. Cancellations and Refunds</h5>
                                 <ul>
                                     <li>Customers may cancel reservations at any time.</li>
                                     <li>No refunds provided for cancellations, regardless of reason.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-exclamation-triangle me-2 text-secondary"></i>9. Liabilities and Legal Use</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-exclamation-triangle me-2"></i>9. Liabilities and Legal Use</h5>
                                 <ul>
                                     <li>Company not liable for valuables left in the car.</li>
                                     <li>Vehicle must be used for lawful purposes only.</li>
                                     <li>Renter responsible for unauthorized driver use.</li>
                                 </ul>
 
-                                <h5 class="mt-4 mb-3"><i class="fas fa-gavel me-2 text-secondary"></i>10. Legal Action</h5>
+                                <h5 class="mt-4 mb-3" style="color: #2b3d5b;"><i class="fas fa-gavel me-2"></i>10. Legal Action</h5>
                                 <ul>
                                     <li>Company may demand vehicle return if agreement is violated.</li>
                                     <li>Renter responsible for court costs, attorney fees, and legal interest in case of violation.</li>
                                 </ul>
 
-                                <p class="mt-4 fw-bold">By making a reservation, you agree to abide by these policies. We reserve the right to refuse service to anyone who violates these terms.</p>
+                                <p class="mt-4 fw-bold" style="color: #2b3d5b;">By making a reservation, you agree to abide by these policies. We reserve the right to refuse service to anyone who violates these terms.</p>
                             </div>
                         </div>
                     </div>

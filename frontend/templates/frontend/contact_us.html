@@ -28,7 +28,7 @@
 
 {% block content %}
 <div class="contact-header text-center text-white py-5 mb-5">
-    <h1 class="display-4 mb-0"><i class="fas fa-envelope me-3"></i>Get in Touch</h1>
+    <h1 class="display-4 mb-0 audiowide-font"><i class="fas fa-envelope me-3"></i>Get in Touch</h1>
 </div>
 
 <div class="container">
@@ -36,7 +36,8 @@
         <div class="col-lg-7 mb-5">
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-                    <h2 class="card-title h3 mb-4">Send Us a Message</h2>
+                    <h2 class="card-title h3 mb-4 audiowide-font text-danger">Send Us a Message!</h2>
+                    <hr>
                     <form method="post">
                         {% csrf_token %}
                         <div class="mb-3">
@@ -70,37 +71,38 @@
         <div class="col-lg-5">
             <div class="card shadow-sm bg-light">
                 <div class="card-body p-4">
-                    <h2 class="card-title h3 mb-4">Contact Information</h2>
+                    <h2 class="card-title h3 mb-4 audiowide-font text-danger">Contact Information</h2>
+                    <hr>
                     <div class="d-flex mb-4">
                         <div class="flex-shrink-0 contact-icon me-3">
-                            <i class="fas fa-map-marker-alt text-secondary"></i>
+                            <i class="fas fa-map-marker-alt text-success"></i>
                         </div>
                         <div>
-                            <h3 class="h5 mb-1">Our Location</h3>
+                            <h3 class="h5 mb-1 text-danger">Our Location</h3>
                             <p class="mb-0">Ortega Subdivision, Kidapawan City</p>
                         </div>
                     </div>
                     <div class="d-flex mb-4">
                         <div class="flex-shrink-0 contact-icon me-3">
-                            <i class="fas fa-building text-secondary"></i>
+                            <i class="fas fa-building text-warning"></i>
                         </div>
                         <div>
-                            <h3 class="h5 mb-1">Company Name</h3>
+                            <h3 class="h5 mb-1 text-danger">Company Name</h3>
                             <p class="mb-0">CAR SHOW CAR RENTAL</p>
                         </div>
                     </div>
                     <div class="d-flex mb-4">
                         <div class="flex-shrink-0 contact-icon me-3">
-                            <i class="fas fa-truck text-secondary"></i>
+                            <i class="fas fa-truck text-danger"></i>
                         </div>
                         <div>
-                            <h3 class="h5 mb-1">Our Services</h3>
+                            <h3 class="h5 mb-1 text-danger">Our Services</h3>
                             <p class="mb-0">TRUCKING & ALLIED SERVICES</p>
                         </div>
                     </div>
                     <hr>
-                    <h3 class="h5 mb-3">Follow Us</h3>
-                    <a href="https://www.facebook.com/profile.php?id=61558045139930&mibextid=ZbWKwL" target="_blank" class="social-icon"><i class="fab fa-facebook-f text-secondary"></i></a>
+                    <h3 class="h5 mb-3 text-danger">Follow Us On:</h3>
+                    <a href="https://www.facebook.com/profile.php?id=61558045139930&mibextid=ZbWKwL" target="_blank" class="social-icon" title="Click me!"><i class="fab fa-facebook-f text-primary"></i></a>
                 </div>
             </div>
         </div>

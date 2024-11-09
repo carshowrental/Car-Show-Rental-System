@@ -5,27 +5,29 @@
 
 {% block content %}
 <section class="hero-section text-center py-5 text-white custom-color-1"
-         style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
->
-    <h1 class="display-4 mb-4 dancing-font">
-        <img src="{% static 'images/sure.png' %}" alt="Car Show Rental Logo">
+         style="border-top-left-radius: 10px; border-top-right-radius: 10px;" data-aos="fade-up">
+    <h1 class="display-4 mb-4 audiowide-font">
+        <img src="{% static 'images/logo1.png' %}" alt="Car Show Rental Logo">
+        <br>
         Car Show Rentals
     </h1>
     <p class="lead mb-4">Experience premium car rental, trucking, and allied services.</p>
     <a href="{% url 'cars' %}" class="btn btn-light btn-lg"><i class="fas fa-search me-2"></i>Explore Our Fleet</a>
 </section>
 
+<br>
+
 {% if featured_cars %}
-<section class="featured-cars py-5" style="background-color: #adbbc6;">
-    <h2 class="text-center mb-4" style="color: #333;"><i class="fas fa-star me-2"></i>Featured Vehicles</h2>
+<section class="featured-cars py-5" style="background-color: #adbbc6;" data-aos="fade-up">
+    <h2 class="text-center mb-4 revalia-font" style="color: #333;"><i class="fas fa-star me-2"></i>Featured Vehicles</h2>
     <div class="row mx-2">
         {% for car in featured_cars %}
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" data-aos="fade-up">
                 <div class="card h-100">
                     <img src="{{ car.get_main_image.image.url }}" class="card-img-top" height="250" alt="{{ car.brand }} {{ car.model }}" style="object-fit: contain;">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-car me-2 text-danger"></i>{{ car.brand }} {{ car.model }}</h5>
-                        <p class="card-text"><i class="fas fa-tag me-2 text-danger"></i>₱{{ car.daily_rate }} / day</p>
+                        <h5 class="card-title audiowide-font"><i class="fas fa-car me-2 text-danger"></i>{{ car.brand }} {{ car.model }}</h5>
+                        <p class="card-text text-success"><i class="fas fa-tag me-2 text-danger"></i>₱{{ car.daily_rate }} / day</p>
                         <a href="{% url 'car_detail' car.id %}" class="btn btn-outline-danger"><i class="fas fa-info-circle me-2"></i>View Details</a>
                     </div>
                 </div>
@@ -35,10 +37,12 @@
 </section>
 {% endif %}
 
-<section class="p-5" style="background-color: #8a8fa3;">
-    <h2 class="text-center mb-4" style="color: #333;"><i class="fas fa-check-circle me-2"></i>Why Choose Car Show?</h2>
+<br>
+
+<section class="p-5" style="background-color: #8a8fa3;" data-aos="fade-up">
+    <h2 class="text-center mb-4 audiowide-font" style="color: #333;"><i class="fas fa-check-circle me-2"></i>Why Choose Car Show?</h2>
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="fade-up">
             <div class="card h-100 bg-light text-dark">
                 <div class="card-body text-center">
                     <i class="fas fa-car-alt feature-icon mb-3 text-danger"></i>
@@ -47,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="fade-up">
             <div class="card h-100 bg-light text-dark">
                 <div class="card-body text-center">
                     <i class="fas fa-truck feature-icon mb-3 text-danger"></i>
@@ -56,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" data-aos="fade-up">
             <div class="card h-100 bg-light text-dark">
                 <div class="card-body text-center">
                     <i class="fas fa-cogs feature-icon mb-3 text-danger"></i>
@@ -68,8 +72,8 @@
     </div>
 </section>
 
-<section class="text-center py-5 text-light" style="background-color: #374254;">
-    <h2 class="mb-4"><i class="fas fa-calendar-alt me-2"></i>Ready to Hit the Road?</h2>
+<section class="text-center py-5 text-light" style="background-color: #374254;" data-aos="fade-up">
+    <h2 class="mb-4 audiowide-font"><i class="fas fa-calendar-alt me-2" ></i>Ready to Hit the Road?</h2>
     <p class="lead mb-4">Book your dream vehicle today and start your journey!</p>
     <a href="{% url 'cars' %}" class="btn btn-light btn-lg"><i class="fas fa-car me-2"></i>Rent Now</a>
 </section>

@@ -4,10 +4,11 @@
 {% block title %}Our Fleet - Car Show Rentals{% endblock %}
 
 {% block content %}
-<section class="py-4 text-dark rounded" style="background-color: #d3d3d3;">
+<section class="py-4 text-dark rounded" style="background-color: #d3d3d3;" data-aos="fade-up">
     <div class="container">
         <div class="mx-3">
-            <h2 class="text-center mb-4 text-dark"><i class="fas fa-search me-2"></i>Find Your Perfect Ride</h2>
+            <h2 class="text-center mb-4 text-dark audiowide-font"><i class="fas fa-search me-2"></i>Find Your Perfect Ride</h2>
+            <hr>
             <form action="" method="get" class="row g-3 align-items-end">
                 <div class="col-md-3 col-sm-6">
                     <label for="search" class="form-label">Search</label>
@@ -41,11 +42,11 @@
     <div class="container">
         <div class="row">
             {% for car in cars %}
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
                     <div class="card h-100 shadow-sm car-card">
                         <img src="{{ car.get_main_image.image.url }}" class="card-img-top" height="250" alt="{{ car.brand }} {{ car.model }}" style="object-fit: contain;">
                         <div class="card-body">
-                            <h5 class="card-title text-danger"><i class="fas fa-car me-2"></i>{{ car.brand }} {{ car.model }}</h5>
+                            <h5 class="card-title audiowide-font"><i class="fas fa-car me-2"></i>{{ car.brand }} {{ car.model }}</h5>
                             <p class="card-text">
                                 <span class="badge bg-danger"><i class="fas fa-tag me-1"></i>{{ car.get_car_type_display }}</span>
                                 <span class="float-end text-success"><i class="fas fa-peso-sign me-1"></i>{{ car.daily_rate }}/day</span>
