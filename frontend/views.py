@@ -501,6 +501,39 @@ def view_payment(request, reservation_id):
             reservation.payment_type = payment_type
             reservation.save()
 
+            # Prepare admin notification message
+            admin_message = (
+                f"New Reservation - {status.upper()}!\n"
+                f"Car: {reservation.car.brand} {reservation.car.model}\n"
+                f"Customer: {reservation.user.get_full_name()}\n"
+                f"Amount: ₱{amount:,.2f}\n"
+                f"Start: {reservation.start_datetime.strftime('%b %d, %Y - %I:%M %p')}\n"
+                f"End: {reservation.end_datetime.strftime('%b %d, %Y - %I:%M %p')}"
+            )
+
+            # Send SMS to admin
+            try:
+                payload = {
+                    "secret": settings.TEAMS_SMS_API_SECRET,
+                    "mode": "devices",
+                    "device": settings.TEAMS_SMS_DEVICE_ID,
+                    "sim": 1,
+                    "priority": 1,
+                    "phone": settings.ADMIN_PHONE_NUMBER,
+                    "message": admin_message
+                }
+
+                response = requests.post(
+                    "https://sms.teamssprogram.com/api/send/sms",
+                    params=payload,
+                    timeout=10
+                )
+                response.raise_for_status()
+                response.json()
+
+            except Exception as e:
+                print(f"Error sending SMS: {str(e)}")
+
             messages.success(request, 'Payment processed successfully')
             return redirect('payment_confirmation', reservation_id=reservation_id)
 

@@ -192,7 +192,10 @@ CELERY_TIMEZONE = 'Asia/Manila'
 
 # Teams SMS Program API Configuration
 TEAMS_SMS_API_SECRET = "c05c90a95a9925ec7011ea19b7eeadf6a79b767e"
-TEAMS_SMS_DEVICE_ID = "00000000-0000-0000-6255-d4715bb82e99"  # Replace with your device ID
+TEAMS_SMS_DEVICE_ID = "00000000-0000-0000-6255-d4715bb82e99"
+
+# Admin Phone Number
+ADMIN_PHONE_NUMBER = '+639512034848'
 
 # Logging Configuration
 LOGGING = {
