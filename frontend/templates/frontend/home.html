@@ -4,15 +4,20 @@
 {% block title %}Welcome to Car Show Rentals{% endblock %}
 
 {% block content %}
-<section class="hero-section text-center py-5 text-white bg-danger">
-    <h1 class="display-4 mb-4"><i class="fas fa-car me-3"></i>Car Show Rentals</h1>
+<section class="hero-section text-center py-5 text-white custom-color-1"
+         style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
+>
+    <h1 class="display-4 mb-4 dancing-font">
+        <img src="{% static 'images/sure.png' %}" alt="Car Show Rental Logo">
+        Car Show Rentals
+    </h1>
     <p class="lead mb-4">Experience premium car rental, trucking, and allied services.</p>
     <a href="{% url 'cars' %}" class="btn btn-light btn-lg"><i class="fas fa-search me-2"></i>Explore Our Fleet</a>
 </section>
 
 {% if featured_cars %}
-<section class="featured-cars py-5" style="background-color: #f8f9fa;">
-    <h2 class="text-center mb-4" style="color: #333;"><i class="fas fa-star me-2 text-danger"></i>Featured Vehicles</h2>
+<section class="featured-cars py-5" style="background-color: #adbbc6;">
+    <h2 class="text-center mb-4" style="color: #333;"><i class="fas fa-star me-2"></i>Featured Vehicles</h2>
     <div class="row mx-2">
         {% for car in featured_cars %}
             <div class="col-md-4 mb-4">
@@ -30,8 +35,8 @@
 </section>
 {% endif %}
 
-<section class="bg-dark p-5">
-    <h2 class="text-danger text-center mb-4"><i class="fas fa-check-circle me-2"></i>Why Choose Car Show?</h2>
+<section class="p-5" style="background-color: #8a8fa3;">
+    <h2 class="text-center mb-4" style="color: #333;"><i class="fas fa-check-circle me-2"></i>Why Choose Car Show?</h2>
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card h-100 bg-light text-dark">
@@ -63,7 +68,7 @@
     </div>
 </section>
 
-<section class="text-center py-5 bg-danger text-light">
+<section class="text-center py-5 text-light" style="background-color: #374254;">
     <h2 class="mb-4"><i class="fas fa-calendar-alt me-2"></i>Ready to Hit the Road?</h2>
     <p class="lead mb-4">Book your dream vehicle today and start your journey!</p>
     <a href="{% url 'cars' %}" class="btn btn-light btn-lg"><i class="fas fa-car me-2"></i>Rent Now</a>

@@ -12,8 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+        .dancing-font {
+            font-family: 'Dancing Script';
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
+            background-color: #2b3d5b;
         }
         .navbar {
             box-shadow: 0 2px 4px rgba(0,0,0,.1);
@@ -34,6 +41,10 @@
         .feature-icon {
             font-size: 2rem;
             color: #FF0000;
+        }
+        .custom-color-1 {
+            background-color: #4a5c6a;
+            color: #2b3d5b;
         }
     </style>
     {% block extra_css %}{% endblock %}
@@ -59,19 +70,19 @@
         {% endif %}
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-color-1">
         <div class="container">
-            <a class="navbar-brand text-danger" href="{% url 'home' %}"><i class="fas fa-car-side me-2"></i>Car Show</a>
+            <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-car-side me-2"></i>Car Show</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home text-danger me-1"></i> Home</a>
+                        <a class="nav-link" href="{% url 'home' %}" style="color: #ffffff;"><i class="fas fa-home me-1"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'cars' %}"><i class="fas fa-car text-danger me-1"></i> Vehicles</a>
+                        <a class="nav-link" href="{% url 'cars' %}" style="color: #ffffff;"><i class="fas fa-car me-1"></i> Vehicles</a>
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
@@ -89,10 +100,10 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <button class="nav-link btn btn-link" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt text-danger me-1"></i> Login</button>
+                            <button class="nav-link btn btn-link" data-bs-toggle="modal" data-bs-target="#loginModal" style="color: #ffffff;"><i class="fas fa-sign-in-alt me-1"></i> Login</button>
                         </li>
                         <li class="nav-item">
-                            <button class="nav-link btn btn-link" data-bs-toggle="modal" data-bs-target="#registerModal"><i class="fas fa-user-plus text-danger me-1"></i> Register</button>
+                            <button class="nav-link btn btn-link" data-bs-toggle="modal" data-bs-target="#registerModal" style="color: #ffffff;"><i class="fas fa-user-plus me-1"></i> Register</button>
                         </li>
                     {% endif %}
                 </ul>
