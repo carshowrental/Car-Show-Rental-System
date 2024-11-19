@@ -41,6 +41,12 @@
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(240, 230, 140, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
+        .nav-link:hover {
+            color: pink !important;
+        }
+        .dropdown-item:hover {
+            color: pink !important;
+        }
         .card {
             border: none;
             border-radius: 0.5rem;
@@ -85,27 +91,19 @@
             transform: translateX(0);
         }
 
-        @keyframes animation1 {
-            0% {color: red}
-            20% {color: green}
-            40% {color: orange}
-            60% {color: yellow}
-            80% {color: purple}
-            100% {color: cyan}
-        }
-        @keyframes animation2 {
-            0% {background-color: red}
-            20% {background-color: green}
-            40% {background-color: orange}
-            60% {background-color: yellow}
-            80% {background-color: purple}
-            100% {background-color: cyan}
-        }
-
         @media (max-width: 500px) {
             .home-logo {
                 width: 100%;
                 max-width: 100%;
+                overflow: hidden;
+            }
+            .reservation-center {
+                text-align: center;
+            }
+            .lead {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
         }
 
     </style>
@@ -151,7 +149,7 @@
                             <a class="nav-link" href="{% url 'reservations' %}" style="color: #ffffff;"><i class="fas fa-calendar-check me-1"></i> Reservations</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" style="color: #ffffff; animation: animation1 10s infinite alternate-reverse;">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-user me-1"></i> {{ user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">

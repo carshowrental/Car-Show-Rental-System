@@ -4161,3 +4161,130 @@ INFO 2024-11-08 18:38:04,307 tasks 3912 8792 Sent 0 pickup reminders and 0 retur
 INFO 2024-11-08 18:38:07,937 tasks 3912 8792 Updated statuses: 0 activated, 0 completed
 INFO 2024-11-08 18:38:11,277 tasks 3912 8792 Successfully cancelled 0 partial payment reservations
 INFO 2024-11-08 18:38:14,835 tasks 3912 8792 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:08:02,173 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:08:07,348 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:08:10,276 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+ERROR 2024-11-09 17:08:14,150 tasks 7484 2900 SMS sending failed to +639103204148: Message has been queued for sending!
+INFO 2024-11-09 17:08:14,378 tasks 7484 2900 Successfully cancelled 1 partial payment reservations
+INFO 2024-11-09 17:08:17,065 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:08:19,654 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:08:22,525 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:08:26,141 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:09:02,763 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:09:05,547 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:09:08,157 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:09:11,122 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:10:02,508 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:10:05,266 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:10:07,849 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:10:10,660 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:11:02,982 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:11:05,593 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:11:08,370 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:11:10,929 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:12:02,585 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:12:06,219 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:12:09,017 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:12:11,855 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:13:02,959 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:13:05,501 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:13:08,264 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:13:11,016 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:14:02,564 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:14:05,285 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:14:08,100 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:14:10,862 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:15:02,882 tasks 7484 2900 Successfully cancelled 0 pending reservations
+ERROR 2024-11-09 17:15:06,859 tasks 7484 2900 SMS sending failed to +639910135803: Message has been queued for sending!
+INFO 2024-11-09 17:15:07,314 tasks 7484 2900 Updated statuses: 1 activated, 0 completed
+INFO 2024-11-09 17:15:09,937 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+ERROR 2024-11-09 17:15:14,532 tasks 7484 2900 SMS sending failed to +639910135803: Message has been queued for sending!
+INFO 2024-11-09 17:15:14,756 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:16:02,914 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:16:06,637 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:16:10,188 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:16:16,621 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:17:02,618 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:17:05,221 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:17:08,577 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:17:11,626 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:18:02,767 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:18:05,896 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:18:08,580 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:18:11,142 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:19:02,759 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:19:05,324 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:19:07,831 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:19:10,612 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:20:02,621 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:20:05,145 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:20:07,910 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:20:10,953 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:21:03,064 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:21:05,645 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:21:08,160 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:21:10,994 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:22:02,740 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:22:05,552 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:22:08,496 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:22:11,056 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:23:02,593 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:23:05,394 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:23:08,175 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:23:10,781 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:24:02,857 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:24:05,386 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:24:08,198 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:24:10,744 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:25:02,582 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:25:05,326 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:25:07,861 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:25:10,877 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:26:02,547 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:26:05,339 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:26:08,150 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:26:10,721 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:27:02,927 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:27:06,135 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:27:18,977 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:27:21,555 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:28:02,621 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:28:05,355 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:28:08,180 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:28:11,820 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:29:02,786 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:29:06,412 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:29:13,071 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:29:15,631 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:30:02,919 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:30:05,675 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:30:08,378 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:30:11,241 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:31:10,063 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:31:21,392 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:31:24,154 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:31:27,970 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:32:02,564 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:32:05,369 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:32:08,176 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:32:10,954 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:33:02,826 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:33:05,540 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:33:08,050 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:33:12,388 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:34:02,562 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:34:05,232 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:34:08,109 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:34:10,953 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:35:02,528 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:35:05,388 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:35:07,893 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:35:11,686 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:36:02,516 tasks 7484 2900 Successfully cancelled 0 partial payment reservations
+INFO 2024-11-09 17:36:05,395 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:36:08,291 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:36:11,131 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:37:02,812 tasks 7484 2900 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-11-09 17:37:05,426 tasks 7484 2900 Successfully cancelled 0 pending reservations
+INFO 2024-11-09 17:37:08,112 tasks 7484 2900 Updated statuses: 0 activated, 0 completed
+INFO 2024-11-09 17:37:10,636 tasks 7484 2900 Successfully cancelled 0 partial payment reservations

@@ -506,7 +506,7 @@ def view_payment(request, reservation_id):
                 f"New Reservation - {status.upper()}!\n"
                 f"Car: {reservation.car.brand} {reservation.car.model}\n"
                 f"Customer: {reservation.user.userprofile.full_name}\n"
-                f"Amount: ₱{amount:,.2f}\n"
+                f"Amount: {amount:,.2f}\n"
                 f"Start: {reservation.start_datetime.strftime('%b %d, %Y - %I:%M %p')}\n"
                 f"End: {reservation.end_datetime.strftime('%b %d, %Y - %I:%M %p')}"
             )
