@@ -5,13 +5,14 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="mb-4"><i class="fas fa-wallet me-2 text-secondary"></i>Payment for Reservation</h1>
+    <h1 class="mb-4 text-center audiowide-font text-light "><i class="fas fa-wallet me-2 text-danger"></i>Payment for Reservation</h1>
     <div class="card shadow-md p-4" style="background-color: #d3d3d3;">
         <div class="row justify-content-center g-4">
             <div class="col-md-6">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h2 class="card-title h4 mb-3"><i class="fas fa-info-circle text-secondary me-2"></i>Reservation Details</h2>
+                        <h2 class="card-title h4 mb-3 audiowide-font"><i class="fas fa-info-circle text-secondary me-2"></i>Reservation Details</h2>
+                        <hr>
                         <p><strong><i class="fas fa-car me-1"></i> Car:</strong> {{ reservation.car.brand }} {{ reservation.car.model }}</p>
                         <p><strong><i class="fas fa-calendar-alt me-1"></i> Start Date:</strong> {{ reservation.start_datetime }}</p>
                         <p><strong><i class="fas fa-calendar-check me-1"></i> End Date:</strong> {{ reservation.end_datetime }}</p>
@@ -27,24 +28,25 @@
                             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                           </svg>
                           <div>
-                            Please scan the QR code below to pay with GCash!
+                            Take a screenshot and scan the QR code below to pay with GCash!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                           </div>
                         </div>
                         <div class="text-center mb-4">
-                            <h2 class="card-title h4 mb-3"><i class="fas fa-mobile-alt text-secondary me-2"></i>GCash Payment</h2>
+                            <h2 class="card-title h4 mb-3 audiowide-font"><i class="fas fa-mobile-alt text-secondary me-2"></i>GCash Payment</h2>
+                            <hr>
                             <img src="{% static 'images/gcash_qr.jpg' %}" alt="GCash QR Code" class="img-fluid mb-3" style="max-width: 200px;">
                             <p><strong><i class="fas fa-tag me-1"></i>Total Price:</strong> ₱{{ reservation.total_price }}</p>
                         </div>
                         <div id="receiptAlertPlaceholder"></div>
-
+                        <hr>
                         <form method="post" enctype="multipart/form-data" id="receiptForm">
                             {% csrf_token %}
 
 
                             <!-- Payment Type Selection -->
                             <div class="mb-3">
-                                <label class="form-label">Payment Type</label>
+                                <label class="form-label"><strong>Payment Type</strong></label>
                                 <div class="d-flex gap-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="payment_type" id="fullPayment" value="full" checked>
@@ -62,7 +64,7 @@
                             </div>
 
                             <div class="mb-2">
-                                <label for="receipt" class="form-label"><i class="fas fa-file-upload me-1"></i>Upload your GCash payment receipt</label>
+                                <label for="receipt" class="form-label"><i class="fas fa-file-upload me-1"></i><strong>Upload your GCash payment receipt:</strong></label>
                                 <input type="file" class="form-control" id="receipt" name="receipt" accept="image/*" {% if not reservation.receipt_image %}required{% endif %}>
                                 <div id="processing-status" class="text-muted mt-2" style="display: none;">
                                     Processing image... Please wait...
@@ -83,11 +85,11 @@
                             </div>
 
                             <div class="mb-2">
-                                <label for="reference_number" class="form-label"><i class="fas fa-barcode me-1"></i>Reference Number</label>
+                                <label for="reference_number" class="form-label"><i class="fas fa-barcode me-1"></i><strong>Reference Number:</strong></label>
                                 <input type="text" class="form-control" id="reference_number" name="reference_number" value="{{ reservation.reference_number|default:'' }}" required>
                             </div>
                             <div class="mb-2">
-                                <label for="amount" class="form-label"><i class="fas fa-peso-sign me-1"></i>Amount</label>
+                                <label for="amount" class="form-label"><i class="fas fa-peso-sign me-1"></i><strong>Amount:</strong></label>
                                 <input type="number" class="form-control" id="amount" name="amount" step="0.01" value="{{ reservation.amount|default:'' }}" required>
                             </div>
                             <button type="submit" class="btn btn-danger w-100 mt-2"><i class="fas fa-upload me-1"></i>Upload Receipt</button>
