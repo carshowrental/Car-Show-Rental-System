@@ -172,7 +172,7 @@
     </nav>
 
     <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content text-light" style="background-color: #1f1f1f;">
                 <div class="modal-header border-0">
@@ -182,7 +182,7 @@
                     <div class="text-center mb-4">
                         <img src="{% static 'images/logo.png' %}" alt="Car Show Rentals Logo" class="img-fluid" style="max-width: 200px;">
                     </div>
-                    <form method="POST" action="{% url 'login' %}">
+                    <form method="POST" action="{% url 'login' %}" id="loginForm">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="login-username" class="form-label">Username</label>
@@ -222,7 +222,7 @@
     </div>
 
     <!-- Register Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-light" style="background-color: #1f1f1f;">
                 <div class="modal-header border-0">
@@ -233,7 +233,7 @@
                         <img src="{% static 'images/logo.png' %}" alt="Car Show Rentals Logo" class="img-fluid" style="max-width: 200px;">
 <!--                        <h3 class="monoton-font">Create Account</h3>-->
                     </div>
-                    <form method="POST" action="{% url 'register' %}">
+                    <form method="POST" action="{% url 'register' %}" id="registerForm">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -283,8 +283,28 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <div class="alert alert-secondary mb-2" role="alert">
+                                <p class="mb-2">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    By registering an account with Car Show Car Rental, you agree that all information provided is accurate and true. Any false or misleading information may result in the suspension or termination of your account, as well as legal action under the applicable Republic Act No. 10173 (Data Privacy Act of 2012) for fraud or misrepresentation.
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    By clicking "I Agree," you acknowledge that you have read, understood, and agree to these terms.
+                                </p>
+                            </div>
+                            <div class="form-check ms-2">
+                                <input class="form-check-input" type="checkbox" id="agreeToTerms" required>
+                                <label class="form-check-label fw-bold" for="agreeToTerms">
+                                    I Agree to the terms above
+                                </label>
+                            </div>
+                        </div>
                         <div class="d-grid gap-2 mt-2">
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-user-plus me-2"></i>Register</button>
+                            <button type="submit" class="btn btn-danger" id="registerButton" disabled>
+                                <i class="fas fa-user-plus me-2"></i>Register
+                            </button>
                         </div>
                     </form>
                     <div class="text-center mt-3">
@@ -300,7 +320,7 @@
     </div>
 
     <!-- Forgot Password Modal -->
-    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header border-0">
@@ -310,7 +330,7 @@
                     <div class="text-center mb-4">
                         <img src="{% static 'images/logo.png' %}" alt="Car Show Rentals Logo" class="img-fluid" style="max-width: 200px;">
                     </div>
-                    <form method="POST" action="{% url 'forgot_password' %}">
+                    <form method="POST" action="{% url 'forgot_password' %}" id="forgotPasswordForm">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="forgot-password-email" class="form-label">Email</label>
@@ -372,6 +392,144 @@
             duration: 2000,
             offset: 100,
         });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle login form submission
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    // Show error message but keep modal open
+                    const errorMessage = data.message || 'Invalid credentials';
+                    messages.error(errorMessage);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        // Handle registration form submission
+        const registerForm = document.getElementById('registerForm');
+        registerForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!agreeCheckbox.checked) {
+                messages.error('Please agree to the terms and conditions before registering.');
+                return;
+            }
+
+            const formData = new FormData(this);
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    const errorMessage = data.message || 'Registration failed';
+                    messages.error(errorMessage);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messages.error('An error occurred during registration. Please try again.');
+            }
+        });
+
+        // Handle forgot password form submission
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        forgotPasswordForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show success message
+                    messages.success(data.message);
+                    // Close the modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal'));
+                    modal.hide();
+                } else {
+                    // Show error message but keep modal open
+                    messages.error(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messages.error('An error occurred. Please try again.');
+            }
+        });
+
+        // Update messages object to include success method
+        const messages = {
+            error: function(message) {
+                showToast(message, 'danger');
+            },
+            success: function(message) {
+                showToast(message, 'success');
+            }
+        };
+
+        // Helper function to show toasts
+        function showToast(message, type) {
+            const toastContainer = document.querySelector('.toast-container');
+            const toastHTML = `
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header bg-${type} text-white">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong class="me-auto">Notification</strong>
+                        <small>Just now</small>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                    </div>
+                `;
+            toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+            const toast = new bootstrap.Toast(toastContainer.lastElementChild);
+            toast.show();
+        }
+
+        // Handle terms agreement checkbox
+        const agreeCheckbox = document.getElementById('agreeToTerms');
+        const registerButton = document.getElementById('registerButton');
+
+        agreeCheckbox.addEventListener('change', function() {
+            registerButton.disabled = !this.checked;
+        });
+    });
     </script>
     {% block extra_js %}{% endblock %}
 </body>

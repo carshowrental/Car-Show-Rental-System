@@ -48,30 +48,37 @@ def user_register(request):
 
         # Validate that all fields are filled
         if password1 != password2:
-            messages.error(request, 'Passwords do not match.')
+            message = 'Passwords do not match.'
         elif len(password1) < 8:
-            messages.error(request, 'Password must be at least 8 characters long.')
+            message = 'Password must be at least 8 characters long.'
         elif User.objects.filter(username=username).exists():
-            messages.error(request, 'This username is already taken. Please use a different username.')
+            message = 'This username is already taken.'
         elif User.objects.filter(email=email).exists():
-            messages.error(request, 'This email is already registered. Please use a different email.')
+            message = 'This email is already registered.'
         elif UserProfile.objects.filter(phone_number=phone_number).exists():
-            messages.error(request, 'This phone number is already registered. Please use a different phone number.')
+            message = 'This phone number is already registered.'
         else:
-            # Create the user
-            user = User.objects.create_user(username=username, email=email, password=password1)
+            try:
+                user = User.objects.create_user(username=username, email=email, password=password1)
+                UserProfile.objects.create(
+                    user=user,
+                    phone_number=phone_number,
+                    address=address
+                )
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    return JsonResponse({'success': True})
+                messages.success(request, f'Account created for {username}. You can now log in.')
+                return redirect('home')
+            except Exception as e:
+                message = str(e)
 
-            # Create the user profile with phone number and address
-            UserProfile.objects.create(
-                user=user,
-                phone_number=phone_number,
-                address=address
-            )
-
-            messages.success(request, f'Account created for {username}. You can now log in.')
-
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({
+                'success': False,
+                'message': message
+            })
+        messages.error(request, message)
         return redirect('home')
-
 
 
 def user_login(request):
@@ -79,13 +86,21 @@ def user_login(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        
         if user is not None:
             login(request, user)
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({'success': True})
             messages.success(request, 'You have been logged in.')
+            return redirect('home')
         else:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': False,
+                    'message': 'Invalid username or password.'
+                })
             messages.error(request, 'Invalid username or password.')
-
-        return redirect('home')
+            return redirect('home')
 
 
 @login_required
@@ -125,9 +140,26 @@ def forgot_password(request):
                 fail_silently=False,
             )
 
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Password reset instructions have been sent to your email.'
+                })
             messages.success(request, 'Password reset instructions have been sent to your email.')
         except User.DoesNotExist:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': False,
+                    'message': 'No user with that email address exists.'
+                })
             messages.error(request, 'No user with that email address exists.')
+        except Exception as e:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': False,
+                    'message': f'An error occurred: {str(e)}'
+                })
+            messages.error(request, f'An error occurred: {str(e)}')
 
         return redirect('home')
 
@@ -514,28 +546,23 @@ def view_payment(request, reservation_id):
             # Send SMS to admin
             try:
                 payload = {
-                    "secret": settings.TEAMS_SMS_API_SECRET,
-                    "mode": "devices",
-                    "device": settings.TEAMS_SMS_DEVICE_ID,
-                    "sim": 1,
-                    "priority": 1,
-                    "phone": settings.ADMIN_PHONE_NUMBER,
-                    "message": admin_message
+                    'apikey': settings.SEMAPHORE_API_KEY,
+                    'number': settings.ADMIN_PHONE_NUMBER,
+                    'message': admin_message,
+                    'sendername': settings.SEMAPHORE_SENDER_NAME
                 }
+                response = requests.post('https://api.semaphore.co/api/v4/messages', json=payload)
 
-                response = requests.post(
-                    "https://sms.teamssprogram.com/api/send/sms",
-                    params=payload,
-                    timeout=10
-                )
-                response.raise_for_status()
-                response.json()
-
+                if response.status_code == 200:
+                    messages.success(request, 'Payment processed successfully')
+                    return redirect('payment_confirmation', reservation_id=reservation_id)
+                else:
+                    messages.error(request, 'Failed to send SMS. Please try again.')
+                    return redirect('payment', reservation_id=reservation_id)
             except Exception as e:
-                print(f"Error sending SMS: {str(e)}")
+                messages.error(request, f"Error sending SMS: {str(e)}")
+                return redirect('payment', reservation_id=reservation_id)
 
-            messages.success(request, 'Payment processed successfully')
-            return redirect('payment_confirmation', reservation_id=reservation_id)
 
         except ValueError:
             messages.error(request, 'Invalid payment amount provided')

@@ -86,11 +86,24 @@
 
                             <div class="mb-2">
                                 <label for="reference_number" class="form-label"><i class="fas fa-barcode me-1"></i><strong>Reference Number:</strong></label>
-                                <input type="text" class="form-control" id="reference_number" name="reference_number" value="{{ reservation.reference_number|default:'' }}" required>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="reference_number" 
+                                       name="reference_number" 
+                                       value="{{ reservation.reference_number|default:'' }}" 
+                                       required 
+                                       readonly>
                             </div>
                             <div class="mb-2">
                                 <label for="amount" class="form-label"><i class="fas fa-peso-sign me-1"></i><strong>Amount:</strong></label>
-                                <input type="number" class="form-control" id="amount" name="amount" step="0.01" value="{{ reservation.amount|default:'' }}" required>
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="amount" 
+                                       name="amount" 
+                                       step="0.01" 
+                                       value="{{ reservation.amount|default:'' }}" 
+                                       required 
+                                       readonly>
                             </div>
                             <button type="submit" class="btn btn-danger w-100 mt-2"><i class="fas fa-upload me-1"></i>Upload Receipt</button>
                         </form>
@@ -190,25 +203,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    // Add event listeners to payment type radio buttons
-    paymentTypeInputs.forEach(input => {
-        input.addEventListener('change', () => {
-            const amount = amountInput.value;
-            if (amount) {
-                validateAmount(amount);
-            }
-        });
-    });
-
-    // Add validation to amount input
-    amountInput.addEventListener('change', function() {
-        validateAmount(this.value);
-    });
-
-    // Prevent default form submission if no image is selected
+    // Prevent form submission if validation fails
     form.addEventListener('submit', function(e) {
         const referenceNumber = referenceNumberInput.value.trim();
         const amount = amountInput.value.trim();
+
+        if (!referenceNumber || !amount) {
+            e.preventDefault();
+            showAlert('Please upload a receipt to get the reference number and amount.', 'warning');
+            return;
+        }
 
         // Validate amount if entered
         if (amount && !validateAmount(amount)) {
@@ -216,12 +220,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Only require the image if there's no existing image and no values in other fields
-        const needsImage = !currentImage && !referenceNumber && !amount;
-
-        if (needsImage && !receiptInput.files.length) {
+        // Check if receipt image is required
+        if (!receiptInput.files.length && !currentImage) {
             e.preventDefault();
-            showAlert('Please select an image or enter receipt details manually.', 'warning');
+            showAlert('Please select a receipt image.', 'warning');
+            return;
         }
     });
 
@@ -258,30 +261,54 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
 
             if (data.success) {
-                if (data.reference_number) {
+                if (data.reference_number && data.total_amount) {
                     referenceNumberInput.value = data.reference_number;
-                }
-                if (data.total_amount) {
                     amountInput.value = data.total_amount;
-                    validateAmount(data.total_amount);
+                    
+                    if (validateAmount(data.total_amount)) {
+                        showAlert('Receipt details extracted successfully!', 'success');
+                    }
+                } else {
+                    showAlert('Could not automatically extract receipt details. Please try uploading a clearer image.', 'warning');
+                    // Clear the fields if extraction failed
+                    referenceNumberInput.value = '';
+                    amountInput.value = '';
                 }
-
-                if (!data.reference_number || !data.total_amount) {
-                    showAlert('Could not automatically extract receipt details. Please enter them manually.', 'warning');
-                }
-                showAlert('Receipt details extracted successfully!', 'success');
             } else {
                 console.error('Error processing receipt:', data.error);
-                showAlert('Could not automatically extract receipt details. Please enter them manually.', 'warning');
+                showAlert('Could not automatically extract receipt details. Please try uploading a clearer image.', 'warning');
+                // Clear the fields if processing failed
+                referenceNumberInput.value = '';
+                amountInput.value = '';
             }
         } catch (error) {
             console.error('Error:', error);
-            showAlert('An error occurred while processing the image. Please try again or enter details manually.', 'danger');
+            showAlert('An error occurred while processing the image. Please try again!', 'danger');
+            // Clear the fields if there was an error
+            referenceNumberInput.value = '';
+            amountInput.value = '';
         } finally {
             // Hide processing status and enable submit button
             processingStatus.style.display = 'none';
             toggleSubmitButton(false);
         }
+    });
+
+    // Add event listeners to payment type radio buttons
+    paymentTypeInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            // Clear the fields when payment type changes
+            referenceNumberInput.value = '';
+            amountInput.value = '';
+            // Clear the receipt input
+            receiptInput.value = '';
+            // Hide the preview
+            imagePreview.style.display = 'none';
+            if (currentImage) {
+                currentImage.style.display = 'block';
+            }
+            showAlert('Please upload a new receipt for the selected payment type.', 'info');
+        });
     });
 });
 </script>

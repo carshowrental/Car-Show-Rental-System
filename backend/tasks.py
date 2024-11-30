@@ -16,9 +16,9 @@ class SMSService:
     """Handles all SMS-related operations using Teams SMS Program"""
 
     def __init__(self):
-        self.api_secret = settings.TEAMS_SMS_API_SECRET
-        self.device_id = settings.TEAMS_SMS_DEVICE_ID
-        self.api_url = "https://sms.teamssprogram.com/api/send/sms"
+        self.api_secret = settings.SEMAPHORE_API_KEY
+        self.sender_name = settings.SEMAPHORE_SENDER_NAME
+        self.api_url = "https://api.semaphore.co/api/v4/messages"
 
     def send_sms(self, phone_number, message):
         """Send SMS with proper error handling and logging"""
@@ -33,17 +33,14 @@ class SMSService:
             phone_number = '+63' + phone_number
 
         payload = {
-            "secret": self.api_secret,
-            "mode": "devices",
-            "device": self.device_id,
-            "sim": 1,
-            "priority": 1,
-            "phone": phone_number,
-            "message": message
+            'apikey': self.api_secret,
+            'number': phone_number,
+            'message': message,
+            'sendername': self.sender_name
         }
 
         try:
-            response = requests.post(self.api_url, params=payload, timeout=10)
+            response = requests.post(self.api_url, json=payload)
             response.raise_for_status()
             result = response.json()
 
@@ -155,15 +152,6 @@ def update_reservation_statuses():
                 end_datetime__gt=now
             )
 
-            # Get reservations that need to be completed
-            to_complete = Reservation.objects.select_related(
-                'user__userprofile',
-                'car'
-            ).filter(
-                status='active',
-                end_datetime__lte=now
-            )
-
             # Update and notify for activations
             activated_count = 0
             for reservation in to_activate:
@@ -178,22 +166,8 @@ def update_reservation_statuses():
                 )
                 sms_service.send_sms(reservation.user.userprofile.phone_number, message)
 
-            # Update and notify for completions
-            completed_count = 0
-            for reservation in to_complete:
-                reservation.status = 'completed'
-                reservation.save()
-                completed_count += 1
-
-                message = (
-                    f"Your reservation for {reservation.car.brand} {reservation.car.model} has been completed.\n\n"
-                    f"Thank you for choosing our service!\n\n"
-                    f"- Car Show Car Rental Team"
-                )
-                sms_service.send_sms(reservation.user.userprofile.phone_number, message)
-
-        logger.info(f"Updated statuses: {activated_count} activated, {completed_count} completed")
-        return f"Updated {activated_count} to active, {completed_count} to completed"
+        logger.info(f"Updated statuses: {activated_count} activated")
+        return f"Updated {activated_count} to active"
     except Exception as e:
         logger.error(f"Error in update_reservation_statuses: {str(e)}")
         raise

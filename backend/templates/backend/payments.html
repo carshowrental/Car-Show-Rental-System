@@ -14,7 +14,8 @@
                     <tr>
                         <th><i class="fas fa-user me-2"></i>User</th>
                         <th><i class="fas fa-money-bill-wave me-2"></i>Amount</th>
-                        <th><i class="fas fa-info-circle me-2"></i>Status</th>
+                        <th><i class="fas fa-calendar me-2"></i>Date</th>
+                        <th><i class="fas fa-check-circle me-2"></i>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,7 +23,18 @@
                     <tr>
                         <td>{{ payment.user }}</td>
                         <td>₱{{ payment.total_price }}</td>
-                        <td><span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>Paid</span></td>
+                        <td>{{ payment.created_at|date:"M d, Y" }}</td>
+                        <td>
+                            {% if payment.status == 'paid' %}
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle me-1"></i>Fully Paid
+                                </span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">
+                                    <i class="fas fa-clock me-1"></i>Partially Paid
+                                </span>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -50,7 +62,7 @@
 <script>
     $(document).ready(function() {
         $('.table').DataTable({
-            "order": [[ 4, "desc" ]],
+            "order": [[ 2, "desc" ]],  // Sort by date column by default
             "pageLength": 25
         });
     });

@@ -670,7 +670,7 @@ def edit_reservation(request, reservation_id):
         duration = int(request.POST.get('duration', 1))
         new_receipt_image = request.FILES.get('receipt_image')
         reference_number = request.POST.get('reference_number')
-        status = request.POST.get('status')
+        new_status = request.POST.get('status')  # Get the new status from POST data
 
         try:
             with transaction.atomic():
@@ -694,9 +694,9 @@ def edit_reservation(request, reservation_id):
                     raise ValueError("Invalid rate type")
 
                 # Calculate amount based on status
-                if status == 'paid':
+                if new_status == 'paid':
                     amount = total_price
-                elif status == 'partial':
+                elif new_status == 'partial':
                     amount = total_price / 2
                 else:  # pending
                     amount = reservation.amount
@@ -716,22 +716,54 @@ def edit_reservation(request, reservation_id):
                 reservation.end_datetime = end_datetime
                 reservation.reference_number = reference_number
                 reservation.amount = amount
-                reservation.status = status
+                reservation.status = new_status
                 reservation.total_price = total_price
                 reservation.save()
 
-                messages.success(request, 'Reservation updated successfully.')
+                # If the submitted status is 'completed', send SMS
+                if new_status == 'completed':
+                    try:
+                        # Get user's phone number
+                        user_profile = reservation.user.userprofile
+                        if user_profile.phone_number:
+                            # Prepare message
+                            message = (
+                                f"Your reservation for {reservation.car.brand} {reservation.car.model} has been completed.\n\n"
+                                f"Thank you for choosing our service!\n\n"
+                                f"- Car Show Car Rental Team"
+                            )
+
+                            # Send SMS using Semaphore
+                            payload = {
+                                'apikey': settings.SEMAPHORE_API_KEY,
+                                'number': user_profile.phone_number,
+                                'message': message,
+                                'sendername': settings.SEMAPHORE_SENDER_NAME
+                            }
+                            response = requests.post('https://api.semaphore.co/api/v4/messages', json=payload)
+
+                            if response.status_code == 200:
+                                messages.success(request, 'Reservation marked as completed and notification sent to user.')
+                            else:
+                                messages.warning(request, 'Reservation marked as completed but notification failed to send.')
+                    except Exception as e:
+                        print(f"SMS sending failed: {str(e)}")
+                        messages.warning(request, 'Reservation marked as completed but notification failed to send.')
+                else:
+                    messages.success(request, 'Reservation updated successfully.')
+
+                # Update the reservation status after SMS attempt
+                reservation.status = new_status
+                reservation.save()
+
                 return redirect('admin_reservations')
 
         except Car.DoesNotExist:
             messages.error(request, 'Selected car does not exist.')
-            return redirect('admin_reservations')
         except ValueError as e:
             messages.error(request, f'Invalid date format: {str(e)}')
-            return redirect('admin_reservations')
         except Exception as e:
             messages.error(request, f'An error occurred: {str(e)}')
-            return redirect('admin_reservations')
 
     # Calculate current duration based on start and end datetime
     if reservation.rate_type == 'hourly':
@@ -766,7 +798,7 @@ def delete_reservation(request, reservation_id):
 
 @admin_required
 def view_payments(request):
-    payment_list = Reservation.objects.filter(status='paid')
+    payment_list = Reservation.objects.filter(status__in=['paid', 'partial'])
     paginator = Paginator(payment_list, 10)  # Show 10 payments per page
     page = request.GET.get('page')
     payments = paginator.get_page(page)  # This handles all edge cases automatically

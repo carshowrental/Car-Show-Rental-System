@@ -82,35 +82,23 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# DATABASES = {
-#     "default": dj_database_url.parse(
-#         "postgresql://carshowrental_db_rp8h_user:zFO0acVWV3AYR6fqb7m70UMB3SPGgL5X@dpg-csj435tsvqrc73en8ppg-a.singapore-postgres.render.com/carshowrental_db_rp8h"
-#     )
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'FaYqFFWBHxAxfECKNQDhpAzCkJMpCPuJ',
-        'HOST': 'junction.proxy.rlwy.net',
-        'PORT': '54492',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+
 # DATABASES = {
-#     "default": dj_database_url.config(
-#         default="sqlite:///db.sqlite3",  # fallback for local development
-#         conn_max_age=600,
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'FaYqFFWBHxAxfECKNQDhpAzCkJMpCPuJ',
+#         'HOST': 'junction.proxy.rlwy.net',
+#         'PORT': '54492',
+#     }
 # }
 
 # Password validation
@@ -190,9 +178,9 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Manila'
 
-# Teams SMS Program API Configuration
-TEAMS_SMS_API_SECRET = "c05c90a95a9925ec7011ea19b7eeadf6a79b767e"
-TEAMS_SMS_DEVICE_ID = "00000000-0000-0000-6255-d4715bb82e99"
+# SEMAPHORE API Configuration
+SEMAPHORE_API_KEY = 'a52721d238d0a46db65ca70b688a44ae'
+SEMAPHORE_SENDER_NAME = 'CarShowKDP'
 
 # Admin Phone Number
 ADMIN_PHONE_NUMBER = '+639512034848'

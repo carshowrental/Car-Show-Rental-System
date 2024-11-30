@@ -102,7 +102,12 @@
 
                         <div class="mb-3">
                             <label for="full_name" class="form-label"><i class="fas fa-user me-2"></i>Full Name</label>
-                            <input type="text" class="form-control" id="full_name" name="full_name" value="{{ user_profile.full_name|default:'' }}">
+                            <input type="text"
+                                   class="form-control"
+                                   id="full_name"
+                                   name="full_name"
+                                   value="{{ user_profile.full_name|default:'' }}"
+                                   required readonly>
                         </div>
 
                         <div class="mb-3">
@@ -112,17 +117,36 @@
                                    id="license_number"
                                    name="license_number"
                                    value="{{ user_profile.license_number|default:'' }}"
-                                   required>
+                                   required readonly>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="license_expiration" class="form-label"><i class="fas fa-calendar-alt me-2"></i>Expiration Date</label>
                             <input type="date"
                                    class="form-control"
                                    id="license_expiration"
                                    name="license_expiration"
                                    value="{{ user_profile.license_expiration|date:'Y-m-d'|default:'' }}"
-                                   required>
+                                   required readonly>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="alert alert-secondary mb-2" role="alert">
+                                <p class="mb-2">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    By uploading your driver's license to Car Show Car Rental, you confirm that the license is valid, accurate, and belongs to you. You authorize Car Show Car Rental to use this information for verification purposes in accordance with our Privacy Policy. Any false or misleading information may result in the suspension or termination of your account, and may lead to legal action under Republic Act No. 10173 (Data Privacy Act of 2012).
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    By clicking "I Agree," you acknowledge that you have read, understood, and agree to these terms.
+                                </p>
+                            </div>
+                            <div class="form-check ms-2">
+                                <input class="form-check-input" type="checkbox" id="agreeToLicenseTerms" required>
+                                <label class="form-check-label fw-bold" for="agreeToLicenseTerms">
+                                    I Agree to the terms above
+                                </label>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary" style="float: right;"><i class="fas fa-sync-alt me-2"></i>Update License</button>
@@ -148,6 +172,140 @@ document.addEventListener('DOMContentLoaded', function() {
     const imagePreview = document.getElementById('imagePreview');
     const previewImage = imagePreview.querySelector('img');
     const currentImage = document.getElementById('currentImage');
+    const licenseForm = document.getElementById('licenseForm');
+    const agreeCheckbox = document.getElementById('agreeToLicenseTerms');
+
+    // Disable submit button by default
+    submitButton.disabled = true;
+
+    // Function to validate expiration date
+    function validateExpirationDate() {
+        const expirationDate = new Date(licenseExpirationInput.value);
+        const today = new Date();
+        
+        // Reset the date to start of day for accurate comparison
+        today.setHours(0, 0, 0, 0);
+        expirationDate.setHours(0, 0, 0, 0);
+        
+        return expirationDate >= today;
+    }
+
+    // Function to validate required fields
+    function validateLicenseFields() {
+        const fullName = licenseNameInput.value.trim();
+        const licenseNumber = licenseNumberInput.value.trim();
+        const expirationDate = licenseExpirationInput.value.trim();
+        
+        // Check if all required fields have values
+        const isValid = fullName && licenseNumber && expirationDate;
+        
+        // Check expiration date if it exists
+        if (expirationDate) {
+            const isValidExpiration = validateExpirationDate();
+            if (!isValidExpiration) {
+                showAlert("Driver's license has expired. Please provide a valid license.", 'danger');
+                submitButton.disabled = true;
+                return false;
+            }
+        }
+        
+        // Only enable submit if checkbox is checked AND all fields are filled
+        submitButton.disabled = !agreeCheckbox.checked || !isValid;
+        
+        return isValid;
+    }
+
+    // Enable/disable submit button based on checkbox and field validation
+    agreeCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            validateLicenseFields();
+        } else {
+            submitButton.disabled = true;
+        }
+    });
+
+    // Prevent form submission if validation fails
+    licenseForm.addEventListener('submit', function(e) {
+        if (!agreeCheckbox.checked) {
+            e.preventDefault();
+            showAlert('Please agree to the Driver\'s License Upload Permission Policy.', 'warning');
+            return;
+        }
+
+        if (!validateLicenseFields()) {
+            e.preventDefault();
+            showAlert('Please ensure all license details are filled out before updating.', 'warning');
+            return;
+        }
+
+        // Validate expiration date before submission
+        if (!validateExpirationDate()) {
+            e.preventDefault();
+            showAlert("Driver's license has expired. Please provide a valid license.", 'danger');
+            return;
+        }
+
+        // Check if there's no image and no existing values
+        const fileInput = this.querySelector('input[type="file"]');
+        const licenseName = licenseNameInput.value.trim();
+        const licenseNumber = licenseNumberInput.value.trim();
+        const expirationDate = licenseExpirationInput.value.trim();
+
+        // Only require the image if there's no existing image and no values in other fields
+        const needsImage = !currentImage && !licenseName && !licenseNumber && !expirationDate;
+
+        if (needsImage && !fileInput.files.length) {
+            e.preventDefault();
+            showAlert('Please select an image.', 'warning');
+        }
+    });
+
+    // Listen for changes in the license fields
+    [licenseNameInput, licenseNumberInput, licenseExpirationInput].forEach(input => {
+        input.addEventListener('input', function() {
+            // Clear any existing alerts when user starts typing
+            const existingAlert = alertPlaceholder.querySelector('.alert');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+            validateLicenseFields();
+        });
+    });
+
+    // Special handler for expiration date changes
+    licenseExpirationInput.addEventListener('change', function() {
+        if (this.value && !validateExpirationDate()) {
+            showAlert("Driver's license has expired. Please provide a valid license.", 'danger');
+            submitButton.disabled = true;
+        }
+    });
+
+    // Function to show Bootstrap alert
+    function showAlert(message, type = 'warning') {
+        // Remove any existing alerts
+        const existingAlert = alertPlaceholder.querySelector('.alert');
+        if (existingAlert) {
+            existingAlert.remove();
+        }
+
+        // Create new alert
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show mb-4`;
+        alertDiv.role = 'alert';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+
+        // Insert alert in the placeholder
+        alertPlaceholder.appendChild(alertDiv);
+
+        // Auto-dismiss after 5 seconds
+        setTimeout(() => {
+            const alert = bootstrap.Alert.getOrCreateInstance(alertDiv);
+            alert.close();
+        }, 5000);
+    }
 
     // Function to toggle submit button state
     function toggleSubmitButton(disabled) {
@@ -177,49 +335,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-
-    // Function to create and show Bootstrap alert
-    function showAlert(message, type = 'warning') {
-        // Remove any existing alerts
-        const existingAlert = alertPlaceholder.querySelector('.alert');
-        if (existingAlert) {
-            existingAlert.remove();
-        }
-
-        // Create new alert
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} alert-dismissible fade show mb-4`;
-        alertDiv.role = 'alert';
-        alertDiv.innerHTML = `
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        `;
-
-        // Insert alert in the placeholder
-        alertPlaceholder.appendChild(alertDiv);
-
-        // Auto-dismiss after 5 seconds
-        setTimeout(() => {
-            const alert = bootstrap.Alert.getOrCreateInstance(alertDiv);
-            alert.close();
-        }, 5000);
-    }
-
-    // Prevent default form submission if no image is selected
-    form.addEventListener('submit', function(e) {
-        const fileInput = this.querySelector('input[type="file"]');
-        const licenseName = licenseNameInput.value.trim();
-        const licenseNumber = licenseNumberInput.value.trim();
-        const expirationDate = licenseExpirationInput.value.trim();
-
-        // Only require the image if there's no existing image and no values in other fields
-        const needsImage = !currentImage && !licenseName && !licenseNumber && !expirationDate;
-
-        if (needsImage && !fileInput.files.length) {
-            e.preventDefault();
-            showAlert('Please select an image or enter license details manually.', 'warning');
-        }
-    });
 
     // Listen for file selection
     licenseImageInput.addEventListener('change', async function(e) {
@@ -266,15 +381,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 if (!data.full_name || !data.license_number || !data.expiration_date) {
-                    showAlert('Could not automatically extract license details. Please enter them manually.', 'warning');
+                    showAlert('Could not automatically extract license details. Please try again!', 'warning');
                 }
             } else {
                 console.error('Error processing license:', data.error);
-                showAlert('Could not automatically extract license details. Please enter them manually.', 'warning');
+                showAlert('Could not automatically extract license details. Please try again!', 'warning');
             }
         } catch (error) {
             console.error('Error:', error);
-            showAlert('An error occurred while processing the image. Please try again or enter details manually.', 'danger');
+            showAlert('An error occurred while processing the image. Please try again!', 'danger');
         } finally {
             // Hide processing status and enable submit button
             processingStatus.style.display = 'none';
