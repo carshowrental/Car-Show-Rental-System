@@ -581,7 +581,7 @@ def view_payment(request, reservation_id):
 
 def extract_gcash_info(image_file):
     """
-    Extract Reference Number and Total Amount from GCash receipt using OCR.Space API
+    Extract Reference Number, Total Amount, and Date from GCash receipt using OCR.Space API
     """
     url = "https://api.ocr.space/parse/image"
     api_key = settings.OCR_SPACE_API_KEY
@@ -605,16 +605,15 @@ def extract_gcash_info(image_file):
         }
 
         try:
-
             response = requests.post(url, files=files, data=payload)
-            response.raise_for_status()  # Raise an exception for bad status codes
+            response.raise_for_status()
 
             result = response.json()
 
             if result.get('ParsedResults'):
                 text = result['ParsedResults'][0]['ParsedText']
 
-                if not text.strip():  # Check if extracted text is empty
+                if not text.strip():
                     return None
 
                 lines = text.split('\n')
@@ -622,9 +621,10 @@ def extract_gcash_info(image_file):
                 # Initialize variables
                 ref_number = None
                 total_amount = None
+                receipt_date = None
 
                 # Method 1: Find Reference Number
-                ref_pattern = r'\d{4}\s*\d{3}\s*\d{6}'  # Pattern: XXXX XXX XXXXXX
+                ref_pattern = r'\d{4}\s*\d{3}\s*\d{6}'
                 for line in lines:
                     if 'ref' in line.lower() or 'reference' in line.lower():
                         ref_match = re.search(ref_pattern, line)
@@ -639,26 +639,23 @@ def extract_gcash_info(image_file):
                         amount_match = re.search(amount_pattern, line)
                         if amount_match:
                             amount_str = amount_match.group(1) or amount_match.group(2)
-                            # Remove commas and convert to float
                             total_amount = amount_str.replace(',', '')
                             break
 
-                if not total_amount:  # Alternative method for Total Amount
-                    for line in lines:
-                        if 'amount sent' in line.lower():
-                            next_line_index = lines.index(line) + 1
-                            if next_line_index < len(lines):
-                                amount_match = re.search(amount_pattern, lines[next_line_index])
-                                if amount_match:
-                                    amount_str = amount_match.group(1) or amount_match.group(2)
-                                    total_amount = amount_str.replace(',', '')
-                                    break
+                # Method 3: Find Date
+                date_pattern = r'(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+\d{4}'
+                for line in lines:
+                    date_match = re.search(date_pattern, line)
+                    if date_match:
+                        receipt_date = date_match.group(0)
+                        break
 
                 # Only return data if at least one field was found
-                if ref_number or total_amount:
+                if ref_number or total_amount or receipt_date:
                     return {
                         'reference_number': ref_number,
-                        'total_amount': total_amount
+                        'total_amount': total_amount,
+                        'receipt_date': receipt_date
                     }
 
             return None
@@ -706,6 +703,21 @@ def process_receipt(request):
         result = extract_gcash_info(receipt_image)
 
         if result and (result['reference_number'] or result['total_amount']):
+            # Check receipt date
+            if result.get('receipt_date'):
+                try:
+                    receipt_date = datetime.strptime(result['receipt_date'], '%b %d, %Y').date()
+                    current_date = timezone.localtime(timezone.now()).date()
+                    
+                    if receipt_date != current_date:
+                        return JsonResponse({
+                            'success': False,
+                            'error': 'This receipt has expired. Please provide a receipt from today.'
+                        })
+                except ValueError:
+                    print("Error parsing receipt date")
+                    # Continue processing even if date parsing fails
+                    pass
 
             detected_reference_number = result['reference_number']
             detected_amount = round(float(result['total_amount']), 2)

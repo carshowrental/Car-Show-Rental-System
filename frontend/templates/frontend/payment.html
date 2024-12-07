@@ -276,10 +276,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } else {
                 console.error('Error processing receipt:', data.error);
-                showAlert('Could not automatically extract receipt details. Please try uploading a clearer image.', 'warning');
+                showAlert(data.error || 'Could not automatically extract receipt details. Please try uploading a clearer image.', 'warning');
                 // Clear the fields if processing failed
                 referenceNumberInput.value = '';
                 amountInput.value = '';
+                // Clear the file input
+                receiptInput.value = '';
+                // Hide the preview
+                imagePreview.style.display = 'none';
+                if (currentImage) {
+                    currentImage.style.display = 'block';
+                }
             }
         } catch (error) {
             console.error('Error:', error);
