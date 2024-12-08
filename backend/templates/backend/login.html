@@ -7,7 +7,13 @@
     <title>Car Show Rental - Admin Login</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+        .audiowide-font {
+            font-family: 'Audiowide';
+        }
         :root {
             --primary-black: #1a1a1a;
             --accent-red: #ff0000;
@@ -117,16 +123,28 @@
             color: var(--accent-red);
             border-left: 4px solid var(--accent-red);
         }
+
+        .text-decoration-none:hover {
+            text-decoration: underline !important;
+        }
+
+        @media (max-width: 600px) {
+            .login-container {
+                margin: 0;
+                padding: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container login-container">
         <div class="login-form">
-            <div class="login-icon">
+            <div class="login-icon" style="margin-bottom: 0;">
                 <img src="{% static 'images/logo.png' %}" alt="Car Show Rental Logo">
             </div>
 
-            <h2>Car Show Admin</h2>
+            <h2 class="audiowide-font" style="margin-bottom: 0;">Admin</h2>
+            <hr>
 
             {% if messages %}
                 {% for message in messages %}
@@ -156,6 +174,9 @@
                             <i class="fas fa-lock"></i>
                         </span>
                         <input type="password" class="form-control" id="password" name="password" required>
+                        <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y text-dark" id="passwordToggle" style="z-index: 10;">
+                                <i class="fa-regular fa-eye" id="passwordToggleIcon"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -164,13 +185,32 @@
                         <i class="fas fa-arrow-right me-2"></i>Login
                     </button>
                 </div>
+                <hr>
                 <div class="text-center mt-3">
-                    <a href="{% url 'admin_forgot_password' %}" class="text-decoration-none">Forgot Password?</a>
+                    <a href="{% url 'admin_forgot_password' %}" class="text-decoration-none text-danger">Forgot Password?</a>
                 </div>
             </form>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Login show password
+            const passwordInput = document.getElementById('password');
+            const passwordToggleIcon = document.getElementById('passwordToggleIcon');
+            const passwordToggle = document.getElementById('passwordToggle') || passwordToggleIcon; // works for both button and icon versions
+
+            passwordToggle.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    passwordToggleIcon.classList.remove('fa-eye');
+                    passwordToggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    passwordToggleIcon.classList.remove('fa-eye-slash');
+                    passwordToggleIcon.classList.add('fa-eye');
+                }
+            });
+    </script>
 </body>
 </html>

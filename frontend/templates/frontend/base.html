@@ -196,6 +196,9 @@
                             <div class="input-group">
                                 <span class="input-group-text bg-secondary"><i class="fas fa-lock text-light"></i></span>
                                 <input type="password" class="form-control bg-secondary text-light" id="password" name="password" required>
+                                <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y text-dark" id="passwordToggle" style="z-index: 10;">
+                                <i class="fa-regular fa-eye" id="passwordToggleIcon"></i>
+                                </button>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -269,17 +272,17 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="password1" class="form-label">Password</label>
+                                <label for="password2" class="form-label">Password</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-secondary"><i class="fas fa-lock text-light"></i></span>
-                                    <input type="password" class="form-control bg-secondary text-light" id="password1" name="password1" required>
+                                    <input type="password" class="form-control bg-secondary text-light" id="password2" name="password1" required>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="password2" class="form-label">Confirm Password</label>
+                                <label for="password3" class="form-label">Confirm Password</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-secondary"><i class="fas fa-lock text-light"></i></span>
-                                    <input type="password" class="form-control bg-secondary text-light" id="password2" name="password2" required>
+                                    <input type="password" class="form-control bg-secondary text-light" id="password3" name="password2" required>
                                 </div>
                             </div>
                         </div>
@@ -529,6 +532,23 @@
         agreeCheckbox.addEventListener('change', function() {
             registerButton.disabled = !this.checked;
         });
+
+        // Login show password
+            const passwordInput = document.getElementById('password');
+            const passwordToggleIcon = document.getElementById('passwordToggleIcon');
+            const passwordToggle = document.getElementById('passwordToggle') || passwordToggleIcon; // works for both button and icon versions
+
+            passwordToggle.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    passwordToggleIcon.classList.remove('fa-eye');
+                    passwordToggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    passwordToggleIcon.classList.remove('fa-eye-slash');
+                    passwordToggleIcon.classList.add('fa-eye');
+                }
+            });
     });
     </script>
     {% block extra_js %}{% endblock %}
