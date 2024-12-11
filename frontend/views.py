@@ -633,14 +633,18 @@ def extract_gcash_info(image_file):
                             break
 
                 # Method 2: Find Total Amount
-                amount_pattern = r'₱\s*([\d,]+\.?\d*)|([\d,]+\.?\d*)'
+                total_amount = None
+                amount_pattern = r'[₱₽]\s*([\d,]+\.?\d*)'  # Matches both ₱ and ₽ symbols, allows commas
+
                 for line in lines:
-                    if 'total amount' in line.lower() or 'amount' in line.lower():
-                        amount_match = re.search(amount_pattern, line)
-                        if amount_match:
-                            amount_str = amount_match.group(1) or amount_match.group(2)
-                            total_amount = amount_str.replace(',', '')
+                    amount_match = re.search(amount_pattern, line)
+                    if amount_match:
+                        amount_str = amount_match.group(1)
+                        try:
+                            total_amount = float(amount_str.replace(',', ''))
                             break
+                        except ValueError:
+                            continue
 
                 # Method 3: Find Date
                 date_pattern = r'(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+\d{4}'
@@ -701,6 +705,7 @@ def process_receipt(request):
 
         # Process the image
         result = extract_gcash_info(receipt_image)
+        print(f"OCR Result: {result}")
 
         if result and (result['reference_number'] or result['total_amount']):
             # Check receipt date
