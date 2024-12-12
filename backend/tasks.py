@@ -58,39 +58,38 @@ class SMSService:
 @shared_task
 def cancel_pending_reservations():
     """Cancel reservations that have been pending for more than 1 hour"""
-    now = timezone.localtime(timezone.now())  # Current time
+    now = timezone.localtime(timezone.now())
     one_hour_ago = now - timedelta(hours=1)
     sms_service = SMSService()
 
     try:
         with transaction.atomic():
-            # Get the pending reservations that need to be cancelled
-            pending_reservations = Reservation.objects.select_related(
-                'user__userprofile',
-                'car'
-            ).filter(
-                status='pending',
-                created_at__lt=one_hour_ago,
-                start_datetime__gt=now
-            ).select_for_update()
+            # Lock and get pending reservations with related data
+            pending_reservations = (
+                Reservation.objects
+                .filter(
+                    status='pending',
+                    created_at__lt=one_hour_ago,
+                    start_datetime__gt=now
+                )
+                .prefetch_related('user', 'user__userprofile', 'car')
+                .select_for_update()
+            )
 
             cancelled_count = 0
             for reservation in pending_reservations:
                 try:
-                    # Double-check status before update
                     if reservation.status == 'pending':
                         reservation.status = 'cancelled'
                         reservation.save(update_fields=['status'])
                         cancelled_count += 1
 
-                        # Send cancellation message
                         message = (
                             f"Your reservation for {reservation.car.brand} {reservation.car.model} "
                             f"has been cancelled due to pending payment.\n\n"
                             f"- Car Show Car Rental Team"
                         )
                         sms_service.send_sms(reservation.user.userprofile.phone_number, message)
-                        
                         logger.info(f"Successfully cancelled pending reservation {reservation.id}")
                 except Exception as e:
                     logger.error(f"Error cancelling pending reservation {reservation.id}: {str(e)}")
@@ -111,25 +110,25 @@ def cancel_partial_payment_reservations():
 
     try:
         with transaction.atomic():
-            # Get partial payment reservations that have reached their start time
-            partial_reservations = Reservation.objects.select_related(
-                'user__userprofile',
-                'car'
-            ).filter(
-                status='partial',
-                start_datetime__lte=now
-            ).select_for_update()
+            # Lock and get partial payment reservations with related data
+            partial_reservations = (
+                Reservation.objects
+                .filter(
+                    status='partial',
+                    start_datetime__lte=now
+                )
+                .prefetch_related('user', 'user__userprofile', 'car')
+                .select_for_update()
+            )
 
             cancelled_count = 0
             for reservation in partial_reservations:
                 try:
-                    # Double-check status before update
                     if reservation.status == 'partial':
                         reservation.status = 'cancelled'
                         reservation.save(update_fields=['status'])
                         cancelled_count += 1
 
-                        # Send cancellation message
                         message = (
                             f"Your reservation for {reservation.car.brand} {reservation.car.model} "
                             f"has been cancelled due to incomplete payment.\n\n"
@@ -137,7 +136,6 @@ def cancel_partial_payment_reservations():
                             f"- Car Show Car Rental Team"
                         )
                         sms_service.send_sms(reservation.user.userprofile.phone_number, message)
-                        
                         logger.info(f"Successfully cancelled partial payment reservation {reservation.id}")
                 except Exception as e:
                     logger.error(f"Error cancelling partial payment reservation {reservation.id}: {str(e)}")
@@ -158,43 +156,44 @@ def update_reservation_statuses():
 
     try:
         with transaction.atomic():
-            # Get reservations that need to be activated
-            to_activate = Reservation.objects.select_related(
-                'user__userprofile',
-                'car'
-            ).filter(
-                status='paid',
-                start_datetime__lte=now,
-                end_datetime__gt=now
-            ).select_for_update()
+            # Lock and get reservations that need to be activated with related data
+            to_activate = (
+                Reservation.objects
+                .filter(
+                    status='paid',
+                    start_datetime__lte=now,
+                    end_datetime__gt=now
+                )
+                .prefetch_related('user', 'user__userprofile', 'car')
+                .select_for_update()
+            )
 
-            # Get reservations that need to be completed
-            to_complete = Reservation.objects.select_related(
-                'user__userprofile',
-                'car'
-            ).filter(
-                status='active',
-                end_datetime__lte=now
-            ).select_for_update()
+            # Lock and get reservations that need to be completed with related data
+            to_complete = (
+                Reservation.objects
+                .filter(
+                    status='active',
+                    end_datetime__lte=now
+                )
+                .prefetch_related('user', 'user__userprofile', 'car')
+                .select_for_update()
+            )
 
             # Update and notify for activations
             activated_count = 0
             for reservation in to_activate:
                 try:
-                    # Double-check status before update
                     if reservation.status == 'paid':
                         reservation.status = 'active'
                         reservation.save(update_fields=['status'])
                         activated_count += 1
                         
-                        # Send notification after successful save
                         message = (
                             f"Your reservation for {reservation.car.brand} {reservation.car.model} is now active.\n\n"
                             f"Enjoy your ride!\n\n"
                             f"- Car Show Car Rental Team"
                         )
                         sms_service.send_sms(reservation.user.userprofile.phone_number, message)
-                        
                         logger.info(f"Successfully activated reservation {reservation.id}")
                 except Exception as e:
                     logger.error(f"Error activating reservation {reservation.id}: {str(e)}")
@@ -204,20 +203,17 @@ def update_reservation_statuses():
             completed_count = 0
             for reservation in to_complete:
                 try:
-                    # Double-check status before update
                     if reservation.status == 'active':
                         reservation.status = 'completed'
                         reservation.save(update_fields=['status'])
                         completed_count += 1
                         
-                        # Send notification after successful save
                         message = (
                             f"Your reservation for {reservation.car.brand} {reservation.car.model} has been completed.\n\n"
                             f"Thank you for choosing Car Show Car Rental!\n\n"
                             f"- Car Show Car Rental Team"
                         )
                         sms_service.send_sms(reservation.user.userprofile.phone_number, message)
-                        
                         logger.info(f"Successfully completed reservation {reservation.id}")
                 except Exception as e:
                     logger.error(f"Error completing reservation {reservation.id}: {str(e)}")
