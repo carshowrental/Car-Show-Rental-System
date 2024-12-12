@@ -168,16 +168,16 @@ def update_reservation_statuses():
                 .select_for_update()
             )
 
-            # Lock and get reservations that need to be completed with related data
-            to_complete = (
-                Reservation.objects
-                .filter(
-                    status='active',
-                    end_datetime__lte=now
-                )
-                .prefetch_related('user', 'user__userprofile', 'car')
-                .select_for_update()
-            )
+            # # Lock and get reservations that need to be completed with related data
+            # to_complete = (
+            #     Reservation.objects
+            #     .filter(
+            #         status='active',
+            #         end_datetime__lte=now
+            #     )
+            #     .prefetch_related('user', 'user__userprofile', 'car')
+            #     .select_for_update()
+            # )
 
             # Update and notify for activations
             activated_count = 0
@@ -201,23 +201,23 @@ def update_reservation_statuses():
 
             # Update completed reservations
             completed_count = 0
-            for reservation in to_complete:
-                try:
-                    if reservation.status == 'active':
-                        reservation.status = 'completed'
-                        reservation.save(update_fields=['status'])
-                        completed_count += 1
-                        
-                        message = (
-                            f"Your reservation for {reservation.car.brand} {reservation.car.model} has been completed.\n\n"
-                            f"Thank you for choosing Car Show Car Rental!\n\n"
-                            f"- Car Show Car Rental Team"
-                        )
-                        sms_service.send_sms(reservation.user.userprofile.phone_number, message)
-                        logger.info(f"Successfully completed reservation {reservation.id}")
-                except Exception as e:
-                    logger.error(f"Error completing reservation {reservation.id}: {str(e)}")
-                    continue
+            # for reservation in to_complete:
+            #     try:
+            #         if reservation.status == 'active':
+            #             reservation.status = 'completed'
+            #             reservation.save(update_fields=['status'])
+            #             completed_count += 1
+            #
+            #             message = (
+            #                 f"Your reservation for {reservation.car.brand} {reservation.car.model} has been completed.\n\n"
+            #                 f"Thank you for choosing Car Show Car Rental!\n\n"
+            #                 f"- Car Show Car Rental Team"
+            #             )
+            #             sms_service.send_sms(reservation.user.userprofile.phone_number, message)
+            #             logger.info(f"Successfully completed reservation {reservation.id}")
+            #     except Exception as e:
+            #         logger.error(f"Error completing reservation {reservation.id}: {str(e)}")
+            #         continue
 
         logger.info(f"Updated statuses: {activated_count} activated, {completed_count} completed")
         return f"Updated {activated_count} to active, {completed_count} to completed"
