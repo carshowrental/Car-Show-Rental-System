@@ -4886,3 +4886,411 @@ INFO 2024-12-12 09:27:00,038 tasks 17356 11944 Successfully cancelled 0 pending 
 INFO 2024-12-12 09:27:00,044 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
 INFO 2024-12-12 09:27:00,050 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
 INFO 2024-12-12 09:27:00,058 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:28:00,029 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:28:00,037 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:28:00,043 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:28:00,049 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:29:00,021 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:29:00,045 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:29:00,054 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:29:00,059 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:30:00,025 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:30:00,041 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:30:00,050 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:30:00,056 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:31:00,027 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:31:00,035 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:31:00,040 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:31:00,048 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:32:00,035 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:32:00,045 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:32:00,048 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:32:00,053 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:33:00,010 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:33:00,022 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:33:00,030 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:33:00,042 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:34:00,071 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:34:00,083 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:34:00,091 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:34:00,097 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:35:00,028 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:35:00,036 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:35:00,042 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:35:00,057 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:36:00,025 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:36:00,029 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:36:00,039 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:36:00,046 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:37:00,025 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:37:00,035 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:37:00,041 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:37:00,041 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:38:00,035 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:38:00,049 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:38:00,052 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:38:00,052 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:39:00,018 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:39:00,025 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:39:00,032 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:39:00,038 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:46:33,888 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:46:33,896 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:46:33,897 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:46:33,897 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:47:00,013 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:47:00,018 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:47:00,018 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:47:00,036 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:48:00,035 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:48:00,048 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:48:00,054 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:48:00,061 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:49:00,025 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:49:00,035 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:49:00,039 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:49:00,051 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:50:00,055 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:50:00,064 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:50:00,069 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:50:00,075 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:51:00,025 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:51:00,047 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:51:00,062 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:51:00,071 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:52:00,017 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:52:00,023 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:52:00,031 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:52:00,038 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:53:00,033 tasks 17356 11944 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 09:53:00,049 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:53:00,049 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:53:00,061 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:54:00,024 tasks 17356 11944 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 09:54:00,036 tasks 17356 11944 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 09:54:00,040 tasks 17356 11944 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 09:54:00,049 tasks 17356 11944 Successfully cancelled 0 pending reservations
+ERROR 2024-12-12 10:36:59,999 tasks 9700 15008 Error in update_reservation_statuses: connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: SSL SYSCALL error: No error (0x00000000/0)
+connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+ERROR 2024-12-12 10:39:36,514 tasks 9700 15008 Error in send_reservation_reminders: connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: SSL SYSCALL error: No error (0x00000000/0)
+connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+ERROR 2024-12-12 12:34:24,446 tasks 5480 13400 Error in cancel_pending_reservations: connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: SSL SYSCALL error: No error (0x00000000/0)
+connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+ERROR 2024-12-12 12:36:55,997 tasks 5480 13400 Error in cancel_partial_payment_reservations: connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: SSL SYSCALL error: No error (0x00000000/0)
+connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+ERROR 2024-12-12 12:39:27,141 tasks 5480 13400 Error in update_reservation_statuses: connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: SSL SYSCALL error: No error (0x00000000/0)
+connection to server at "junction.proxy.rlwy.net" (35.213.147.91), port 54492 failed: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+INFO 2024-12-12 12:42:00,525 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,570 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,578 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,588 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,598 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,605 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,616 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,625 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,635 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,645 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,659 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,672 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,682 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,691 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,706 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,714 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,721 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,726 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,734 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,742 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,748 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,754 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,759 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,766 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,771 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,777 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,784 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,790 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,797 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,804 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,811 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,817 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,825 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,830 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,836 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,842 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,849 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,856 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,862 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,868 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,879 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,892 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,901 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,914 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,927 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:02,941 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,953 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:02,962 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:02,972 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:02,985 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,001 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,015 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,026 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,034 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:03,043 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:03,049 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:03,057 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,064 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:03,071 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,078 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:03,087 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,093 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:03,105 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,112 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:03,122 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,129 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,250 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:03,263 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,289 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:03,315 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,331 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:03,345 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,407 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:03,429 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,439 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:03,447 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:03,458 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,472 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,484 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:03,500 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:03,511 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:03,524 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:03,567 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:03,636 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,049 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,071 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,085 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,095 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,108 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,122 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,134 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,159 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,190 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,205 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,216 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,230 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,244 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,256 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,268 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,279 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,293 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,305 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,318 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,332 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,343 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,357 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,367 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,377 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,388 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,400 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,415 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,425 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,437 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,446 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,454 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,461 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,467 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,473 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,481 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,486 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,493 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,500 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,508 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,516 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,524 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,531 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,537 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,542 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,549 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,555 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,562 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,570 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,576 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,581 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,588 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,593 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,601 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,605 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,613 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,621 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,630 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,643 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,650 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,658 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,664 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,670 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,677 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,682 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,688 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,694 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,701 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,709 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,716 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,722 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,728 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,733 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,740 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,748 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,754 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,759 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,767 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,773 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,779 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,787 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,793 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,800 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,806 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,812 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,819 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,826 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,832 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,840 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,846 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,852 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,860 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,867 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,872 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,879 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,885 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,892 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,899 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,905 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,912 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,918 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,924 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,931 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,938 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,944 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,952 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,958 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:04,963 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,971 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:04,980 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:04,988 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:04,994 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,003 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,012 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,020 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,032 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,039 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,047 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,055 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,065 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,075 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,083 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,095 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,103 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,110 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,118 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,128 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,137 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,146 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,151 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,158 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,164 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,169 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,175 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,181 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,189 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,195 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,202 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,208 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,215 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,225 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,233 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,239 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,247 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,253 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,262 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,270 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,279 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,287 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,294 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,303 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,314 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,322 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,331 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,339 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,349 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,357 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,364 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,372 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,382 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,389 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,397 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,406 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,414 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,423 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,430 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,437 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,442 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,448 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,453 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,460 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,468 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,475 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,481 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,485 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,492 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,500 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,506 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,512 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,518 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,525 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,531 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,537 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,545 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,551 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,557 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,565 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,571 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,578 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,584 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,591 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,597 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,603 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,609 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,619 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,632 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,645 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,651 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,659 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,665 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,673 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,678 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,686 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,693 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,698 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,705 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,711 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,718 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,725 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
+INFO 2024-12-12 12:42:05,732 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,738 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,744 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,751 tasks 7656 16224 Sent 0 pickup reminders and 0 return reminders
+INFO 2024-12-12 12:42:05,757 tasks 7656 16224 Successfully cancelled 0 partial payment reservations
+INFO 2024-12-12 12:42:05,763 tasks 7656 16224 Successfully cancelled 0 pending reservations
+INFO 2024-12-12 12:42:05,771 tasks 7656 16224 Updated statuses: 0 activated, 0 completed
