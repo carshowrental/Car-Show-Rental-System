@@ -91,7 +91,7 @@
                                        id="reference_number" 
                                        name="reference_number" 
                                        value="{{ reservation.reference_number|default:'' }}" 
-                                       required 
+                                       required
                                        readonly>
                             </div>
                             <div class="mb-2">
@@ -102,7 +102,7 @@
                                        name="amount" 
                                        step="0.01" 
                                        value="{{ reservation.amount|default:'' }}" 
-                                       required 
+                                       required
                                        readonly>
                             </div>
                             <button type="submit" class="btn btn-danger w-100 mt-2"><i class="fas fa-upload me-1"></i>Upload Receipt</button>
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.reference_number && data.total_amount) {
                     referenceNumberInput.value = data.reference_number;
                     amountInput.value = data.total_amount;
-                    
+
                     if (validateAmount(data.total_amount)) {
                         showAlert('Receipt details extracted successfully!', 'success');
                     }
