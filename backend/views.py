@@ -11,7 +11,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
@@ -198,8 +197,6 @@ def reset_password(request, token):
 
             if password1 != password2:
                 messages.error(request, 'Passwords do not match.')
-            elif len(password1) < 8:
-                messages.error(request, 'Password must be at least 8 characters long.')
             else:
                 user = reset_token.user
                 user.set_password(password1)
@@ -399,16 +396,9 @@ def add_user(request):
             if phone_number and UserProfile.objects.filter(phone_number=phone_number).exists():
                 messages.error(request, 'This phone number is already registered.')
 
-            # Validate password length
-            if len(password) < 8:
-                messages.error(request, 'Password must be at least 8 characters long.')
-
             # Check if password match
             if password != confirm_password:
                 messages.error(request, 'Password do not match.')
-
-            # Validate password strength
-            validate_password(password)
 
             with transaction.atomic():
                 user = User(
@@ -472,17 +462,12 @@ def edit_user(request, user_id):
                 # Check if password match
                 if new_password != confirm_password:
                     messages.error(request, 'Password do not match.')
+                    return render(request, 'backend/edit_user.html', {'user': user})
+                user.set_password(new_password)
 
             with transaction.atomic():
                 user.username = username
                 user.email = email
-
-                # If a new password is provided, validate and update it
-                if new_password:
-                    if len(new_password) < 8:
-                        messages.error(request, 'New password must be at least 8 characters long.')
-                    validate_password(new_password, user)
-                    user.set_password(new_password)
 
                 user.full_clean()
                 user.save()
@@ -840,10 +825,6 @@ def view_profile(request):
             # Validate new password
             if new_password != confirm_password:
                 messages.error(request, 'New passwords do not match.')
-                return redirect('admin_profile')
-
-            if len(new_password) < 8:
-                messages.error(request, 'Password must be at least 8 characters long.')
                 return redirect('admin_profile')
 
             # Update password

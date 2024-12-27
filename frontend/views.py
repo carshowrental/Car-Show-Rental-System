@@ -30,6 +30,29 @@ from backend.models import Car, Reservation, UserProfile, PasswordResetToken
 from backend.views import compress_image
 
 
+def validate_password_strength(password):
+    """
+    Validate password strength.
+    Returns (is_valid, message)
+    """
+    if len(password) < 8:
+        return False, "Password must be at least 8 characters long."
+    
+    if not re.search(r'[A-Z]', password):
+        return False, "Password must contain at least one uppercase letter."
+        
+    if not re.search(r'[a-z]', password):
+        return False, "Password must contain at least one lowercase letter."
+        
+    if not re.search(r'\d', password):
+        return False, "Password must contain at least one number."
+        
+    if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        return False, "Password must contain at least one special character."
+        
+    return True, "Password is strong."
+
+
 def view_home(request):
     all_cars = Car.objects.all()
     featured_cars = [car for car in all_cars if car.is_currently_available][:3]  # Get the first 3 available cars
@@ -46,11 +69,20 @@ def user_register(request):
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
 
+        # Validate password strength
+        is_valid, message = validate_password_strength(password1)
+        if not is_valid:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': False,
+                    'message': message
+                })
+            messages.error(request, message)
+            return redirect('home')
+
         # Validate that all fields are filled
         if password1 != password2:
             message = 'Passwords do not match.'
-        elif len(password1) < 8:
-            message = 'Password must be at least 8 characters long.'
         elif User.objects.filter(username=username).exists():
             message = 'This username is already taken.'
         elif User.objects.filter(email=email).exists():
@@ -176,17 +208,21 @@ def reset_password(request, token):
             password1 = request.POST.get('password1')
             password2 = request.POST.get('password2')
 
+            # Validate password strength
+            is_valid, message = validate_password_strength(password1)
+            if not is_valid:
+                messages.error(request, message)
+                return render(request, 'frontend/reset_password.html', {'token': token})
+
             if password1 != password2:
                 messages.error(request, 'Passwords do not match.')
-            elif len(password1) < 8:
-                messages.error(request, 'Password must be at least 8 characters long.')
             else:
                 user = reset_token.user
                 user.set_password(password1)
                 user.save()
                 reset_token.delete()
                 messages.success(request,
-                                 'Your password has been reset successfully. You can now log in with your new password.')
+                             'Your password has been reset successfully. You can now log in with your new password.')
                 return redirect('home')
 
         return render(request, 'frontend/reset_password.html', {'token': token})
@@ -239,15 +275,18 @@ def user_profile(request):
 
             if not check_password(old_password, user.password):
                 messages.error(request, 'Your old password was entered incorrectly. Please enter it again.')
-            elif new_password1 != new_password2:
-                messages.error(request, "The two password fields didn't match.")
-            elif len(new_password1) < 8:
-                messages.error(request, 'Your new password must contain at least 8 characters.')
             else:
-                user.set_password(new_password1)
-                user.save()
-                update_session_auth_hash(request, user)
-                messages.success(request, 'Your password was successfully updated!')
+                # Validate password strength
+                is_valid, message = validate_password_strength(new_password1)
+                if not is_valid:
+                    messages.error(request, message)
+                elif new_password1 != new_password2:
+                    messages.error(request, "The two password fields didn't match.")
+                else:
+                    user.set_password(new_password1)
+                    user.save()
+                    update_session_auth_hash(request, user)
+                    messages.success(request, 'Your password was successfully updated!')
             return redirect('profile')
         elif action == 'upload_license':
             try:
